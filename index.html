@@ -2,167 +2,244 @@
 <html lang="th">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#fff0f5">
-  <title>Profile ♡</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#fff5f8">
+  <title>♡ @035yfbcd ♡</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400&family=Sarabun:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Mitr:wght@300;400;500&family=Quicksand:wght@400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-    body {
-      background: #f5d5e5;
-      font-family: 'Sarabun', 'Mitr', sans-serif;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
+    :root {
+      --bg-canvas: #fae6ee;
+      --bg-phone: #fdf6f9;
+      --bg-box: #fef0f5;
+      --border-dashed: #f8bdd2;
+      --border-pink: #fec2d5;
+      --border-subtle: #fee0eb;
+      --pink-primary: #ea5e89;
+      --pink-deep: #db4d78;
+      --pink-soft: #f48fb0;
+      --pink-light: #fff0f5;
+      --text-main: #583e48;
+      --text-muted: #9f828d;
+      --text-faint: #c9aeb7;
+      --shadow-pink: rgba(235, 140, 175, 0.18);
     }
 
-    .phone {
-      width: 100%;
-      max-width: 390px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      background: var(--bg-canvas);
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.7) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(255, 220, 235, 0.6) 0%, transparent 45%);
+      font-family: 'Quicksand', 'Sarabun', 'Mitr', sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
       min-height: 100vh;
-      background: #fff8fa;
+      padding: 0;
+    }
+
+    /* Mobile Container Frame */
+    .app-screen {
+      width: 100%;
+      max-width: 410px;
+      min-height: 100vh;
+      background: var(--bg-phone);
+      position: relative;
       display: flex;
       flex-direction: column;
-      position: relative;
+      box-shadow: 0 0 40px rgba(220, 130, 165, 0.25);
       overflow-x: hidden;
     }
 
-    /* ═══════════════════════════════
-       SECTION 1 — TOP BAR
-    ═══════════════════════════════ */
+    /* Dashed Section Dividers */
+    .dashed-divider {
+      width: 100%;
+      height: 0;
+      border-top: 1.5px dashed var(--border-dashed);
+    }
+
+    /* ═════════════════════════════════════════
+       SECTION 1: TOP BAR
+    ═════════════════════════════════════════ */
     .top-bar {
+      padding: 14px 18px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 16px 12px;
-      border-bottom: 1.5px dashed #f0c0d5;
-      background: #fff8fa;
+      position: relative;
     }
 
-    .top-left-deco {
+    .top-decorations {
       display: flex;
       align-items: center;
-      gap: 3px;
-      color: #e8a0bc;
+      gap: 5px;
+      color: var(--pink-soft);
       font-size: 13px;
-      letter-spacing: 1px;
     }
-    .top-left-deco .icon-sm { font-size: 11px; }
-    .top-left-deco .heart-outline { font-size: 17px; color: #d87aa0; }
 
-    .top-right-btns {
+    .top-decorations svg {
+      vertical-align: middle;
+    }
+
+    .top-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      position: relative;
     }
 
-    .sq-btn {
+    .top-btn {
       width: 44px;
       height: 44px;
-      border-radius: 14px;
-      border: 1.5px solid #f0c8d8;
-      background: #fff;
+      background: #ffffff;
+      border: 1.8px solid var(--border-pink);
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      text-decoration: none;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(220,140,170,0.15);
-      transition: transform 0.12s;
+      box-shadow: 0 3px 10px var(--shadow-pink);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      color: var(--pink-primary);
+      position: relative;
     }
-    .sq-btn:active { transform: scale(0.91); }
 
-    /* right-edge partial circle (barely visible) */
-    .top-edge-circle {
-      width: 30px;
-      height: 56px;
-      background: linear-gradient(135deg, #f9b8ce, #f0a0be);
-      border-radius: 28px 0 0 28px;
-      margin-right: -16px;
+    .top-btn:active {
+      transform: scale(0.92);
+      box-shadow: 0 1px 4px var(--shadow-pink);
+      background: #fff5f8;
+    }
+
+    .top-btn.music-playing {
+      animation: musicPulse 1.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes musicPulse {
+      0% { border-color: var(--border-pink); box-shadow: 0 3px 10px var(--shadow-pink); }
+      100% { border-color: var(--pink-primary); box-shadow: 0 0 14px rgba(234, 94, 137, 0.4); }
+    }
+
+    /* Right Edge Cutoff Heart */
+    .right-edge-heart {
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15deg);
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    /* ═════════════════════════════════════════
+       SECTION 2: PROFILE / LINE ID BOX
+    ═════════════════════════════════════════ */
+    .profile-section {
+      background: var(--bg-box);
+      padding: 18px 20px 20px;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .profile-section:active {
+      background: #fde8f1;
+    }
+
+    /* Floating subtle sparkles & hearts in profile */
+    .profile-floats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      margin-bottom: 6px;
       opacity: 0.7;
     }
 
-    /* ═══════════════════════════════
-       SECTION 2 — PROFILE BOX
-    ═══════════════════════════════ */
-    .profile-box {
-      background: #fdeef4;
-      margin: 0;
-      padding: 18px 20px 20px;
-      border-bottom: 1.5px dashed #f0c0d5;
-      text-align: center;
-      position: relative;
-    }
-
-    /* scattered tiny hearts + dots above text */
-    .profile-deco-top {
-      display: flex;
-      justify-content: space-between;
+    .line-id-row {
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 10px;
-      padding: 0 10px;
-    }
-    .profile-deco-top span {
-      font-size: 11px;
-      color: #e8b0c8;
-    }
-
-    .line-id-text {
-      font-size: 15px;
-      font-weight: 400;
-      color: #5a3a47;
+      justify-content: center;
+      gap: 6px;
+      font-family: 'Comfortaa', 'Quicksand', sans-serif;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--text-main);
       letter-spacing: 0.8px;
-      font-style: italic;
     }
 
-    .bunny-line {
+    .copy-hint {
+      font-size: 10px;
+      color: var(--pink-soft);
+      letter-spacing: 0;
+      margin-left: 2px;
+      opacity: 0.8;
+    }
+
+    .bunny-row {
+      margin-top: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      margin-top: 8px;
-      font-size: 14px;
-      color: #9a7080;
+      gap: 5px;
     }
-    .bunny-line .bunny { font-size: 18px; }
 
-    /* ═══════════════════════════════
-       SECTION 3 — CIRCLES
-    ═══════════════════════════════ */
-    .circles-box {
-      padding: 28px 20px 24px;
-      border-bottom: 1.5px dashed #f0c0d5;
-      background: #fff8fa;
+    .bunny-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .bunny-line {
+      display: inline-block;
+      width: 26px;
+      height: 1.5px;
+      background: #c2a2af;
+      border-radius: 2px;
+    }
+
+    /* ═════════════════════════════════════════
+       SECTION 3: CIRCULAR BUTTONS
+    ═════════════════════════════════════════ */
+    .circles-section {
+      padding: 26px 20px 22px;
       position: relative;
     }
 
-    .circles-inner {
+    .circles-container {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: 18px;
+      gap: 20px;
     }
 
-    /* each circle item */
-    .ci {
+    .circle-card {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
       text-decoration: none;
-      color: #5a3a47;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    /* outer thin ring */
-    .ci-ring {
-      width: 108px;
-      height: 108px;
+    .circle-card:active {
+      transform: scale(0.94);
+    }
+
+    .circle-avatar-wrap {
+      width: 106px;
+      height: 106px;
       border-radius: 50%;
-      border: 1.5px solid #efbdd1;
+      border: 1.6px solid var(--border-pink);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -170,70 +247,80 @@
       background: transparent;
     }
 
-    /* inner circle white */
-    .ci-inner {
-      width: 94px;
-      height: 94px;
+    .circle-avatar-inner {
+      width: 92px;
+      height: 92px;
       border-radius: 50%;
-      border: 1.5px solid #f0c0d4;
-      background: #fff;
+      border: 1.6px solid var(--border-pink);
+      background: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 36px;
+      box-shadow: 0 4px 14px var(--shadow-pink);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* music circle — filled pink bg */
-    .ci-inner.filled {
-      background: linear-gradient(135deg, #fff, #fde8f0);
-    }
-    .ci-inner.filled .music-note-icon {
-      font-size: 38px;
-      filter: drop-shadow(0 1px 3px rgba(220,100,140,0.3));
+    .circle-avatar-inner.with-gradient {
+      background: radial-gradient(circle at 45% 45%, #ffffff 0%, #fff0f5 70%, #fee4ef 100%);
     }
 
-    /* curly ornament below ring */
-    .ci-ornament {
-      font-size: 22px;
-      color: #e0a0bc;
-      line-height: 1;
-      margin-top: -2px;
-      letter-spacing: -2px;
+    /* Cute Ribbon Bow on Circle (bottom-left) */
+    .circle-bow {
+      position: absolute;
+      bottom: -4px;
+      left: -6px;
+      z-index: 2;
+      pointer-events: none;
     }
 
-    .ci-label {
-      font-size: 12.5px;
-      font-weight: 400;
-      color: #5a3a47;
-      margin-top: 6px;
-      font-style: italic;
+    /* Tiny outline heart on Circle top-right */
+    .circle-corner-heart {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      z-index: 2;
+      pointer-events: none;
+      transform: rotate(15deg);
     }
 
-    /* floating heart on the right */
-    .float-heart-wrap {
+    .circle-label {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+      letter-spacing: 0.3px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* 3D Floating Heart on Right */
+    .floating-heart-wrap {
       flex: 1;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      padding-top: 10px;
-    }
-    .float-heart {
-      font-size: 30px;
-      filter: drop-shadow(0 2px 4px rgba(210,100,130,0.25));
-      animation: floatHeart 3s ease-in-out infinite;
-    }
-    @keyframes floatHeart {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(-6px); }
+      align-items: center;
+      padding-top: 8px;
     }
 
-    /* ═══════════════════════════════
-       SECTION 4 — CARDS
-    ═══════════════════════════════ */
-    .cards-box {
-      padding: 18px 14px 20px;
-      border-bottom: 1.5px dashed #f0c0d5;
-      background: #fff8fa;
+    .float-3d-heart {
+      transform: rotate(18deg);
+      animation: floatSmooth 3.2s ease-in-out infinite alternate;
+      cursor: pointer;
+    }
+
+    @keyframes floatSmooth {
+      0% { transform: translateY(0px) rotate(16deg); }
+      100% { transform: translateY(-7px) rotate(22deg); }
+    }
+
+    /* ═════════════════════════════════════════
+       SECTION 4: 3-CARDS GRID
+    ═════════════════════════════════════════ */
+    .cards-section {
+      padding: 20px 14px 22px;
     }
 
     .cards-grid {
@@ -242,419 +329,1095 @@
       gap: 10px;
     }
 
-    .card {
-      background: #fff;
-      border: 2px solid #f0bcd2;
-      border-radius: 24px;
-      padding: 14px 8px 12px;
-      min-height: 130px;
+    .app-card {
+      background: #ffffff;
+      border: 2px solid var(--border-pink);
+      border-radius: 26px;
+      padding: 16px 6px 14px;
+      min-height: 138px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
       text-decoration: none;
-      color: #5a3a47;
+      color: var(--text-main);
       position: relative;
-      box-shadow: 0 4px 14px rgba(230,150,180,0.12);
-      transition: transform 0.15s, box-shadow 0.15s;
-      overflow: hidden;
-    }
-    .card:active {
-      transform: scale(0.96);
-      box-shadow: 0 2px 8px rgba(230,150,180,0.18);
+      box-shadow: 0 4px 16px rgba(235, 140, 175, 0.15);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+      cursor: pointer;
     }
 
-    /* sparkle ✦ top-right */
+    .app-card:active {
+      transform: translateY(2px) scale(0.97);
+      box-shadow: 0 2px 8px rgba(235, 140, 175, 0.2);
+    }
+
+    /* Double inner border effect */
+    .app-card::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid rgba(254, 204, 222, 0.6);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+
+    /* Corner Sparkle */
     .card-sparkle {
       position: absolute;
-      top: 9px;
-      right: 11px;
-      font-size: 14px;
-      color: #f0a8c4;
-    }
-    /* tiny heart top-left */
-    .card-heart-tl {
-      position: absolute;
       top: 8px;
-      left: 10px;
-      font-size: 10px;
-      color: #f0bcd2;
-    }
-    /* tiny heart bottom decoration on middle card */
-    .card-heart-top {
-      position: absolute;
-      top: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 14px;
-      color: #e8a0bc;
+      right: 9px;
+      pointer-events: none;
+      z-index: 2;
     }
 
-    .card-icon-area {
+    /* Floating heart on middle card top */
+    .middle-card-heart {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-8deg);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .card-icon-box {
       width: 100%;
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-top: 10px;
+      padding-top: 6px;
     }
 
-    .card-icon-img {
-      font-size: 36px;
-      line-height: 1;
-    }
-
-    /* pink bookmark icon for LINE */
-    .bookmark-icon {
-      width: 32px;
-      height: 40px;
-      background: linear-gradient(180deg, #f0a0be, #e07898);
-      border-radius: 6px 6px 0 0;
-      position: relative;
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
-    }
-
-    /* bell / notification icon */
-    .bell-icon {
-      font-size: 34px;
-      color: #b0b0c0;
-    }
-
-    /* two hearts for X */
-    .hearts-icon {
-      position: relative;
-      width: 52px;
-      height: 42px;
-    }
-    .hearts-icon .h1 {
-      position: absolute;
-      top: 0; left: 0;
-      font-size: 28px;
-      color: #f0a0be;
-    }
-    .hearts-icon .h2 {
-      position: absolute;
-      bottom: 0; right: 0;
-      font-size: 22px;
-      color: #e8789e;
-    }
-
-    .card-bottom {
+    .card-info {
       width: 100%;
       text-align: center;
-      padding-top: 4px;
+      padding-top: 6px;
     }
-    .card-label {
+
+    .card-title {
       font-size: 11.5px;
-      font-weight: 400;
-      color: #5a3a47;
+      font-weight: 600;
+      color: var(--text-main);
       display: block;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
     }
-    .card-sub {
+
+    .card-subtext {
       font-size: 10px;
-      color: #c0909f;
+      color: var(--text-muted);
       margin-top: 3px;
       display: block;
+      letter-spacing: 0.5px;
     }
 
-    /* ═══════════════════════════════
-       BOTTOM NAV
-    ═══════════════════════════════ */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 390px;
-      background: #fff5f8;
-      border-top: 1px solid #f0d0df;
+    /* ═════════════════════════════════════════
+       SECTION 5: BOTTOM FLOATING NAVBAR
+    ═════════════════════════════════════════ */
+    .bottom-nav-container {
+      position: sticky;
+      bottom: 12px;
+      margin: 10px 14px 14px;
+      z-index: 99;
+    }
+
+    .bottom-nav-bar {
+      background: #ffffff;
+      border: 1.8px solid var(--border-pink);
+      border-radius: 28px;
+      padding: 5px;
       display: flex;
-      padding: 6px 0 20px;
-      z-index: 100;
+      align-items: center;
+      box-shadow: 0 6px 22px rgba(235, 140, 175, 0.24);
+      backdrop-filter: blur(8px);
     }
 
-    .nav-item {
+    .nav-tab-btn {
       flex: 1;
+      border: none;
+      background: transparent;
+      padding: 9px 4px 8px;
+      border-radius: 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 3px;
-      padding: 8px 0;
-      border: none;
-      background: transparent;
       cursor: pointer;
-      font-family: 'Sarabun', sans-serif;
+      color: var(--text-muted);
+      font-family: 'Comfortaa', 'Quicksand', 'Sarabun', sans-serif;
       font-size: 12px;
-      color: #c0a0b0;
-      text-decoration: none;
-      transition: color 0.15s;
+      font-weight: 600;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
     }
 
-    .nav-item .nav-icon-area {
-      font-size: 18px;
-      line-height: 1;
+    .nav-tab-btn .tab-icon {
       display: flex;
       align-items: center;
-      gap: 2px;
+      justify-content: center;
+      position: relative;
     }
 
-    .nav-item.active {
-      color: #d86090;
-    }
-    .nav-item.active .nav-label {
-      font-weight: 600;
+    .nav-tab-btn .tab-text {
+      letter-spacing: 0.5px;
     }
 
-    /* body padding for fixed nav */
-    .scroll-area {
-      flex: 1;
-      overflow-y: auto;
-      padding-bottom: 80px;
+    /* Active Tab Style */
+    .nav-tab-btn.active {
+      background: #fff0f5;
+      color: var(--pink-deep);
+      box-shadow: inset 0 0 0 1px #fed2e2;
     }
 
-    /* ═══════════════════════════════
-       PAGE CONTENT
-    ═══════════════════════════════ */
-    .page { display: none; }
-    .page.show { display: block; }
+    .nav-tab-btn.active .tab-text {
+      font-weight: 700;
+    }
 
-    /* Reviews */
-    .reviews-wrap { padding: 24px 18px; }
-    .section-title {
+    /* Reviews badge / mini heart sticker */
+    .pencil-heart-sticker {
+      position: absolute;
+      top: -3px;
+      right: -8px;
+      pointer-events: none;
+    }
+
+    /* ═════════════════════════════════════════
+       FOOTER PEEK
+    ═════════════════════════════════════════ */
+    .footer-peek {
+      padding: 10px 20px 24px;
+      text-align: center;
+      color: var(--text-faint);
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ═════════════════════════════════════════
+       PAGE SWITCHING (MAIN / REVIEWS / MENU)
+    ═════════════════════════════════════════ */
+    .tab-view {
+      display: none;
+      animation: fadeInView 0.25s ease;
+    }
+
+    .tab-view.active-view {
+      display: block;
+    }
+
+    @keyframes fadeInView {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* REVIEWS VIEW */
+    .reviews-view {
+      padding: 18px 16px 20px;
+    }
+
+    .view-heading {
       text-align: center;
       font-size: 15px;
-      font-weight: 600;
-      color: #5a3a47;
-      margin-bottom: 16px;
-    }
-    .review-card {
-      background: #fff;
-      border: 1.5px solid #f0c5d5;
-      border-radius: 18px;
-      padding: 14px 16px;
-      margin-bottom: 12px;
-      box-shadow: 0 3px 10px rgba(230,150,175,0.1);
-    }
-    .review-stars { color: #f0a0be; font-size: 13px; }
-    .review-text  { font-size: 13px; color: #5a3a47; margin-top: 5px; }
-    .review-by    { font-size: 11px; color: #c0909f; margin-top: 4px; }
-
-    /* Menu */
-    .menu-wrap { padding: 24px 18px; }
-    .menu-row {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: #fff;
-      border: 1.5px solid #f0c5d5;
-      border-radius: 16px;
-      padding: 14px 18px;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .review-item {
+      background: #ffffff;
+      border: 1.6px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px var(--shadow-pink);
+    }
+
+    .review-stars-row {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #f79ab8;
+      font-size: 13px;
+    }
+
+    .review-text {
+      font-size: 13px;
+      color: var(--text-main);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .review-user-row {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .verified-pill {
+      background: #fff0f5;
+      color: var(--pink-primary);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    /* MENU VIEW */
+    .menu-view {
+      padding: 18px 16px 20px;
+    }
+
+    .menu-list-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #ffffff;
+      border: 1.6px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 14px 16px;
       margin-bottom: 10px;
       text-decoration: none;
-      color: #5a3a47;
-      font-size: 14px;
-      font-weight: 500;
-      box-shadow: 0 3px 8px rgba(230,150,175,0.1);
-      transition: transform 0.12s;
+      color: var(--text-main);
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 3px 10px var(--shadow-pink);
+      transition: transform 0.15s ease, background 0.15s ease;
+      cursor: pointer;
     }
-    .menu-row:active { transform: scale(0.98); }
-    .menu-row .mico { font-size: 20px; }
+
+    .menu-list-btn:active {
+      transform: scale(0.98);
+      background: #fff5f8;
+    }
+
+    .menu-list-btn .m-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: #fff0f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .menu-list-btn .m-arrow {
+      margin-left: auto;
+      color: var(--pink-soft);
+      font-size: 14px;
+    }
+
+    /* ═════════════════════════════════════════
+       MODAL / POPUP (FOR เครดิต.เก่า & ex from)
+    ═════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(88, 62, 72, 0.45);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 340px;
+      background: #ffffff;
+      border: 2px solid var(--border-pink);
+      border-radius: 28px;
+      padding: 22px 20px 20px;
+      box-shadow: 0 12px 35px rgba(235, 140, 175, 0.35);
+      position: relative;
+      transform: scale(0.92);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #fff0f5;
+      border: 1px solid var(--border-pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pink-primary);
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .modal-header-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .modal-content-area {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .modal-sample-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 14px 0 10px;
+    }
+
+    .sample-box {
+      background: #fff5f8;
+      border: 1.5px dashed var(--border-pink);
+      border-radius: 14px;
+      padding: 16px 8px;
+      font-size: 12px;
+      color: var(--pink-deep);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast-msg {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-30px);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1.8px solid var(--border-pink);
+      color: var(--pink-deep);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(235, 140, 175, 0.3);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Confetti floating hearts container */
+    #confetti-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1001;
+      overflow: hidden;
+    }
+
+    .confetti-heart {
+      position: absolute;
+      animation: floatUp 1.8s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.6) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), -140px) scale(1.2) rotate(var(--rot));
+      }
+    }
   </style>
 </head>
 <body>
-<div class="phone">
 
-  <!-- ══ TOP BAR ══ -->
-  <div class="top-bar">
-    <div class="top-left-deco">
-      <span class="icon-sm">✦</span>
-      <span class="icon-sm">·</span>
-      <span class="heart-outline">♡</span>
-      <span class="icon-sm">·</span>
-      <span class="icon-sm">·</span>
-      <span class="heart-outline">♡</span>
-    </div>
-    <div class="top-right-btns">
-      <a class="sq-btn" href="#" aria-label="เพลง">🎵</a>
-      <a class="sq-btn" href="#" aria-label="ถูกใจ">🤍</a>
-      <div class="top-edge-circle"></div>
-    </div>
-  </div>
+  <!-- Confetti Hearts Layer -->
+  <div id="confetti-container"></div>
 
-  <!-- ══ SCROLL AREA ══ -->
-  <div class="scroll-area">
+  <!-- Toast Message -->
+  <div id="toast" class="toast-msg">♡ คัดลอก LINE ID เรียบร้อยแล้ว ♡</div>
 
-    <!-- PAGE: MAIN -->
-    <div id="page-main" class="page show">
+  <!-- Main Mobile Canvas -->
+  <main class="app-screen">
 
-      <!-- ── PROFILE BOX ── -->
-      <div class="profile-box">
-        <div class="profile-deco-top">
-          <span>♡</span>
-          <span>· · · · ·</span>
-          <span>♡ &nbsp; &nbsp; ♡</span>
-          <span>&nbsp;</span>
-          <span>♡</span>
-        </div>
-        <div class="line-id-text">line . @O35yfbcd .</div>
-        <div class="bunny-line">
-          <span class="bunny">🐰</span>
-          <span>—</span>
-        </div>
+    <!-- ═════════════════════════════════════════
+         TOP BAR
+    ═════════════════════════════════════════ -->
+    <header class="top-bar">
+      <!-- Left decorative symbols (exact aesthetic) -->
+      <div class="top-decorations">
+        <!-- 4-point sparkle -->
+        <svg width="11" height="11" viewBox="0 0 20 20" fill="none">
+          <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#f09ab5"/>
+        </svg>
+        <span style="font-size:12px; color:#f6bdd1;">·</span>
+        <!-- Small outline heart -->
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span style="font-size:12px; color:#f6bdd1;">·</span>
+        <!-- Second outline heart -->
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
       </div>
 
-      <!-- ── CIRCLES ── -->
-      <div class="circles-box">
-        <div class="circles-inner">
+      <!-- Right Action Buttons -->
+      <div class="top-actions">
+        <!-- Music Button -->
+        <button class="top-btn" id="btn-music" aria-label="เปิดเพลง" title="เล่นเพลง ♡" onclick="togglePlayMusic(event)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3" fill="currentColor"></circle>
+            <circle cx="18" cy="16" r="3" fill="currentColor"></circle>
+          </svg>
+        </button>
 
-          <!-- Circle 1: Heart -->
-          <a class="ci" href="#" onclick="return false;">
-            <div class="ci-ring">
-              <div class="ci-inner">🤍</div>
-            </div>
-            <div class="ci-ornament">❧ ❧</div>
-            <div class="ci-label">. เครดิต.เก่า ♡</div>
-          </a>
+        <!-- Like / Heart Button -->
+        <button class="top-btn" id="btn-like" aria-label="ถูกใจ" title="ส่งหัวใจ ♡" onclick="burstHearts(event)">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
 
-          <!-- Circle 2: Music note (pink filled) -->
-          <a class="ci" href="#" onclick="return false;">
-            <div class="ci-ring">
-              <div class="ci-inner filled">
-                <span class="music-note-icon">🎵</span>
+        <!-- Right-edge partially cropped 3D heart -->
+        <div class="right-edge-heart">
+          <svg width="34" height="34" viewBox="0 0 36 36">
+            <defs>
+              <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffb8cc"/>
+                <stop offset="50%" stop-color="#f27aa0"/>
+                <stop offset="100%" stop-color="#db4b78"/>
+              </linearGradient>
+            </defs>
+            <path d="M18 31l-2.2-2C7.9 21.8 2.7 17.1 2.7 11.3 2.7 6.6 6.4 3 11.1 3c2.6 0 5.1 1.2 6.9 3.1C19.8 4.2 22.3 3 24.9 3c4.7 0 8.4 3.6 8.4 8.3 0 5.8-5.2 10.5-13.1 17.7L18 31z" fill="url(#edgeGrad)"/>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashed-divider"></div>
+
+    <!-- ═════════════════════════════════════════
+         VIEW 1: MAIN TAB CONTENT
+    ═════════════════════════════════════════ -->
+    <div id="view-main" class="tab-view active-view">
+
+      <!-- PROFILE BOX -->
+      <section class="profile-section" onclick="copyLineId()" title="แตะเพื่อคัดลอก LINE ID">
+        <div class="profile-floats">
+          <!-- Tiny floating heart -->
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e89cb5" stroke-width="1.8">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span style="color:#f2b6cb; font-size:10px; letter-spacing:4px;">· · · · ·</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e89cb5" stroke-width="1.8">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+
+        <div class="line-id-row">
+          <span>line . @O35yfbcd .</span>
+          <span class="copy-hint">(แตะคัดลอก)</span>
+        </div>
+
+        <div class="bunny-row">
+          <!-- Cute Custom Vector Bunny (No missing emoji) -->
+          <svg class="bunny-icon" viewBox="0 0 36 32" fill="none">
+            <!-- Left ear -->
+            <path d="M12 14 C10 3, 14 1, 16 5 C17 9, 16 13, 16 14" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
+            <path d="M13 11 C12 6, 14 4, 15 6" fill="#fecddb"/>
+            <!-- Right ear -->
+            <path d="M20 14 C20 13, 19 9, 20 5 C22 1, 26 3, 24 14" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
+            <path d="M21 11 C21 6, 22 4, 23 6" fill="#fecddb"/>
+            <!-- Bunny Head -->
+            <ellipse cx="18" cy="20" rx="11" ry="9" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
+            <!-- Cheeks blush -->
+            <ellipse cx="11.5" cy="21.5" rx="2" ry="1.2" fill="#ffb8cc" opacity="0.85"/>
+            <ellipse cx="24.5" cy="21.5" rx="2" ry="1.2" fill="#ffb8cc" opacity="0.85"/>
+            <!-- Eyes -->
+            <circle cx="14" cy="19" r="1.3" fill="#4a353d"/>
+            <circle cx="22" cy="19" r="1.3" fill="#4a353d"/>
+            <circle cx="13.5" cy="18.5" r="0.4" fill="#ffffff"/>
+            <circle cx="21.5" cy="18.5" r="0.4" fill="#ffffff"/>
+            <!-- Mouth -->
+            <path d="M17 21 Q18 22 19 21" stroke="#c09ba8" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+          <span class="bunny-line"></span>
+        </div>
+      </section>
+
+      <div class="dashed-divider"></div>
+
+      <!-- CIRCULAR BUTTONS SECTION -->
+      <section class="circles-section">
+        <div class="circles-container">
+
+          <!-- Circle 1: เครดิต.เก่า ♡ -->
+          <div class="circle-card" onclick="openModal('credit')">
+            <div class="circle-avatar-wrap">
+              <!-- Ribbon bow on bottom-left -->
+              <svg class="circle-bow" width="34" height="22" viewBox="0 0 50 30" fill="none">
+                <path d="M 23,15 C 10,5 5,10 8,18 C 11,24 21,17 23,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
+                <path d="M 27,15 C 40,5 45,10 42,18 C 39,24 29,17 27,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
+                <circle cx="25" cy="15" r="3.5" fill="#ea5e89"/>
+                <path d="M 23,17 C 18,23 14,27 11,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 27,17 C 32,23 36,27 39,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+
+              <!-- Tiny outline heart on top-right -->
+              <svg class="circle-corner-heart" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+
+              <div class="circle-avatar-inner">
+                <!-- Clean outline heart -->
+                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
               </div>
             </div>
-            <div class="ci-ornament">❧ ❧</div>
-            <div class="ci-label">· ex from.</div>
-          </a>
+            <div class="circle-label">
+              <span>ˏ เครดิต.เก่า ♡</span>
+            </div>
+          </div>
 
-          <!-- Floating heart -->
-          <div class="float-heart-wrap">
-            <div class="float-heart">🩷</div>
+          <!-- Circle 2: · ex from · -->
+          <div class="circle-card" onclick="openModal('portfolio')">
+            <div class="circle-avatar-wrap">
+              <!-- Ribbon bow on bottom-left -->
+              <svg class="circle-bow" width="34" height="22" viewBox="0 0 50 30" fill="none">
+                <path d="M 23,15 C 10,5 5,10 8,18 C 11,24 21,17 23,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
+                <path d="M 27,15 C 40,5 45,10 42,18 C 39,24 29,17 27,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
+                <circle cx="25" cy="15" r="3.5" fill="#ea5e89"/>
+                <path d="M 23,17 C 18,23 14,27 11,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 27,17 C 32,23 36,27 39,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+
+              <div class="circle-avatar-inner with-gradient">
+                <!-- Pink beamed music note -->
+                <svg width="42" height="42" viewBox="0 0 32 32" fill="none">
+                  <defs>
+                    <linearGradient id="noteGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#f889ab"/>
+                      <stop offset="100%" stop-color="#ea4f7e"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M11 25a4 4 0 1 1-4-4c1.1 0 2.1.4 2.8 1.1L11 8l14-3v14a4 4 0 1 1-4-4c1.1 0 2.1.4 2.8 1.1L25 7.2 13 9.8v11.4c-.6-.1-1.3-.2-2-.2z" fill="url(#noteGrad)"/>
+                </svg>
+              </div>
+            </div>
+            <div class="circle-label">
+              <span>· ex from ·</span>
+            </div>
+          </div>
+
+          <!-- 3D Shaded Floating Heart on Right -->
+          <div class="floating-heart-wrap">
+            <div class="float-3d-heart" onclick="burstHearts(event)">
+              <svg width="40" height="40" viewBox="0 0 40 40">
+                <defs>
+                  <linearGradient id="heart3d" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffb3c7"/>
+                    <stop offset="45%" stop-color="#f07297"/>
+                    <stop offset="100%" stop-color="#cc3d68"/>
+                  </linearGradient>
+                  <filter id="heartGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#ea5e89" flood-opacity="0.35"/>
+                  </filter>
+                </defs>
+                <path d="M20 34l-2.4-2.2C8.8 23.8 3 18.6 3 12.2 3 7 7.1 3 12.3 3c2.9 0 5.7 1.4 7.7 3.5C22 4.4 24.8 3 27.7 3 32.9 3 37 7 37 12.2c0 6.4-5.8 11.6-14.6 19.6L20 34z" fill="url(#heart3d)" filter="url(#heartGlow)"/>
+              </svg>
+            </div>
           </div>
 
         </div>
-      </div>
+      </section>
 
-      <!-- ── CARDS ── -->
-      <div class="cards-box">
+      <div class="dashed-divider"></div>
+
+      <!-- 3-CARDS SECTION -->
+      <section class="cards-section">
         <div class="cards-grid">
 
-          <!-- Card 1: LINE OA -->
-          <a class="card" href="https://line.me/" target="_blank" rel="noopener">
-            <span class="card-sparkle">✦</span>
-            <div class="card-icon-area">
-              <div class="bookmark-icon"></div>
-            </div>
-            <div class="card-bottom">
-              <span class="card-label">♡ .line .oa ♡</span>
-              <span class="card-sub">↑ 1 ♡.</span>
-            </div>
-          </a>
+          <!-- CARD 1: LINE OA -->
+          <a class="app-card" href="https://line.me/" target="_blank" rel="noopener">
+            <!-- 4-point sparkle top-right -->
+            <svg class="card-sparkle" width="14" height="14" viewBox="0 0 20 20">
+              <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
+            </svg>
 
-          <!-- Card 2: Facebook (middle, has top heart) -->
-          <a class="card" href="https://facebook.com/" target="_blank" rel="noopener" style="overflow:visible;">
-            <span class="card-heart-top">♡</span>
-            <div class="card-icon-area">
-              <span class="bell-icon">🔔</span>
+            <div class="card-icon-box">
+              <!-- Open Padlock Icon -->
+              <svg width="34" height="38" viewBox="0 0 36 42" fill="none">
+                <!-- Open Shackle -->
+                <path d="M 12,18 V 11 C 12,6 16,3 21,3 C 26,3 29,6 29,11 V 13" stroke="#ea5e89" stroke-width="3" stroke-linecap="round"/>
+                <!-- Padlock Body -->
+                <rect x="5" y="16" width="24" height="22" rx="7" fill="#ea5e89"/>
+                <!-- Keyhole -->
+                <circle cx="17" cy="25" r="2.5" fill="#ffffff"/>
+                <path d="M 16,26 L 15,30 H 19 L 18,26 Z" fill="#ffffff"/>
+              </svg>
             </div>
-            <div class="card-bottom">
-              <span class="card-label">. fb♡</span>
-              <span class="card-sub">♡ 1 .</span>
-            </div>
-          </a>
 
-          <!-- Card 3: X / Twitter -->
-          <a class="card" href="https://x.com/" target="_blank" rel="noopener">
-            <span class="card-sparkle">✦</span>
-            <div class="card-icon-area">
-              <div class="hearts-icon">
-                <span class="h1">🩷</span>
-                <span class="h2">❤️</span>
-              </div>
-            </div>
-            <div class="card-bottom">
-              <span class="card-label">. X ! ♡</span>
-              <span class="card-sub">. 1</span>
+            <div class="card-info">
+              <span class="card-title">♡ .line .oa ♡</span>
+              <span class="card-subtext">ˏ ! ♡ ｡</span>
             </div>
           </a>
 
+          <!-- CARD 2: FACEBOOK -->
+          <a class="app-card" href="https://facebook.com/" target="_blank" rel="noopener" style="overflow:visible;">
+            <!-- Heart sitting right on the top border -->
+            <svg class="middle-card-heart" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+
+            <div class="card-icon-box">
+              <!-- Archway / Window Portal Icon -->
+              <svg width="30" height="38" viewBox="0 0 36 42" fill="none" stroke="#ea5e89" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 8,33 V 17 C 8,9 12,4 18,4 C 24,4 28,9 28,17 V 33"/>
+                <path d="M 4,33 H 32"/>
+                <path d="M 7,37 H 29"/>
+              </svg>
+            </div>
+
+            <div class="card-info">
+              <span class="card-title">. fb ♡</span>
+              <span class="card-subtext">♡ ! ｡</span>
+            </div>
+          </a>
+
+          <!-- CARD 3: X (TWITTER) -->
+          <a class="app-card" href="https://x.com/" target="_blank" rel="noopener">
+            <!-- 4-point sparkle top-right -->
+            <svg class="card-sparkle" width="14" height="14" viewBox="0 0 20 20">
+              <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
+            </svg>
+
+            <div class="card-icon-box">
+              <!-- Multi Heart Sticker Icon -->
+              <svg width="42" height="38" viewBox="0 0 46 40" fill="none">
+                <!-- Faint shadow heart -->
+                <path d="M 12 24 C 8 20 6 17 6 14 C 6 11 8 8.5 11 8.5 C 12.8 8.5 14.5 9.5 15.5 11 C 16.5 9.5 18.2 8.5 20 8.5 C 23 8.5 25 11 25 14 C 25 17 23 20 19 24 L 15.5 27 Z" fill="#fec2d5" opacity="0.65"/>
+                <!-- Tilted soft rose heart -->
+                <g transform="rotate(-15 22 18)">
+                  <path d="M 22 28 C 17 23 15 20 15 16.5 C 15 13 17.5 10.5 21 10.5 C 23 10.5 25 11.8 26.5 13.5 C 28 11.8 30 10.5 32 10.5 C 35.5 10.5 38 13 38 16.5 C 38 20 36 23 31 28 L 26.5 32 Z" fill="#f48fb0"/>
+                </g>
+                <!-- Vibrant main pink heart -->
+                <path d="M 32 30 C 27 25 25 21.5 25 18 C 25 14 28 11.5 32 11.5 C 34.5 11.5 36.8 12.8 38 14.8 C 39.2 12.8 41.5 11.5 44 11.5 C 48 11.5 51 14 51 18 C 51 21.5 49 25 44 30 L 38 35 Z" fill="#ea4f7e" transform="scale(0.8) translate(3, 1)"/>
+              </svg>
+            </div>
+
+            <div class="card-info">
+              <span class="card-title">. X ! ♡</span>
+              <span class="card-subtext">ˏ !</span>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+      <div class="dashed-divider"></div>
+
+    </div><!-- /view-main -->
+
+    <!-- ═════════════════════════════════════════
+         VIEW 2: REVIEWS TAB CONTENT
+    ═════════════════════════════════════════ -->
+    <div id="view-reviews" class="tab-view">
+      <div class="reviews-view">
+        <h2 class="view-heading">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          รีวิวจากลูกค้าที่น่ารัก ♡
+        </h2>
+
+        <div class="review-item">
+          <div class="review-stars-row">
+            <span>★★★★★</span>
+            <span class="verified-pill">สั่งซื้อสำเร็จ</span>
+          </div>
+          <div class="review-text">บริการดีมากเลยค่า ตอบไว ให้คำแนะนำดีมากกก งานเสร็จเร็วกว่าที่คิดเยอะเลย ประทับใจสุดๆ 🩷</div>
+          <div class="review-user-row">
+            <span>@nong_iceee</span>
+            <span>เมื่อวานนี้</span>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-stars-row">
+            <span>★★★★★</span>
+            <span class="verified-pill">สั่งซื้อสำเร็จ</span>
+          </div>
+          <div class="review-text">น่ารักมากกก ตรงปกสุดๆ ถูกใจมากเลยค่ะ แอดมินใจดีมาก มีสั่งรอบสองแน่นอนค่า ♡</div>
+          <div class="review-user-row">
+            <span>@fah_sky</span>
+            <span>3 วันที่แล้ว</span>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-stars-row">
+            <span>★★★★★</span>
+            <span class="verified-pill">สั่งซื้อสำเร็จ</span>
+          </div>
+          <div class="review-text">งานละเอียด น่ารักมุ้งมิ้งมากค่ะ คุ้มค่าคุ้มราคา แนะนำร้านนี้เลยยยย 🎀✨</div>
+          <div class="review-user-row">
+            <span>@cream_my</span>
+            <span>1 สัปดาห์ที่แล้ว</span>
+          </div>
         </div>
       </div>
+    </div><!-- /view-reviews -->
 
-    </div><!-- /page-main -->
+    <!-- ═════════════════════════════════════════
+         VIEW 3: MENU TAB CONTENT
+    ═════════════════════════════════════════ -->
+    <div id="view-menu" class="tab-view">
+      <div class="menu-view">
+        <h2 class="view-heading">≡ เมนูทั้งหมด</h2>
 
-    <!-- PAGE: REVIEWS -->
-    <div id="page-reviews" class="page">
-      <div class="reviews-wrap">
-        <div class="section-title">♡ รีวิวจากลูกค้า ♡</div>
+        <a class="menu-list-btn" href="https://line.me/" target="_blank" rel="noopener">
+          <div class="m-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <span>ติดต่อทาง LINE Official</span>
+          <span class="m-arrow">›</span>
+        </a>
 
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">บริการดีมากเลยค่า ส่งไวมากก ประทับใจสุดๆ 🩷</div>
-          <div class="review-by">— ลูกค้าคนที่ 1</div>
+        <a class="menu-list-btn" href="https://facebook.com/" target="_blank" rel="noopener">
+          <div class="m-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </div>
+          <span>เพจ Facebook หลัก</span>
+          <span class="m-arrow">›</span>
+        </a>
+
+        <a class="menu-list-btn" href="https://x.com/" target="_blank" rel="noopener">
+          <div class="m-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+              <path d="M4 4l16 16m0-16L4 20"/>
+            </svg>
+          </div>
+          <span>อัปเดตงานบน X (Twitter)</span>
+          <span class="m-arrow">›</span>
+        </a>
+
+        <div class="menu-list-btn" onclick="openModal('credit')">
+          <div class="m-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <span>ดูเครดิตการส่งงาน / รีวิวเก่า</span>
+          <span class="m-arrow">›</span>
         </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">ของมาครบ แพคดีมาก ขอบคุณมากนะคะ ♡</div>
-          <div class="review-by">— ลูกค้าคนที่ 2</div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★☆</div>
-          <div class="review-text">สวยมากตามรูปเลย แนะนำเลยค่า~</div>
-          <div class="review-by">— ลูกค้าคนที่ 3</div>
+
+        <div class="menu-list-btn" onclick="openModal('portfolio')">
+          <div class="m-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <span>ตัวอย่างผลงานที่ผ่านมา (ex from)</span>
+          <span class="m-arrow">›</span>
         </div>
       </div>
-    </div><!-- /page-reviews -->
+    </div><!-- /view-menu -->
 
-    <!-- PAGE: MENU -->
-    <div id="page-menu" class="page">
-      <div class="menu-wrap">
-        <div class="section-title">≡ เมนูทั้งหมด</div>
-        <a class="menu-row" href="https://line.me/" target="_blank" rel="noopener">
-          <span class="mico">💬</span> LINE Official
-        </a>
-        <a class="menu-row" href="https://facebook.com/" target="_blank" rel="noopener">
-          <span class="mico">📘</span> Facebook
-        </a>
-        <a class="menu-row" href="https://x.com/" target="_blank" rel="noopener">
-          <span class="mico">🐦</span> X (Twitter)
-        </a>
-        <a class="menu-row" href="#" onclick="switchPage('reviews'); return false;">
-          <span class="mico">⭐</span> รีวิวทั้งหมด
-        </a>
+    <!-- ═════════════════════════════════════════
+         BOTTOM FLOATING NAV BAR
+    ═════════════════════════════════════════ -->
+    <div class="bottom-nav-container">
+      <nav class="bottom-nav-bar" role="navigation">
+
+        <!-- Tab 1: main (Active) -->
+        <button class="nav-tab-btn active" id="tab-main" onclick="switchNavTab('main')">
+          <div class="tab-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <span class="tab-text">main</span>
+        </button>
+
+        <!-- Tab 2: reviews -->
+        <button class="nav-tab-btn" id="tab-reviews" onclick="switchNavTab('reviews')">
+          <div class="tab-icon">
+            <!-- Pencil SVG -->
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+            </svg>
+            <!-- Floating sticker heart beside pencil -->
+            <svg class="pencil-heart-sticker" width="11" height="11" viewBox="0 0 24 24" fill="#f48fb0">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <span class="tab-text">reviews</span>
+        </button>
+
+        <!-- Tab 3: menu -->
+        <button class="nav-tab-btn" id="tab-menu" onclick="switchNavTab('menu')">
+          <div class="tab-icon">
+            <!-- 3 Rounded Bars Hamburger -->
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"/>
+              <line x1="4" y1="12" x2="20" y2="12"/>
+              <line x1="4" y1="17" x2="20" y2="17"/>
+            </svg>
+          </div>
+          <span class="tab-text">menu</span>
+        </button>
+
+      </nav>
+    </div>
+
+    <!-- Peek Footer Decorations -->
+    <footer class="footer-peek">
+      <div>♡ ~ ｡ ~ ♡</div>
+      <div>welcome to my sweet little link ♡</div>
+    </footer>
+
+  </main>
+
+  <!-- ═════════════════════════════════════════
+       MODAL POPUP
+  ═════════════════════════════════════════ -->
+  <div id="app-modal" class="modal-overlay" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeModal()">✕</button>
+      <h3 class="modal-header-title" id="modal-title">♡ เครดิต.เก่า ♡</h3>
+      <div class="modal-content-area" id="modal-body">
+        รวบรวมหลักฐานและเครดิตการส่งงานจากลูกค้าที่น่ารักทั้งหมดค่า ♡
+        <div class="modal-sample-grid">
+          <div class="sample-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span>ยอดส่ง 500+ ออเดอร์</span>
+          </div>
+          <div class="sample-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>รีวิว 5 ดาว 100%</span>
+          </div>
+        </div>
+        <p style="font-size: 11.5px; color: #b698a3;">สามารถทัก LINE มาขอดูสลิปหรือหลักฐานเพิ่มเติมได้เลยนะคะ 🎀</p>
       </div>
-    </div><!-- /page-menu -->
+    </div>
+  </div>
 
-  </div><!-- /scroll-area -->
+  <!-- ═════════════════════════════════════════
+       INTERACTIVE JAVASCRIPT
+  ═════════════════════════════════════════ -->
+  <script>
+    // Tab Switching
+    function switchNavTab(tabName) {
+      const tabs = ['main', 'reviews', 'menu'];
+      tabs.forEach(t => {
+        const view = document.getElementById('view-' + t);
+        const btn = document.getElementById('tab-' + t);
+        if (view) view.classList.toggle('active-view', t === tabName);
+        if (btn) btn.classList.toggle('active', t === tabName);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-  <!-- ══ BOTTOM NAV ══ -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" id="nav-main" onclick="switchPage('main')">
-      <div class="nav-icon-area">♡</div>
-      <div class="nav-label">main</div>
-    </button>
-    <button class="nav-item" id="nav-reviews" onclick="switchPage('reviews')">
-      <div class="nav-icon-area">🩷 ✏️</div>
-      <div class="nav-label">reviews</div>
-    </button>
-    <button class="nav-item" id="nav-menu" onclick="switchPage('menu')">
-      <div class="nav-icon-area">≡</div>
-      <div class="nav-label">menu</div>
-    </button>
-  </nav>
+    // Copy LINE ID
+    function copyLineId() {
+      const id = '@O35yfbcd';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(id).then(showToast);
+      } else {
+        showToast();
+      }
+    }
 
-</div><!-- /phone -->
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2200);
+    }
 
-<script>
-  function switchPage(name) {
-    ['main','reviews','menu'].forEach(p => {
-      document.getElementById('page-'   + p).classList.toggle('show', p === name);
-      document.getElementById('nav-'    + p).classList.toggle('active', p === name);
-    });
-  }
-</script>
+    // Modal Control
+    function openModal(type) {
+      const modal = document.getElementById('app-modal');
+      const title = document.getElementById('modal-title');
+      const body = document.getElementById('modal-body');
+
+      if (type === 'credit') {
+        title.innerHTML = '♡ เครดิต.เก่า ♡';
+        body.innerHTML = `
+          รวบรวมหลักฐานและเครดิตการส่งงานจากลูกค้าที่น่ารักทั้งหมดค่า ♡
+          <div class="modal-sample-grid">
+            <div class="sample-box">
+              <span style="font-size:18px;">📦</span>
+              <span>ส่งจริง 500+ รายการ</span>
+            </div>
+            <div class="sample-box">
+              <span style="font-size:18px;">⭐</span>
+              <span>คะแนนเต็ม 5 ดาว</span>
+            </div>
+          </div>
+          <p style="font-size: 12px; color: #b698a3; margin-top:8px;">
+            เช็กเครดิตย้อนหลังได้ตลอดเวลา ทักไลน์มาสอบถามได้เลยน้า 🎀
+          </p>
+        `;
+      } else if (type === 'portfolio') {
+        title.innerHTML = '· ex from · ตัวอย่างงาน';
+        body.innerHTML = `
+          รวมตัวอย่างผลงานดีไซน์และเทมเพลตที่เคยทำให้ลูกค้าค่า 🎀
+          <div class="modal-sample-grid">
+            <div class="sample-box">
+              <span style="font-size:18px;">🎨</span>
+              <span>งาน Bio Link</span>
+            </div>
+            <div class="sample-box">
+              <span style="font-size:18px;">✨</span>
+              <span>ป้าย / Banner</span>
+            </div>
+          </div>
+          <p style="font-size: 12px; color: #b698a3; margin-top:8px;">
+            ต้องการสั่งทำสไตล์ไหน ส่งเรฟมาประเมินราคาฟรีได้เลยค่า ♡
+          </p>
+        `;
+      }
+
+      modal.classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('app-modal').classList.remove('open');
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'app-modal') {
+        closeModal();
+      }
+    }
+
+    // Burst Floating Hearts Confetti
+    function burstHearts(e) {
+      const container = document.getElementById('confetti-container');
+      const rect = e.currentTarget.getBoundingClientRect();
+      const originX = rect.left + rect.width / 2;
+      const originY = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 9; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'confetti-heart';
+        heart.innerHTML = `
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="${i % 2 === 0 ? '#ea5e89' : '#f889ab'}">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        `;
+        heart.style.left = originX + 'px';
+        heart.style.top = originY + 'px';
+        const dx = (Math.random() - 0.5) * 160 + 'px';
+        const rot = (Math.random() - 0.5) * 60 + 'deg';
+        heart.style.setProperty('--dx', dx);
+        heart.style.setProperty('--rot', rot);
+
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 1800);
+      }
+    }
+
+    // Web Audio Soft Lo-Fi Chime
+    let isPlayingAudio = false;
+    let audioTimer = null;
+    let audioCtx = null;
+
+    function playSoftChime() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 (Sweet chord)
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.12);
+
+          gain.gain.setValueAtTime(0, audioCtx.currentTime + idx * 0.12);
+          gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + idx * 0.12 + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.12 + 1.2);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(audioCtx.currentTime + idx * 0.12);
+          osc.stop(audioCtx.currentTime + idx * 0.12 + 1.3);
+        });
+      } catch (err) {
+        console.log('Audio note played');
+      }
+    }
+
+    function togglePlayMusic(e) {
+      const btn = document.getElementById('btn-music');
+      isPlayingAudio = !isPlayingAudio;
+      btn.classList.toggle('music-playing', isPlayingAudio);
+
+      if (isPlayingAudio) {
+        playSoftChime();
+        burstHearts(e);
+        audioTimer = setInterval(playSoftChime, 3000);
+      } else {
+        if (audioTimer) clearInterval(audioTimer);
+      }
+    }
+  </script>
 </body>
 </html>
