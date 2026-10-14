@@ -6,793 +6,860 @@
 <meta name="theme-color" content="#ffffff">
 <title>sosoli ♡ platform</title>
 
+<!-- Fonts & Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Kanit:wght@300;400;500;600&family=Mitr:wght@300;400;500&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Kanit:wght@300;400;500;600&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <style>
-:root{
-  --pink:#ea5e89;
-  --darkpink:#db4b78;
-  --soft:#f8a6bf;
-  --pale:#fff0f5;
-  --background:#ffffff;
-  --text:#583e48;
-  --muted:#9f828d;
-  --line:#f8bdd2;
-  --card:#ffffff;
-  --shadow:rgba(235, 140, 175, 0.18);
-  --border-subtle:#fee0eb;
-  --bg-opacity:0.22;
+/* ══════════════════════════════════════════════════════════
+   1. THEME VARIABLES & BASE RESET
+══════════════════════════════════════════════════════════ */
+:root {
+  --pink: #ea5e89;
+  --darkpink: #db4b78;
+  --soft: #f8a6bf;
+  --pale: #fff0f5;
+  --background: #ffffff;
+  --text: #583e48;
+  --muted: #9f828d;
+  --line: #f8bdd2;
+  --card: #ffffff;
+  --shadow: rgba(235, 140, 175, 0.18);
+  --border-subtle: #fee0eb;
+  --bg-opacity: 0.22;
 }
 
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:'Quicksand','Kanit',sans-serif;
-  font-weight:400;
-  color:var(--text);
-  background:#ffffff;
-  display:flex;
-  justify-content:center;
-  min-height:100vh;
-  position:relative;
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* ═════════════════════════════════
-   ANIMATED GIF BACKGROUND WITH WHITE OVERLAY (มีขาวทับ)
-   Soft, milky white-washed cherry blossom petals
-═════════════════════════════════ */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background:url('images/bg.gif') center center / cover no-repeat;
-  opacity:var(--bg-opacity, 0.22);
-  pointer-events:none;
-  z-index:0;
+html {
+  scroll-behavior: smooth;
 }
 
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-[hidden]{display:none!important}
-.eng{font-family:'Nunito','Comfortaa',sans-serif}
-.small{font-size:11px}
-.muted{color:var(--muted)}
-.full{width:100%}
-
-/* ═════════════════════════════════
-   MAIN BOX (SOLID OPAQUE WHITE / PASTEL)
-═════════════════════════════════ */
-.app{
-  width:100%;
-  max-width:420px;
-  min-height:100vh;
-  margin:0 auto;
-  padding-bottom:30px;
-  position:relative;
-  z-index:1;
-  background:#ffffff;
-  box-shadow:0 10px 40px rgba(0,0,0,0.06), 0 0 50px rgba(235,140,175,0.18);
-  overflow-x:hidden;
+body {
+  margin: 0;
+  font-family: 'Quicksand', 'Kanit', sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
 }
 
-@media(min-width:460px){
-  .app{
-    margin:24px auto;
-    min-height:calc(100vh - 48px);
-    border-radius:36px;
-    border:1.8px solid rgba(248, 189, 210, 0.6);
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+a { text-decoration: none; color: inherit; }
+[hidden] { display: none !important; }
+
+.eng { font-family: 'Nunito', 'Comfortaa', sans-serif; }
+.muted { color: var(--muted); }
+.full { width: 100%; }
+
+/* ══════════════════════════════════════════════════════════
+   2. ANIMATED BACKGROUND (WHITE-WASHED / มีขาวทับ)
+══════════════════════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('images/bg.gif') center center / cover no-repeat;
+  opacity: var(--bg-opacity, 0.22);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   3. APP CONTAINER & RESPONSIVE LAYOUT
+══════════════════════════════════════════════════════════ */
+.app {
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-bottom: 30px;
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06), 0 0 50px rgba(235, 140, 175, 0.18);
+  overflow-x: hidden;
+}
+
+@media (min-width: 460px) {
+  .app {
+    margin: 24px auto;
+    min-height: calc(100vh - 48px);
+    border-radius: 36px;
+    border: 1.8px solid rgba(248, 189, 210, 0.6);
   }
-  .topbar{
-    border-top-left-radius:34px;
-    border-top-right-radius:34px;
+  .topbar {
+    border-top-left-radius: 34px;
+    border-top-right-radius: 34px;
   }
 }
 
-/* ═════════════════════════════════
-   TOP BAR (OPTION 1: SOUNDWAVE PILL)
-═════════════════════════════════ */
-.topbar{
-  min-height:64px;
-  padding:12px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:30;
-  background:rgba(255,255,255,0.95);
-  border-bottom:1.5px dashed var(--line);
-  backdrop-filter:blur(14px);
+/* ══════════════════════════════════════════════════════════
+   4. TOP BAR & SOUNDWAVE BUTTON
+══════════════════════════════════════════════════════════ */
+.topbar {
+  min-height: 64px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1.5px dashed var(--line);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
-.top-left-title{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  font-family:'Comfortaa',sans-serif;
-  font-size:13.5px;
-  font-weight:700;
-  color:var(--darkpink);
-  letter-spacing:0.5px;
+.top-left-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--darkpink);
+  letter-spacing: 0.5px;
 }
 
-.top-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  position:relative;
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
 }
 
-/* Soundwave Pill Button */
-.soundwave-btn{
-  height:38px;
-  padding:0 14px;
-  border-radius:20px;
-  border:1.8px solid var(--line);
-  background:#ffffff;
-  box-shadow:0 3px 10px var(--shadow);
-  display:flex;
-  align-items:center;
-  gap:8px;
-  cursor:pointer;
-  transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+.soundwave-btn {
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 20px;
+  border: 1.8px solid var(--line);
+  background: #ffffff;
+  box-shadow: 0 3px 10px var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.soundwave-btn:active{
-  transform:scale(0.94);
+.soundwave-btn:active {
+  transform: scale(0.94);
 }
 
-.soundwave-bars{
-  display:flex;
-  align-items:center;
-  gap:2.5px;
-  height:16px;
+.soundwave-bars {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+  height: 16px;
 }
 
-.soundwave-bar{
-  width:3px;
-  height:4px;
-  border-radius:2px;
-  background:var(--pink);
-  transition:height 0.2s ease;
+.soundwave-bar {
+  width: 3px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--pink);
+  transition: height 0.2s ease;
 }
 
-/* Dancing animation when music is playing */
-.soundwave-btn.playing{
-  border-color:var(--pink);
-  box-shadow:0 0 12px rgba(234, 94, 137, 0.35);
-  background:#fff5f8;
+.soundwave-btn.playing {
+  border-color: var(--pink);
+  box-shadow: 0 0 12px rgba(234, 94, 137, 0.35);
+  background: #fff5f8;
 }
 
-.soundwave-btn.playing .bar-1{ animation: waveBounce 0.8s ease-in-out infinite alternate; }
-.soundwave-btn.playing .bar-2{ animation: waveBounce 1.1s ease-in-out infinite 0.2s alternate; }
-.soundwave-btn.playing .bar-3{ animation: waveBounce 0.9s ease-in-out infinite 0.4s alternate; }
-.soundwave-btn.playing .bar-4{ animation: waveBounce 1.2s ease-in-out infinite 0.1s alternate; }
+.soundwave-btn.playing .bar-1 { animation: waveBounce 0.8s ease-in-out infinite alternate; }
+.soundwave-btn.playing .bar-2 { animation: waveBounce 1.1s ease-in-out infinite 0.2s alternate; }
+.soundwave-btn.playing .bar-3 { animation: waveBounce 0.9s ease-in-out infinite 0.4s alternate; }
+.soundwave-btn.playing .bar-4 { animation: waveBounce 1.2s ease-in-out infinite 0.1s alternate; }
 
-@keyframes waveBounce{
-  0%{ height:4px; }
-  100%{ height:16px; background:var(--darkpink); }
-}
-
-.soundwave-icon{
-  color:var(--pink);
-  display:flex;
-  align-items:center;
+@keyframes waveBounce {
+  0%   { height: 4px; }
+  100% { height: 16px; background: var(--darkpink); }
 }
 
-/* Admin Button */
-.admin-circle-btn{
-  width:38px;
-  height:38px;
-  border-radius:14px;
-  border:1.8px solid var(--line);
-  background:#ffffff;
-  box-shadow:0 3px 10px var(--shadow);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--pink);
-  cursor:pointer;
-  transition:transform 0.15s;
-}
-.admin-circle-btn:active{transform:scale(0.92)}
-
-/* Cutoff heart at top right edge */
-.top-right-edge{
-  position:absolute;
-  right:-14px;
-  top:50%;
-  transform:translateY(-50%) rotate(-15deg);
-  pointer-events:none;
-  opacity:0.85;
+.soundwave-icon {
+  color: var(--pink);
+  display: flex;
+  align-items: center;
 }
 
-/* ═════════════════════════════════
-   PROFILE HEADER (MATCHING IMAGE)
-═════════════════════════════════ */
-.profile-section{
-  padding:28px 20px 22px;
-  text-align:center;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+.admin-circle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  border: 1.8px solid var(--line);
+  background: #ffffff;
+  box-shadow: 0 3px 10px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink);
+  cursor: pointer;
+  transition: transform 0.15s;
 }
 
-.avatar-circle-wrap{
-  width:105px;
-  height:105px;
-  border-radius:50%;
-  padding:3px;
-  background:#ffffff;
-  border:2px solid var(--line);
-  box-shadow:0 6px 18px var(--shadow);
-  overflow:hidden;
-  position:relative;
+.admin-circle-btn:active {
+  transform: scale(0.92);
 }
 
-.avatar-circle-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:50%;
+.top-right-edge {
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-15deg);
+  pointer-events: none;
+  opacity: 0.85;
 }
 
-.avatar-default-placeholder{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,#fff,#ffe8f2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--pink);
+/* ══════════════════════════════════════════════════════════
+   5. PROFILE HEADER & AVATAR
+══════════════════════════════════════════════════════════ */
+.profile-section {
+  padding: 28px 20px 22px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.profile-name-row{
-  margin-top:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  position:relative;
+.avatar-circle-wrap {
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  padding: 3px;
+  background: #ffffff;
+  border: 2px solid var(--line);
+  box-shadow: 0 6px 18px var(--shadow);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
 }
 
-.name-decor-dots{
-  color:var(--soft);
-  font-size:11px;
-  position:absolute;
-  top:-8px;
-  letter-spacing:6px;
-  pointer-events:none;
+.avatar-circle-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-.profile-display-name{
-  font-family:'Comfortaa','Nunito',sans-serif;
-  font-size:22px;
-  font-weight:700;
-  color:var(--text);
-  letter-spacing:0.8px;
+.avatar-default-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, #ffe8f2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink);
 }
 
-.profile-bio-text{
-  margin-top:8px;
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.6;
-  max-width:320px;
-  font-weight:500;
+.profile-name-row {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
 }
 
-/* DIVIDERS */
-.divider{
-  border:0;
-  border-top:1.5px dashed var(--line);
-  margin:0;
+.name-decor-dots {
+  color: var(--soft);
+  font-size: 11px;
+  position: absolute;
+  top: -8px;
+  letter-spacing: 6px;
+  pointer-events: none;
 }
 
-/* ═════════════════════════════════
-   FEATURED: EASYDONATE BANNER
-═════════════════════════════════ */
-.donate-highlight-wrap{
-  padding:18px 16px 16px;
+.profile-display-name {
+  font-family: 'Comfortaa', 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.8px;
+  margin: 0;
 }
 
-.donate-banner-card{
-  background:linear-gradient(135deg, #ffffff 0%, #fff2f7 100%);
-  border:2px solid var(--line);
-  border-radius:24px;
-  padding:15px 16px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  text-decoration:none;
-  color:var(--text);
-  box-shadow:0 6px 20px rgba(235, 140, 175, 0.22);
-  position:relative;
-  transition:all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow:hidden;
+.profile-bio-text {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 320px;
+  font-weight: 500;
 }
 
-.donate-banner-card:active{
-  transform:scale(0.97);
-  box-shadow:0 2px 10px rgba(235, 140, 175, 0.25);
+.divider {
+  border: 0;
+  border-top: 1.5px dashed var(--line);
+  margin: 0;
 }
 
-/* Double inner frame effect */
-.donate-banner-card::before{
-  content:'';
-  position:absolute;
-  inset:3px;
-  border:1px solid rgba(254, 204, 222, 0.7);
-  border-radius:20px;
-  pointer-events:none;
+/* ══════════════════════════════════════════════════════════
+   6. FEATURED EASYDONATE BANNER
+══════════════════════════════════════════════════════════ */
+.donate-highlight-wrap {
+  padding: 18px 16px 16px;
 }
 
-.donate-sparkle{
-  position:absolute;
-  top:8px;
-  right:10px;
-  pointer-events:none;
+.donate-banner-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fff2f7 100%);
+  border: 2px solid var(--line);
+  border-radius: 24px;
+  padding: 15px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 6px 20px rgba(235, 140, 175, 0.22);
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
 }
 
-.donate-icon-circle{
-  width:46px;
-  height:46px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#ffebf3,#ffd8e6);
-  border:1.5px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--pink);
-  flex-shrink:0;
-  box-shadow:0 3px 8px var(--shadow);
+.donate-banner-card:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 10px rgba(235, 140, 175, 0.25);
 }
 
-.donate-info{
-  flex:1;
-  min-width:0;
+.donate-banner-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(254, 204, 222, 0.7);
+  border-radius: 20px;
+  pointer-events: none;
 }
 
-.donate-title{
-  font-family:'Comfortaa',sans-serif;
-  font-size:14px;
-  font-weight:700;
-  color:var(--darkpink);
-  display:flex;
-  align-items:center;
-  gap:5px;
+.donate-sparkle {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  pointer-events: none;
 }
 
-.donate-desc{
-  font-size:11.5px;
-  color:var(--muted);
-  margin-top:3px;
+.donate-icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ffebf3, #ffd8e6);
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink);
+  flex-shrink: 0;
+  box-shadow: 0 3px 8px var(--shadow);
 }
 
-.donate-arrow-btn{
-  width:32px;
-  height:32px;
-  border-radius:12px;
-  background:#ffffff;
-  border:1.5px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--pink);
-  flex-shrink:0;
-  box-shadow:0 2px 6px var(--shadow);
+.donate-info {
+  flex: 1;
+  min-width: 0;
 }
 
-/* Highlight bounce effect when triggered */
-.donate-banner-card.highlight-pulse{
-  animation: pulseCard 1.2s ease-in-out;
-}
-@keyframes pulseCard{
-  0%, 100%{ transform:scale(1); }
-  50%{ transform:scale(1.04); box-shadow:0 0 24px rgba(234,94,137,0.5); }
-}
-
-/* ═════════════════════════════════
-   4 SOCIAL CARDS GRID (TIKTOK, SOUNDCLOUD, TWITCH, IG)
-═════════════════════════════════ */
-.cards-section{
-  padding:16px 14px 22px;
+.donate-title {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--darkpink);
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.cards-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+.donate-desc {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 3px;
 }
 
-.app-social-card{
-  min-height:142px;
-  padding:18px 10px 14px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:space-between;
-  text-align:center;
-  border:2px solid var(--line);
-  border-radius:26px;
-  background:#ffffff;
-  box-shadow:0 6px 18px rgba(235, 140, 175, 0.14);
-  position:relative;
-  transition:transform .2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .2s;
-  cursor:pointer;
-  text-decoration:none;
-  color:var(--text);
-  overflow:visible;
+.donate-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink);
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px var(--shadow);
 }
 
-.app-social-card:active{
-  transform:translateY(2px) scale(0.97);
-  box-shadow:0 2px 8px rgba(235, 140, 175, 0.2);
+/* ══════════════════════════════════════════════════════════
+   7. 4 SOCIAL CARDS GRID (TIKTOK, SOUNDCLOUD, TWITCH, IG)
+══════════════════════════════════════════════════════════ */
+.cards-section {
+  padding: 16px 14px 22px;
 }
 
-.app-social-card::after{
-  content:'';
-  position:absolute;
-  inset:3px;
-  border:1.2px solid rgba(254, 204, 222, 0.65);
-  border-radius:22px;
-  pointer-events:none;
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
-.card-sparkle{
-  position:absolute;
-  top:9px;
-  right:10px;
-  pointer-events:none;
-  z-index:2;
+.app-social-card {
+  min-height: 142px;
+  padding: 18px 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  border: 2px solid var(--line);
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(235, 140, 175, 0.14);
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  overflow: visible;
 }
 
-.card-heart-top{
-  position:absolute;
-  top:-11px;
-  left:50%;
-  transform:translateX(-50%) rotate(-6deg);
-  z-index:3;
-  pointer-events:none;
+.app-social-card:active {
+  transform: translateY(2px) scale(0.97);
+  box-shadow: 0 2px 8px rgba(235, 140, 175, 0.2);
 }
 
-.card-icon-box{
-  width:100%;
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:4px 0;
+.app-social-card::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1.2px solid rgba(254, 204, 222, 0.65);
+  border-radius: 22px;
+  pointer-events: none;
 }
 
-.card-info{
-  width:100%;
-  text-align:center;
+.card-sparkle {
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  pointer-events: none;
+  z-index: 2;
 }
 
-.card-title{
-  font-size:12.5px;
-  font-weight:700;
-  color:var(--text);
-  display:block;
-  letter-spacing:0.2px;
-  white-space:nowrap;
+.card-heart-top {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-6deg);
+  z-index: 3;
+  pointer-events: none;
 }
 
-.card-sub{
-  font:700 10.5px 'Nunito',sans-serif;
-  color:var(--muted);
-  margin-top:3px;
-  display:block;
-  letter-spacing:0.4px;
+.card-icon-box {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
 }
 
-/* ═════════════════════════════════
-   EXTRA NOTE & FOOTER
-═════════════════════════════════ */
-.extra-box{
-  margin:10px 16px 20px;
-  padding:16px;
-  border:1.5px dashed var(--line);
-  border-radius:20px;
-  background:#ffffff;
-  box-shadow:0 3px 10px rgba(235,140,175,0.08);
-  white-space:pre-wrap;
-  line-height:1.8;
-  font-size:12px;
-  text-align:center;
-  color:var(--text);
-}
-.extra-box:before{
-  content:"୨୧ little note ୨୧";
-  display:block;
-  font:700 11px 'Nunito',sans-serif;
-  color:var(--darkpink);
-  margin-bottom:6px;
+.card-info {
+  width: 100%;
+  text-align: center;
 }
 
-.footer-decor{
-  text-align:center;
-  font-size:11px;
-  color:var(--soft);
-  padding:10px 0 20px;
+.card-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
 }
 
-/* ═════════════════════════════════
-   MODALS & ADMIN PANEL
-═════════════════════════════════ */
-.overlay{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:12px;
-  background:rgba(74,41,71,.44);
-  backdrop-filter:blur(8px);
-}
-.overlay.active{display:flex}
-.modal{
-  width:100%;
-  max-width:440px;
-  max-height:88vh;
-  overflow-y:auto;
-  position:relative;
-  scrollbar-width:thin;
-  background:#fffafd;
-  border:2px solid var(--line);
-  border-radius:26px;
-  padding:0 20px 20px;
-  box-shadow:0 20px 60px rgba(109,60,92,0.35);
-}
-.modal-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  position:sticky;
-  top:0;
-  z-index:30;
-  background:rgba(255,250,253,0.97);
-  padding:18px 0 14px;
-  margin-bottom:14px;
-  border-bottom:1.5px dashed var(--line);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-.modal-heading{
-  font:800 20px 'Comfortaa','Nunito',sans-serif;
-  color:var(--darkpink);
-}
-.close-btn{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  border:1.5px solid var(--line);
-  background:white;
-  color:var(--darkpink);
-  font-size:18px;
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-  transition:all .2s;
-  box-shadow:0 2px 8px var(--shadow);
-}
-.close-btn:hover{
-  background:var(--pale);
-  transform:scale(1.08);
-}
-.close-btn:active{
-  transform:scale(0.92);
+.card-sub {
+  font: 700 10.5px 'Nunito', sans-serif;
+  color: var(--muted);
+  margin-top: 3px;
+  display: block;
+  letter-spacing: 0.4px;
 }
 
-/* Avatar uploader component */
-.avatar-upload-box{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:12px 14px;
-  background:#ffffff;
-  border:1.5px solid var(--line);
-  border-radius:20px;
-  box-shadow:0 2px 8px var(--shadow);
-}
-.avatar-preview-wrap{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  border:1.8px solid var(--line);
-  background:var(--pale);
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-  box-shadow:0 3px 10px var(--shadow);
-  position:relative;
-}
-.avatar-preview-placeholder{
-  color:var(--soft);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+/* ══════════════════════════════════════════════════════════
+   8. EXTRA NOTE & FOOTER
+══════════════════════════════════════════════════════════ */
+.extra-box {
+  margin: 10px 16px 20px;
+  padding: 16px;
+  border: 1.5px dashed var(--line);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 3px 10px rgba(235, 140, 175, 0.08);
+  white-space: pre-wrap;
+  line-height: 1.8;
+  font-size: 12px;
+  text-align: center;
+  color: var(--text);
 }
 
-.field{margin-bottom:12px}
-.field label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--text)}
-.input{
-  display:block;
-  width:100%;
-  padding:11px 13px;
-  border:1.5px solid var(--line);
-  border-radius:13px;
-  background:white;
-  color:var(--text);
-  font-size:12px;
-  outline:none;
-}
-.input:focus{border-color:var(--pink);box-shadow:0 0 0 3px var(--pale)}
-textarea.input{min-height:85px;resize:vertical}
-.hint{font-size:10px;line-height:1.7;color:var(--muted);margin:5px 0 11px}
-
-.primary,.secondary,.danger{
-  padding:11px 16px;
-  border-radius:14px;
-  font-size:12px;
-  font-weight:600;
-  transition:.2s;
-  cursor:pointer;
-  border:none;
-}
-.primary{
-  background:linear-gradient(135deg,#fa9fbd,#ee82ac);
-  border:1px solid #ef91b4;
-  color:white;
-  box-shadow:0 3px 10px rgba(234,94,137,0.3);
-}
-.secondary{
-  background:white;
-  border:1.5px solid var(--line);
-  color:var(--darkpink);
-  box-shadow:0 2px 6px var(--shadow);
-}
-.danger{
-  background:#fff1f5;
-  border:1px solid #ffc4d4;
-  color:#c85c7d;
+.extra-box::before {
+  content: "୨୧ little note ୨୧";
+  display: block;
+  font: 700 11px 'Nunito', sans-serif;
+  color: var(--darkpink);
+  margin-bottom: 6px;
 }
 
-.toast{
-  position:fixed;
-  z-index:200;
-  top:24px;
-  left:50%;
-  transform:translateX(-50%) translateY(-20px);
-  background:rgba(255,255,255,0.96);
-  color:var(--darkpink);
-  border:1.8px solid var(--line);
-  border-radius:99px;
-  padding:10px 22px;
-  font-size:12px;
-  font-weight:600;
-  box-shadow:0 8px 25px rgba(235,140,175,0.3);
-  backdrop-filter:blur(8px);
-  opacity:0;
-  pointer-events:none;
-  transition:all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+.footer-decor {
+  text-align: center;
+  font-size: 11px;
+  color: var(--soft);
+  padding: 10px 0 20px;
 }
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ══════════════════════════════════════════════════════════
+   9. MODALS & ADMIN FORM CONTROLS
+══════════════════════════════════════════════════════════ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: rgba(74, 41, 71, 0.44);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.overlay.active {
+  display: flex;
+}
+
+.modal {
+  width: 100%;
+  max-width: 440px;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  scrollbar-width: thin;
+  background: #fffafd;
+  border: 2px solid var(--line);
+  border-radius: 26px;
+  padding: 0 20px 20px;
+  box-shadow: 0 20px 60px rgba(109, 60, 92, 0.35);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255, 250, 253, 0.97);
+  padding: 18px 0 14px;
+  margin-bottom: 14px;
+  border-bottom: 1.5px dashed var(--line);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-heading {
+  font: 800 20px 'Comfortaa', 'Nunito', sans-serif;
+  color: var(--darkpink);
+}
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: white;
+  color: var(--darkpink);
+  font-size: 18px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.close-btn:hover {
+  background: var(--pale);
+  transform: scale(1.08);
+}
+
+.close-btn:active {
+  transform: scale(0.92);
+}
+
+.avatar-upload-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: #ffffff;
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.avatar-preview-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1.8px solid var(--line);
+  background: var(--pale);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px var(--shadow);
+  position: relative;
+}
+
+.avatar-preview-placeholder {
+  color: var(--soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.field {
+  margin-bottom: 12px;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.field-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.field-value-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--darkpink);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 11px 13px;
+  border: 1.5px solid var(--line);
+  border-radius: 13px;
+  background: white;
+  color: var(--text);
+  font-size: 12px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px var(--pale);
+}
+
+textarea.input {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.range-slider {
+  width: 100%;
+  accent-color: var(--darkpink);
+  cursor: pointer;
+}
+
+.hint {
+  font-size: 10px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 5px 0 11px;
+}
+
+.primary, .secondary, .danger {
+  padding: 11px 16px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.primary {
+  background: linear-gradient(135deg, #fa9fbd, #ee82ac);
+  border: 1px solid #ef91b4;
+  color: white;
+  box-shadow: 0 3px 10px rgba(234, 94, 137, 0.3);
+}
+
+.secondary {
+  background: white;
+  border: 1.5px solid var(--line);
+  color: var(--darkpink);
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.danger {
+  background: #fff1f5;
+  border: 1px solid #ffc4d4;
+  color: #c85c7d;
+}
+
+.toast {
+  position: fixed;
+  z-index: 200;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--darkpink);
+  border: 1.8px solid var(--line);
+  border-radius: 99px;
+  padding: 10px 22px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 8px 25px rgba(235, 140, 175, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 
 /* Confetti heart animation */
-.confetti-heart{
-  position:fixed;
-  pointer-events:none;
-  z-index:9999;
-  animation:floatUp 1.8s ease-out forwards;
-}
-@keyframes floatUp{
-  0%{ opacity:1; transform:translate(0,0) scale(0.6) rotate(0deg); }
-  100%{ opacity:0; transform:translate(var(--dx),-130px) scale(1.2) rotate(var(--rot)); }
+.confetti-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  animation: floatUp 1.8s ease-out forwards;
 }
 
-/* ═════════════════════════════════
-   TAP TO ENTER OVERLAY (BLURRED)
-═════════════════════════════════ */
-.tap-to-enter-overlay{
-  position:fixed;
-  inset:0;
-  z-index:9000;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,0.72);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  cursor:pointer;
-  user-select:none;
-  padding:20px;
-  transition:opacity .5s cubic-bezier(0.4, 0, 0.2, 1), transform .5s cubic-bezier(0.4, 0, 0.2, 1);
+@keyframes floatUp {
+  0%   { opacity: 1; transform: translate(0, 0) scale(0.6) rotate(0deg); }
+  100% { opacity: 0; transform: translate(var(--dx), -130px) scale(1.2) rotate(var(--rot)); }
 }
 
-.tap-to-enter-overlay.closing{
-  opacity:0;
-  transform:scale(1.04);
-  pointer-events:none;
+/* ══════════════════════════════════════════════════════════
+   10. TAP TO ENTER OVERLAY (BLURRED)
+══════════════════════════════════════════════════════════ */
+.tap-to-enter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+  user-select: none;
+  padding: 20px;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.enter-card{
-  width:100%;
-  max-width:320px;
-  background:rgba(255,255,255,0.92);
-  border:2px solid var(--line);
-  border-radius:32px;
-  padding:32px 24px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-  text-align:center;
-  box-shadow:0 16px 40px rgba(220,130,165,0.25);
-  backdrop-filter:blur(10px);
-  animation:enterPulse 3s ease-in-out infinite;
+.tap-to-enter-overlay.closing {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
 }
 
-@keyframes enterPulse{
-  0%, 100%{ transform:scale(1); box-shadow:0 16px 40px rgba(220,130,165,0.22); }
-  50%{ transform:scale(1.025); box-shadow:0 20px 48px rgba(234,94,137,0.35); }
+.enter-card {
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid var(--line);
+  border-radius: 32px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(220, 130, 165, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: enterPulse 3s ease-in-out infinite;
 }
 
-.enter-icon-wrap{
-  width:68px;
-  height:68px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#fff0f5,#fee4ef);
-  border:1.8px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 4px 14px var(--shadow);
-  margin-bottom:2px;
+@keyframes enterPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 16px 40px rgba(220, 130, 165, 0.22); }
+  50%      { transform: scale(1.025); box-shadow: 0 20px 48px rgba(234, 94, 137, 0.35); }
 }
 
-.enter-title{
-  font:700 16px 'Comfortaa','Nunito',sans-serif;
-  color:var(--darkpink);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
+.enter-icon-wrap {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff0f5, #fee4ef);
+  border: 1.8px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px var(--shadow);
+  margin-bottom: 2px;
 }
 
-.enter-instruction{
-  font:600 13px 'Nunito',sans-serif;
-  color:var(--text);
-  line-height:1.5;
+.enter-title {
+  font: 700 16px 'Comfortaa', 'Nunito', sans-serif;
+  color: var(--darkpink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
-.enter-hint{
-  font:700 11px 'Nunito',sans-serif;
-  color:var(--soft);
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  background:rgba(255,245,248,0.95);
-  padding:6px 16px;
-  border-radius:99px;
-  border:1.2px solid var(--line);
-  margin-top:4px;
+.enter-instruction {
+  font: 600 13px 'Nunito', sans-serif;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.enter-hint {
+  font: 700 11px 'Nunito', sans-serif;
+  color: var(--soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 245, 248, 0.95);
+  padding: 6px 16px;
+  border-radius: 99px;
+  border: 1.2px solid var(--line);
+  margin-top: 4px;
 }
 </style>
 </head>
@@ -831,227 +898,214 @@ textarea.input{min-height:85px;resize:vertical}
   </div>
 </div>
 
+<!-- ════════ MAIN APP CONTAINER ════════ -->
 <div class="app">
 
-<!-- ════════ TOPBAR (OPTION 1) ════════ -->
-<header class="topbar">
-  <div class="top-left-title">
-    <span>୨୧</span>
-    <span id="topLogoText">sosoli space</span>
-    <span style="color:var(--soft); font-size:11px;">⊹ .</span>
-  </div>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="top-left-title">
+      <span>୨୧</span>
+      <span id="topLogoText">sosoli space</span>
+      <span style="color:var(--soft); font-size:11px;">⊹ .</span>
+    </div>
 
-  <div class="top-actions">
-    <!-- Soundwave Pill Button (ılılı ♫) -->
-    <button type="button" class="soundwave-btn" id="soundwaveBtn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">
-      <div class="soundwave-bars">
-        <span class="soundwave-bar bar-1"></span>
-        <span class="soundwave-bar bar-2"></span>
-        <span class="soundwave-bar bar-3"></span>
-        <span class="soundwave-bar bar-4"></span>
-      </div>
-      <div class="soundwave-icon">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 18V5l12-2v13"></path>
-          <circle cx="6" cy="18" r="3" fill="currentColor"></circle>
-          <circle cx="18" cy="16" r="3" fill="currentColor"></circle>
+    <div class="top-actions">
+      <!-- Soundwave Pill Button (ılılı ♫) -->
+      <button type="button" class="soundwave-btn" id="soundwaveBtn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">
+        <div class="soundwave-bars">
+          <span class="soundwave-bar bar-1"></span>
+          <span class="soundwave-bar bar-2"></span>
+          <span class="soundwave-bar bar-3"></span>
+          <span class="soundwave-bar bar-4"></span>
+        </div>
+        <div class="soundwave-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3" fill="currentColor"></circle>
+            <circle cx="18" cy="16" r="3" fill="currentColor"></circle>
+          </svg>
+        </div>
+      </button>
+
+      <!-- Admin Button (♡) -->
+      <button type="button" class="admin-circle-btn" onclick="openAdmin()" title="Admin Control ♡">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
-      </div>
-    </button>
+      </button>
 
-    <!-- Admin Button (♡) -->
-    <button type="button" class="admin-circle-btn" onclick="openAdmin()" title="Admin Control ♡">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-    </button>
-
-    <!-- Right-edge partial 3D heart -->
-    <div class="top-right-edge">
-      <svg width="32" height="32" viewBox="0 0 36 36">
-        <defs>
-          <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffb8cc"/>
-            <stop offset="50%" stop-color="#f27aa0"/>
-            <stop offset="100%" stop-color="#db4b78"/>
-          </linearGradient>
-        </defs>
-        <path d="M18 31l-2.2-2C7.9 21.8 2.7 17.1 2.7 11.3 2.7 6.6 6.4 3 11.1 3c2.6 0 5.1 1.2 6.9 3.1C19.8 4.2 22.3 3 24.9 3c4.7 0 8.4 3.6 8.4 8.3 0 5.8-5.2 10.5-13.1 17.7L18 31z" fill="url(#edgeGrad)"/>
-      </svg>
-    </div>
-  </div>
-</header>
-
-<!-- ════════ PROFILE HEADER (MATCHING USER IMAGE) ════════ -->
-<section class="profile-section">
-  <!-- Avatar (Photo with upload) -->
-  <div class="avatar-circle-wrap" id="avatarBox" onclick="burstHearts(event)">
-    <div class="avatar-default-placeholder">
-      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Name with aesthetic dot decor -->
-  <div class="profile-name-row">
-    <span class="name-decor-dots">· ⊹ · ⁺</span>
-    <h1 class="profile-display-name" id="mainDisplayName">sosoli</h1>
-  </div>
-
-  <!-- Bio Subtitle -->
-  <div class="profile-bio-text" id="mainBioText">
-    hi hi welc to my platform chanel ⊹ . ⁺ ૮૩
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ════════ FEATURED: EASYDONATE BANNER ════════ -->
-<section class="donate-highlight-wrap" id="donateSection">
-  <a class="donate-banner-card" id="donateBannerLink" href="https://ezdn.app/kitawwa" target="_blank" rel="noopener noreferrer">
-    <!-- Sparkle ✦ -->
-    <svg class="donate-sparkle" width="14" height="14" viewBox="0 0 20 20">
-      <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
-    </svg>
-
-    <div class="donate-icon-circle">
-      <!-- Cute Coffee / Support Icon -->
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-        <line x1="6" y1="1" x2="6" y2="4"></line>
-        <line x1="10" y1="1" x2="10" y2="4"></line>
-        <line x1="14" y1="1" x2="14" y2="4"></line>
-      </svg>
-    </div>
-
-    <div class="donate-info">
-      <div class="donate-title">
-        <span id="donateCardTitle">Support Me ♡ EasyDonate</span>
-      </div>
-      <div class="donate-desc" id="donateCardSubtitle">
-        แตะเพื่อโดเนทเป็นกำลังใจให้เค้าน้า ☕ ⁺ ⊹
-      </div>
-    </div>
-
-    <div class="donate-arrow-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="7" y1="17" x2="17" y2="7"></line>
-        <polyline points="7 7 17 7 17 17"></polyline>
-      </svg>
-    </div>
-  </a>
-</section>
-
-<hr class="divider">
-
-<!-- ════════ 4 SOCIAL CARDS GRID (TIKTOK, SOUNDCLOUD, TWITCH, IG) ════════ -->
-<section class="cards-section">
-  <div class="cards-grid">
-
-    <!-- Card 1: TikTok Live -->
-    <a class="app-social-card" id="linkTikTok" href="https://www.tiktok.com/@r8140356" target="_blank" rel="noopener noreferrer">
-      <!-- Sparkle ✦ on corner -->
-      <svg class="card-sparkle" width="14" height="14" viewBox="0 0 20 20">
-        <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
-      </svg>
-
-      <div class="card-icon-box">
-        <!-- TikTok Vector Icon -->
-        <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
-          <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-2.888 2.879 2.896 2.896 0 0 1-2.888-2.879 2.896 2.896 0 0 1 2.888-2.879c.328 0 .642.057.933.161V9.458a6.31 6.31 0 0 0-.933-.07A6.335 6.335 0 0 0 3.15 15.68a6.335 6.335 0 0 0 6.336 6.292 6.335 6.335 0 0 0 6.336-6.292V8.922a8.163 8.163 0 0 0 4.767 1.517V6.994c-.34 0-.677-.105-1-.308z" fill="#ea5e89"/>
-        </svg>
-      </div>
-
-      <div class="card-info">
-        <span class="card-title" id="labelTikTok">. TikTok Live ♡</span>
-        <span class="card-sub">live stream ⊹</span>
-      </div>
-    </a>
-
-    <!-- Card 2: SoundCloud -->
-    <a class="app-social-card" id="linkSoundCloud" href="https://soundcloud.com/tlqkbal" target="_blank" rel="noopener noreferrer">
-      <!-- Heart sitting on top border -->
-      <svg class="card-heart-top" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-
-      <div class="card-icon-box">
-        <!-- SoundCloud Vector Cloud Icon -->
-        <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+      <!-- Right-edge partial 3D heart -->
+      <div class="top-right-edge">
+        <svg width="32" height="32" viewBox="0 0 36 36">
           <defs>
-            <linearGradient id="scGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ffa07a"/>
-              <stop offset="100%" stop-color="#ea5e89"/>
+            <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffb8cc"/>
+              <stop offset="50%" stop-color="#f27aa0"/>
+              <stop offset="100%" stop-color="#db4b78"/>
             </linearGradient>
           </defs>
-          <path d="M25.5 13.5a6 6 0 0 0-5.7-4.1 6.5 6.5 0 0 0-6.3 5A4.5 4.5 0 0 0 10 14a4.5 4.5 0 0 0-4.5 4.5A4.5 4.5 0 0 0 10 23h15.5a4.5 4.5 0 0 0 4.5-4.5 4.5 4.5 0 0 0-4.5-5z" fill="url(#scGrad)"/>
+          <path d="M18 31l-2.2-2C7.9 21.8 2.7 17.1 2.7 11.3 2.7 6.6 6.4 3 11.1 3c2.6 0 5.1 1.2 6.9 3.1C19.8 4.2 22.3 3 24.9 3c4.7 0 8.4 3.6 8.4 8.3 0 5.8-5.2 10.5-13.1 17.7L18 31z" fill="url(#edgeGrad)"/>
         </svg>
       </div>
+    </div>
+  </header>
 
-      <div class="card-info">
-        <span class="card-title" id="labelSoundCloud">· SoundCloud ·</span>
-        <span class="card-sub">music & vibe ♫</span>
+  <!-- PROFILE SECTION -->
+  <section class="profile-section">
+    <div class="avatar-circle-wrap" id="avatarBox" onclick="burstHearts(event)">
+      <div class="avatar-default-placeholder">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
       </div>
-    </a>
+    </div>
 
-    <!-- Card 3: Twitch -->
-    <a class="app-social-card" id="linkTwitch" href="https://www.twitch.tv/anisubu" target="_blank" rel="noopener noreferrer">
-      <!-- Sparkle ✦ on corner -->
-      <svg class="card-sparkle" width="14" height="14" viewBox="0 0 20 20">
+    <div class="profile-name-row">
+      <span class="name-decor-dots">· ⊹ · ⁺</span>
+      <h1 class="profile-display-name" id="mainDisplayName">sosoli</h1>
+    </div>
+
+    <div class="profile-bio-text" id="mainBioText">
+      hi hi welc to my platform chanel ⊹ . ⁺ ૮૩
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- FEATURED: EASYDONATE BANNER -->
+  <section class="donate-highlight-wrap" id="donateSection">
+    <a class="donate-banner-card" id="donateBannerLink" href="https://ezdn.app/kitawwa" target="_blank" rel="noopener noreferrer">
+      <svg class="donate-sparkle" width="14" height="14" viewBox="0 0 20 20">
         <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
       </svg>
 
-      <div class="card-icon-box">
-        <!-- Twitch Vector Icon -->
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-          <path d="M2.5 4.5L4 1h16.5L22 4.5v11l-4.5 4.5H13l-2.5 2.5H8v-2.5H2.5v-15zm16 10V5.5H5.5v9h4v2l2-2h4.5l2.5-2.5zm-6-6h2v5h-2v-5zm-5 0h2v5h-2v-5z" fill="#9b62d4"/>
+      <div class="donate-icon-circle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+          <line x1="6" y1="1" x2="6" y2="4"></line>
+          <line x1="10" y1="1" x2="10" y2="4"></line>
+          <line x1="14" y1="1" x2="14" y2="4"></line>
         </svg>
       </div>
 
-      <div class="card-info">
-        <span class="card-title" id="labelTwitch">. Twitch ! ♡</span>
-        <span class="card-sub">live stream ⊹</span>
+      <div class="donate-info">
+        <div class="donate-title">
+          <span id="donateCardTitle">Support Me ♡ EasyDonate</span>
+        </div>
+        <div class="donate-desc" id="donateCardSubtitle">
+          แตะเพื่อโดเนทเป็นกำลังใจให้เค้าน้า ☕ ⁺ ⊹
+        </div>
       </div>
-    </a>
 
-    <!-- Card 4: Instagram -->
-    <a class="app-social-card" id="linkInstagram" href="https://www.instagram.com/neqrrt" target="_blank" rel="noopener noreferrer">
-      <!-- Heart sitting on top border -->
-      <svg class="card-heart-top" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-
-      <div class="card-icon-box">
-        <!-- Instagram Vector Icon -->
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-          <rect x="2" y="2" width="20" height="20" rx="6" stroke="#ea5e89" stroke-width="2"/>
-          <circle cx="12" cy="12" r="4.5" stroke="#ea5e89" stroke-width="2"/>
-          <circle cx="17.5" cy="6.5" r="1.2" fill="#ea5e89"/>
+      <div class="donate-arrow-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
         </svg>
       </div>
-
-      <div class="card-info">
-        <span class="card-title" id="labelInstagram">. Instagram ♡</span>
-        <span class="card-sub">story & photo ｡</span>
-      </div>
     </a>
+  </section>
 
+  <hr class="divider">
+
+  <!-- 4 SOCIAL CARDS GRID -->
+  <section class="cards-section">
+    <div class="cards-grid">
+
+      <!-- Card 1: TikTok Live -->
+      <a class="app-social-card" id="linkTikTok" href="https://www.tiktok.com/@r8140356" target="_blank" rel="noopener noreferrer">
+        <svg class="card-sparkle" width="14" height="14" viewBox="0 0 20 20">
+          <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
+        </svg>
+
+        <div class="card-icon-box">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+            <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-2.888 2.879 2.896 2.896 0 0 1-2.888-2.879 2.896 2.896 0 0 1 2.888-2.879c.328 0 .642.057.933.161V9.458a6.31 6.31 0 0 0-.933-.07A6.335 6.335 0 0 0 3.15 15.68a6.335 6.335 0 0 0 6.336 6.292 6.335 6.335 0 0 0 6.336-6.292V8.922a8.163 8.163 0 0 0 4.767 1.517V6.994c-.34 0-.677-.105-1-.308z" fill="#ea5e89"/>
+          </svg>
+        </div>
+
+        <div class="card-info">
+          <span class="card-title" id="labelTikTok">. TikTok Live ♡</span>
+          <span class="card-sub">live stream ⊹</span>
+        </div>
+      </a>
+
+      <!-- Card 2: SoundCloud -->
+      <a class="app-social-card" id="linkSoundCloud" href="https://soundcloud.com/tlqkbal" target="_blank" rel="noopener noreferrer">
+        <svg class="card-heart-top" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+
+        <div class="card-icon-box">
+          <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+            <defs>
+              <linearGradient id="scGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffa07a"/>
+                <stop offset="100%" stop-color="#ea5e89"/>
+              </linearGradient>
+            </defs>
+            <path d="M25.5 13.5a6 6 0 0 0-5.7-4.1 6.5 6.5 0 0 0-6.3 5A4.5 4.5 0 0 0 10 14a4.5 4.5 0 0 0-4.5 4.5A4.5 4.5 0 0 0 10 23h15.5a4.5 4.5 0 0 0 4.5-4.5 4.5 4.5 0 0 0-4.5-5z" fill="url(#scGrad)"/>
+          </svg>
+        </div>
+
+        <div class="card-info">
+          <span class="card-title" id="labelSoundCloud">· SoundCloud ·</span>
+          <span class="card-sub">music & vibe ♫</span>
+        </div>
+      </a>
+
+      <!-- Card 3: Twitch -->
+      <a class="app-social-card" id="linkTwitch" href="https://www.twitch.tv/anisubu" target="_blank" rel="noopener noreferrer">
+        <svg class="card-sparkle" width="14" height="14" viewBox="0 0 20 20">
+          <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
+        </svg>
+
+        <div class="card-icon-box">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+            <path d="M2.5 4.5L4 1h16.5L22 4.5v11l-4.5 4.5H13l-2.5 2.5H8v-2.5H2.5v-15zm16 10V5.5H5.5v9h4v2l2-2h4.5l2.5-2.5zm-6-6h2v5h-2v-5zm-5 0h2v5h-2v-5z" fill="#9b62d4"/>
+          </svg>
+        </div>
+
+        <div class="card-info">
+          <span class="card-title" id="labelTwitch">. Twitch ! ♡</span>
+          <span class="card-sub">live stream ⊹</span>
+        </div>
+      </a>
+
+      <!-- Card 4: Instagram -->
+      <a class="app-social-card" id="linkInstagram" href="https://www.instagram.com/neqrrt" target="_blank" rel="noopener noreferrer">
+        <svg class="card-heart-top" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+
+        <div class="card-icon-box">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="2" width="20" height="20" rx="6" stroke="#ea5e89" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4.5" stroke="#ea5e89" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="#ea5e89"/>
+          </svg>
+        </div>
+
+        <div class="card-info">
+          <span class="card-title" id="labelInstagram">. Instagram ♡</span>
+          <span class="card-sub">story & photo ｡</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- EXTRA NOTE & FOOTER -->
+  <div class="extra-box" id="mainExtraBox">
+    ขอบคุณทุกคนที่แวะมาหากันนะคะ 🎀 เจอกันในสตรีมน้า ♡
   </div>
-</section>
 
-
-<!-- ════════ EXTRA NOTE & FOOTER ════════ -->
-<div class="extra-box" id="mainExtraBox">
-ขอบคุณทุกคนที่แวะมาหากันนะคะ 🎀 เจอกันในสตรีมน้า ♡
-</div>
-
-<div class="footer-decor">
-  <div>♡ ~ ｡ ~ ♡</div>
-  <div style="margin-top:4px;">welcome to my sweet little space</div>
-</div>
+  <div class="footer-decor">
+    <div>♡ ~ ｡ ~ ♡</div>
+    <div style="margin-top:4px;">welcome to my sweet little space</div>
+  </div>
 
 </div><!-- /app -->
 
@@ -1091,6 +1145,7 @@ textarea.input{min-height:85px;resize:vertical}
       <label>Bio (ข้อความแนะนำตัว)</label>
       <textarea class="input" id="editBioText" placeholder="hi hi welc to my platform chanel ⊹ . ⁺ ૮૩"></textarea>
     </div>
+
     <!-- Avatar Upload & URL -->
     <div class="field">
       <label>🎀 รูปโปรไฟล์ (Profile Picture)</label>
@@ -1117,7 +1172,6 @@ textarea.input{min-height:85px;resize:vertical}
           <div id="avatarUploadStatus" class="hint" style="margin:6px 0 0; color:var(--darkpink);">แตะเพื่อเลือกรูปจากมือถือหรือคอมได้ทันทีค่ะ ♡</div>
         </div>
       </div>
-      <!-- Direct URL fallback -->
       <details style="margin-top:8px; font-size:11px; color:var(--muted);">
         <summary style="cursor:pointer; color:var(--darkpink); font-weight:600;">หรือใส่ลิงก์รูปภาพ URL (Advanced)</summary>
         <input class="input" id="editAvatarUrl" placeholder="https://..." style="margin-top:6px;" oninput="syncAvatarUrlPreview(this.value)">
@@ -1158,20 +1212,24 @@ textarea.input{min-height:85px;resize:vertical}
       <label>♫ ลิงก์เพลงพื้นหลัง (Direct MP3 URL)</label>
       <input class="input" id="editMusicUrl" placeholder="https://.../music.mp3">
     </div>
+
+    <!-- Music Volume Slider -->
     <div class="field">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+      <div class="field-label-row">
         <label style="margin-bottom:0;">🔊 ระดับเสียงคลอเบาๆ (Background Volume)</label>
-        <span id="volumeValueLabel" style="font-size:12px; font-weight:700; color:var(--darkpink);">20%</span>
+        <span id="volumeValueLabel" class="field-value-badge">20%</span>
       </div>
-      <input type="range" id="editMusicVolume" min="5" max="100" step="5" value="20" style="width:100%; accent-color:var(--darkpink); cursor:pointer;" oninput="updateVolumePreview(this.value)">
+      <input type="range" class="range-slider" id="editMusicVolume" min="5" max="100" step="5" value="20" oninput="updateVolumePreview(this.value)">
       <div class="hint">ตั้งไว้ที่ 20% เพื่อเปิดคลอเบาๆ สบายหู ไม่ดังหูแตก ปรับเลื่อนแล้วฟังระดับเสียงจริงได้ทันทีค่ะ ♡</div>
     </div>
+
+    <!-- Background Opacity Slider -->
     <div class="field">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+      <div class="field-label-row">
         <label style="margin-bottom:0;">🌸 ความชัดพื้นหลังอนิเมชั่น (Background Opacity)</label>
-        <span id="bgOpacityValueLabel" style="font-size:12px; font-weight:700; color:var(--darkpink);">22%</span>
+        <span id="bgOpacityValueLabel" class="field-value-badge">22%</span>
       </div>
-      <input type="range" id="editBgOpacity" min="5" max="70" step="1" value="22" style="width:100%; accent-color:var(--darkpink); cursor:pointer;" oninput="updateBgOpacityPreview(this.value)">
+      <input type="range" class="range-slider" id="editBgOpacity" min="5" max="70" step="1" value="22" oninput="updateBgOpacityPreview(this.value)">
       <div class="hint">ตั้งไว้ที่ 22% เพื่อให้ได้โทนสีขาวทับจางๆ ละมุนตา ไม่แย่งสายตา สามารถเลื่อนปรับระดับความชัดได้ตามชอบค่ะ ♡</div>
     </div>
 
@@ -1186,132 +1244,132 @@ textarea.input{min-height:85px;resize:vertical}
 <audio id="bgMusic" loop preload="none"></audio>
 
 <script>
-/* ======================================
-   FIREBASE CONFIG
-====================================== */
-const firebaseConfig={
-  apiKey:"AIzaSyD6iOvBIoVoVXzrA8VlXr4dSitW-nrjBxE",
-  authDomain:"my-shop-profile.firebaseapp.com",
-  projectId:"my-shop-profile",
-  storageBucket:"my-shop-profile.firebasestorage.app",
-  messagingSenderId:"200741341090",
-  appId:"1:200741341090:web:9de641f55ae35cdf3a14fb",
-  measurementId:"G-E95EM8MNWT"
+/* ══════════════════════════════════════════════════════════
+   1. CONFIG & FIREBASE INITIALIZATION
+══════════════════════════════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyD6iOvBIoVoVXzrA8VlXr4dSitW-nrjBxE",
+  authDomain: "my-shop-profile.firebaseapp.com",
+  projectId: "my-shop-profile",
+  storageBucket: "my-shop-profile.firebasestorage.app",
+  messagingSenderId: "200741341090",
+  appId: "1:200741341090:web:9de641f55ae35cdf3a14fb",
+  measurementId: "G-E95EM8MNWT"
 };
 
-const ADMIN_UID="";
+const ADMIN_UID = "";
 
 firebase.initializeApp(firebaseConfig);
-const db=firebase.firestore();
-const auth=firebase.auth();
-const settingsRef=db.collection("siteSettings").doc("main");
+const db = firebase.firestore();
+const auth = firebase.auth();
+const settingsRef = db.collection("siteSettings").doc("main");
 
-const $=id=>document.getElementById(id);
+/* ══════════════════════════════════════════════════════════
+   2. DOM UTILITIES & HELPERS
+══════════════════════════════════════════════════════════ */
+const $ = id => document.getElementById(id);
+const val = id => ($(id)?.value || "").trim();
+const setVal = (id, value) => { const el = $(id); if (el) el.value = value ?? ""; };
 
-/* ======================================
-   DEFAULT CREATOR HUB DATA
-====================================== */
-const defaults={
-  displayName:"sosoli",
-  bioText:"hi hi welc to my platform chanel ⊹ . ⁺ ૮૩",
-  avatarUrl:"",
-  donateUrl:"https://ezdn.app/kitawwa",
-  donateTitle:"Support Me ♡ EasyDonate",
-  donateSubtitle:"แตะเพื่อโดเนทเป็นกำลังใจให้เค้าน้า ☕ ⁺ ⊹",
-  tiktokUrl:"https://www.tiktok.com/@r8140356",
-  soundcloudUrl:"https://soundcloud.com/tlqkbal",
-  twitchUrl:"https://www.twitch.tv/anisubu",
-  instagramUrl:"https://www.instagram.com/neqrrt",
-  extraText:"ขอบคุณทุกคนที่แวะมาหากันนะคะ 🎀 เจอกันในสตรีมน้า ♡",
-  musicUrl:"https://www.image2url.com/r2/default/audio/1791461860465-d3c9e01c-0913-46aa-aac7-9421e51b0f5b.mp3",
-  musicVolume:0.2,
-  bgOpacity:0.22
-};
-
-let settings={...defaults};
-let isAdmin=false;
-
-/* Load instant cache from localStorage if available */
-try{
-  const cached=localStorage.getItem("creatorHubSettings");
-  if(cached){
-    const parsed=JSON.parse(cached);
-    const oldPlaceholders = ["https://easydonate.in.th/", "https://www.tiktok.com/", "https://soundcloud.com/", "https://twitch.tv/", "https://instagram.com/"];
-    ["donateUrl", "tiktokUrl", "soundcloudUrl", "twitchUrl", "instagramUrl"].forEach(k => {
-      if(!parsed[k] || oldPlaceholders.includes(parsed[k])){
-        parsed[k] = defaults[k];
-      }
-    });
-    settings={...defaults,...parsed};
-    if(typeof settings.musicVolume!=="number"){
-      settings.musicVolume=defaults.musicVolume;
-    }
-    if(typeof settings.bgOpacity!=="number"){
-      settings.bgOpacity=defaults.bgOpacity;
-    }
+function safeUrl(value) {
+  try {
+    const u = new URL(String(value || "").trim());
+    return ["http:", "https:"].includes(u.protocol) ? u.href : "";
+  } catch (e) {
+    return "";
   }
-}catch(e){}
-
-function val(id){return $(id).value.trim();}
-function setVal(id,value){$(id).value=value??"";}
-
-function safeUrl(value){
-  try{
-    const u=new URL(String(value||"").trim());
-    return ["http:","https:"].includes(u.protocol)?u.href:"";
-  }catch(e){return "";}
 }
 
-function safeAvatarUrl(value){
-  const str = String(value||"").trim();
-  if(str.startsWith("data:image/")) return str;
+function safeAvatarUrl(value) {
+  const str = String(value || "").trim();
+  if (str.startsWith("data:image/")) return str;
   return safeUrl(str);
 }
 
-function toast(message){
-  const node=$("toast");
-  node.textContent=message;
+function toast(message) {
+  const node = $("toast");
+  if (!node) return;
+  node.textContent = message;
   node.classList.add("show");
   clearTimeout(toast.timer);
-  toast.timer=setTimeout(()=>node.classList.remove("show"),2200);
+  toast.timer = setTimeout(() => node.classList.remove("show"), 2200);
 }
 
-function openModal(id){
-  const modal=$(id);
-  if(!modal)return;
+function openModal(id) {
+  const modal = $(id);
+  if (!modal) return;
   modal.classList.add("active");
-  document.body.style.overflow="hidden";
+  document.body.style.overflow = "hidden";
 }
 
-function closeModal(id){
-  const modal=$(id);
-  if(modal)modal.classList.remove("active");
-  if(!document.querySelector(".overlay.active")){
-    document.body.style.overflow="";
+function closeModal(id) {
+  const modal = $(id);
+  if (modal) modal.classList.remove("active");
+  if (!document.querySelector(".overlay.active")) {
+    document.body.style.overflow = "";
   }
 }
 
-// NOTE: Outside tap on .overlay does NOT close modal, ensuring user won't lose unsaved edits.
+/* ══════════════════════════════════════════════════════════
+   3. DATA SCHEMA & SANITIZER
+══════════════════════════════════════════════════════════ */
+const defaults = {
+  displayName: "sosoli",
+  bioText: "hi hi welc to my platform chanel ⊹ . ⁺ ૮૩",
+  avatarUrl: "",
+  donateUrl: "https://ezdn.app/kitawwa",
+  donateTitle: "Support Me ♡ EasyDonate",
+  donateSubtitle: "แตะเพื่อโดเนทเป็นกำลังใจให้เค้าน้า ☕ ⁺ ⊹",
+  tiktokUrl: "https://www.tiktok.com/@r8140356",
+  soundcloudUrl: "https://soundcloud.com/tlqkbal",
+  twitchUrl: "https://www.twitch.tv/anisubu",
+  instagramUrl: "https://www.instagram.com/neqrrt",
+  extraText: "ขอบคุณทุกคนที่แวะมาหากันนะคะ 🎀 เจอกันในสตรีมน้า ♡",
+  musicUrl: "https://www.image2url.com/r2/default/audio/1791461860465-d3c9e01c-0913-46aa-aac7-9421e51b0f5b.mp3",
+  musicVolume: 0.2,
+  bgOpacity: 0.22
+};
 
-/* ═════════════════════════════════
-   RENDER HUB VIEW
-═════════════════════════════════ */
-function renderHub(){
-  const name=settings.displayName||defaults.displayName;
+function sanitizeSettings(data) {
+  if (!data || typeof data !== "object") return { ...defaults };
+  const oldPlaceholders = ["https://easydonate.in.th/", "https://www.tiktok.com/", "https://soundcloud.com/", "https://twitch.tv/", "https://instagram.com/"];
+  const clean = { ...defaults, ...data };
+  ["donateUrl", "tiktokUrl", "soundcloudUrl", "twitchUrl", "instagramUrl"].forEach(k => {
+    if (!clean[k] || oldPlaceholders.includes(clean[k])) clean[k] = defaults[k];
+  });
+  if (typeof clean.musicVolume !== "number") clean.musicVolume = defaults.musicVolume;
+  if (typeof clean.bgOpacity !== "number") clean.bgOpacity = defaults.bgOpacity;
+  return clean;
+}
+
+let settings = { ...defaults };
+let isAdmin = false;
+
+// Fast initial load from LocalStorage cache
+try {
+  const cached = localStorage.getItem("creatorHubSettings");
+  if (cached) settings = sanitizeSettings(JSON.parse(cached));
+} catch (e) {}
+
+/* ══════════════════════════════════════════════════════════
+   4. HUB UI RENDERER
+══════════════════════════════════════════════════════════ */
+function renderHub() {
+  const name = settings.displayName || defaults.displayName;
   $("topLogoText").textContent = name + " space";
   $("mainDisplayName").textContent = name;
-  $("mainBioText").textContent = settings.bioText||defaults.bioText;
+  $("mainBioText").textContent = settings.bioText || defaults.bioText;
   document.title = name + " ♡ platform";
 
   const enterName = $("enterSpaceName");
-  if(enterName) enterName.textContent = name;
+  if (enterName) enterName.textContent = name;
 
   // Avatar
-  const avatarBox=$("avatarBox");
+  const avatarBox = $("avatarBox");
   const avatarSrc = safeAvatarUrl(settings.avatarUrl);
-  if(avatarSrc){
+  if (avatarSrc) {
     avatarBox.innerHTML = `<img src="${avatarSrc}" alt="${name}">`;
-  }else{
+  } else {
     avatarBox.innerHTML = `
       <div class="avatar-default-placeholder">
         <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -1321,244 +1379,241 @@ function renderHub(){
       </div>`;
   }
 
-  // Links (4 Social Cards & Donate Banner)
-  $("donateBannerLink").href = safeUrl(settings.donateUrl)||defaults.donateUrl;
-  $("linkTikTok").href = safeUrl(settings.tiktokUrl)||defaults.tiktokUrl;
-  $("linkSoundCloud").href = safeUrl(settings.soundcloudUrl)||defaults.soundcloudUrl;
-  $("linkTwitch").href = safeUrl(settings.twitchUrl)||defaults.twitchUrl;
-  $("linkInstagram").href = safeUrl(settings.instagramUrl)||defaults.instagramUrl;
+  // Links (4 Social Cards & Featured Banner)
+  $("donateBannerLink").href = safeUrl(settings.donateUrl) || defaults.donateUrl;
+  $("linkTikTok").href = safeUrl(settings.tiktokUrl) || defaults.tiktokUrl;
+  $("linkSoundCloud").href = safeUrl(settings.soundcloudUrl) || defaults.soundcloudUrl;
+  $("linkTwitch").href = safeUrl(settings.twitchUrl) || defaults.twitchUrl;
+  $("linkInstagram").href = safeUrl(settings.instagramUrl) || defaults.instagramUrl;
 
-  $("mainExtraBox").textContent = settings.extraText||defaults.extraText;
-  if(music) music.volume = getActiveVolume();
+  $("mainExtraBox").textContent = settings.extraText || defaults.extraText;
+  if (music) music.volume = getActiveVolume();
 
-  const op = (typeof settings.bgOpacity === 'number') ? settings.bgOpacity : defaults.bgOpacity;
+  const op = (typeof settings.bgOpacity === "number") ? settings.bgOpacity : defaults.bgOpacity;
   document.documentElement.style.setProperty("--bg-opacity", op);
 }
 
-/* ═════════════════════════════════
-   MUSIC & SOUNDWAVE
-═════════════════════════════════ */
-const music=$("bgMusic");
-let musicStarted=false;
-let musicManuallyPaused=false;
+/* ══════════════════════════════════════════════════════════
+   5. MUSIC ENGINE & SOUNDWAVE
+══════════════════════════════════════════════════════════ */
+const music = $("bgMusic");
+let musicStarted = false;
+let musicManuallyPaused = false;
 
-function getActiveVolume(){
-  const vol = (typeof settings.musicVolume === 'number') ? settings.musicVolume : defaults.musicVolume;
+function getActiveVolume() {
+  const vol = (typeof settings.musicVolume === "number") ? settings.musicVolume : defaults.musicVolume;
   return Math.max(0, Math.min(1, vol));
 }
 
-function updateVolumePreview(percent){
-  const p = Math.max(5, Math.min(100, Number(percent)||20));
+function updateVolumePreview(percent) {
+  const p = Math.max(5, Math.min(100, Number(percent) || 20));
   const lbl = $("volumeValueLabel");
-  if(lbl) lbl.textContent = p + "%";
-  if(music){
-    music.volume = p / 100;
-  }
+  if (lbl) lbl.textContent = p + "%";
+  if (music) music.volume = p / 100;
 }
 
-function updateBgOpacityPreview(percent){
-  const p = Math.max(5, Math.min(70, Number(percent)||22));
+function updateBgOpacityPreview(percent) {
+  const p = Math.max(5, Math.min(70, Number(percent) || 22));
   const lbl = $("bgOpacityValueLabel");
-  if(lbl) lbl.textContent = p + "%";
+  if (lbl) lbl.textContent = p + "%";
   document.documentElement.style.setProperty("--bg-opacity", p / 100);
 }
 
-if(music) music.volume = getActiveVolume();
+if (music) music.volume = getActiveVolume();
 
-function getActiveMusicUrl(){
+function getActiveMusicUrl() {
   return safeUrl(settings.musicUrl) || defaults.musicUrl;
 }
 
-function startMusicPlayback(){
-  if(musicManuallyPaused) return;
+function startMusicPlayback() {
+  if (musicManuallyPaused) return;
   const url = getActiveMusicUrl();
-  if(!url) return;
+  if (!url) return;
 
   music.volume = getActiveVolume();
-
-  if(music.getAttribute("src") !== url){
+  if (music.getAttribute("src") !== url) {
     music.src = url;
   }
 
-  music.play().then(()=>{
+  music.play().then(() => {
     musicStarted = true;
-    $("soundwaveBtn").classList.add("playing");
-  }).catch(err=>{
+    $("soundwaveBtn")?.classList.add("playing");
+    detachAutoPlayListeners();
+  }).catch(err => {
     console.log("Audio waiting for first user touch:", err);
   });
 }
 
-function toggleMusic(e){
+function toggleMusic(e) {
   const url = getActiveMusicUrl();
-  if(!url){
+  if (!url) {
     toast("ยังไม่ได้ตั้งค่าเพลงใน Admin ค่ะ 🎵");
     return;
   }
 
-  if(music.paused){
+  if (music.paused) {
     musicManuallyPaused = false;
     music.volume = getActiveVolume();
-    music.play().then(()=>{
+    music.play().then(() => {
       musicStarted = true;
-      $("soundwaveBtn").classList.add("playing");
+      $("soundwaveBtn")?.classList.add("playing");
       toast("Music playing ♫");
-      if(e) burstHearts(e);
-    }).catch(()=>toast("Music unavailable"));
-  }else{
+      if (e) burstHearts(e);
+    }).catch(() => toast("Music unavailable"));
+  } else {
     music.pause();
     musicManuallyPaused = true;
-    $("soundwaveBtn").classList.remove("playing");
+    $("soundwaveBtn")?.classList.remove("playing");
     toast("Music paused");
   }
 }
 
-// Seamless interaction trigger
-["pointerdown", "touchstart", "click", "scroll"].forEach(evt => {
-  window.addEventListener(evt, () => {
-    if(!musicStarted && !musicManuallyPaused){
-      startMusicPlayback();
-    }
-  }, {passive:true, once:false});
-});
-
+// User-interaction triggers with self-detaching performance optimization
+const autoPlayEvents = ["pointerdown", "touchstart", "click", "scroll"];
+function handleFirstUserTouch() {
+  if (!musicStarted && !musicManuallyPaused) {
+    startMusicPlayback();
+  }
+}
+function detachAutoPlayListeners() {
+  autoPlayEvents.forEach(evt => window.removeEventListener(evt, handleFirstUserTouch));
+}
+autoPlayEvents.forEach(evt => window.addEventListener(evt, handleFirstUserTouch, { passive: true }));
 window.addEventListener("DOMContentLoaded", startMusicPlayback);
 window.addEventListener("load", startMusicPlayback);
-setTimeout(startMusicPlayback, 500);
 
-/* ═════════════════════════════════
-   TAP TO ENTER & CONFETTI HEARTS
-═════════════════════════════════ */
-function handleTapToEnter(e){
+/* ══════════════════════════════════════════════════════════
+   6. INTERACTIVE EFFECTS (TAP TO ENTER & CONFETTI)
+══════════════════════════════════════════════════════════ */
+function handleTapToEnter(e) {
   const overlay = $("tapToEnter");
-  if(!overlay || overlay.classList.contains("closing")) return;
+  if (!overlay || overlay.classList.contains("closing")) return;
 
   startMusicPlayback();
   burstHearts(e);
 
   overlay.classList.add("closing");
-  setTimeout(()=>{
+  setTimeout(() => {
     overlay.style.display = "none";
   }, 500);
 }
 
-function burstHearts(e){
+function burstHearts(e) {
   let originX = window.innerWidth / 2;
   let originY = window.innerHeight / 2;
 
-  if(e){
-    if(e.touches && e.touches.length > 0){
+  if (e) {
+    if (e.touches && e.touches.length > 0) {
       originX = e.touches[0].clientX;
       originY = e.touches[0].clientY;
-    }else if(typeof e.clientX === "number" && typeof e.clientY === "number" && (e.clientX !== 0 || e.clientY !== 0)){
+    } else if (typeof e.clientX === "number" && typeof e.clientY === "number" && (e.clientX !== 0 || e.clientY !== 0)) {
       originX = e.clientX;
       originY = e.clientY;
-    }else if(e.currentTarget && e.currentTarget.getBoundingClientRect){
+    } else if (e.currentTarget && e.currentTarget.getBoundingClientRect) {
       const rect = e.currentTarget.getBoundingClientRect();
       originX = rect.left + rect.width / 2;
       originY = rect.top + rect.height / 2;
     }
   }
 
-  for(let i=0; i<8; i++){
-    const heart = document.createElement('div');
-    heart.className = 'confetti-heart';
+  for (let i = 0; i < 8; i++) {
+    const heart = document.createElement("div");
+    heart.className = "confetti-heart";
     heart.innerHTML = `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="${i%2===0?'#ea5e89':'#f889ab'}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="${i % 2 === 0 ? '#ea5e89' : '#f889ab'}">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
       </svg>`;
-    heart.style.left = originX + 'px';
-    heart.style.top = originY + 'px';
-    const dx = (Math.random() - 0.5) * 150 + 'px';
-    const rot = (Math.random() - 0.5) * 60 + 'deg';
-    heart.style.setProperty('--dx', dx);
-    heart.style.setProperty('--rot', rot);
+    heart.style.left = originX + "px";
+    heart.style.top = originY + "px";
+    const dx = (Math.random() - 0.5) * 150 + "px";
+    const rot = (Math.random() - 0.5) * 60 + "deg";
+    heart.style.setProperty("--dx", dx);
+    heart.style.setProperty("--rot", rot);
 
     document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(), 1800);
+    setTimeout(() => heart.remove(), 1800);
   }
 }
 
-/* ═════════════════════════════════
-   ADMIN AUTH & SETTINGS
-═════════════════════════════════ */
-auth.onAuthStateChanged(user=>{
-  isAdmin = Boolean(user && !user.isAnonymous && (!ADMIN_UID || user.uid===ADMIN_UID));
+/* ══════════════════════════════════════════════════════════
+   7. ADMIN AUTHENTICATION
+══════════════════════════════════════════════════════════ */
+auth.onAuthStateChanged(user => {
+  isAdmin = Boolean(user && !user.isAnonymous && (!ADMIN_UID || user.uid === ADMIN_UID));
 });
 
-function openAdmin(){
-  if(isAdmin){
+function openAdmin() {
+  if (isAdmin) {
     fillAdminForm();
     openModal("adminModal");
-  }else{
+  } else {
     openModal("loginModal");
   }
 }
 
-async function loginAdmin(){
-  const email=val("adminEmail");
-  const password=$("adminPassword").value;
-  if(!email||!password) return toast("กรุณากรอก Email และ Password");
+async function loginAdmin() {
+  const email = val("adminEmail");
+  const password = $("adminPassword")?.value;
+  if (!email || !password) return toast("กรุณากรอก Email และ Password");
 
-  try{
-    const result=await auth.signInWithEmailAndPassword(email,password);
-    if(result.user.isAnonymous || (ADMIN_UID && result.user.uid!==ADMIN_UID)){
+  try {
+    const result = await auth.signInWithEmailAndPassword(email, password);
+    if (result.user.isAnonymous || (ADMIN_UID && result.user.uid !== ADMIN_UID)) {
       await auth.signOut();
       return toast("ไม่ใช่บัญชีแอดมิน");
     }
-    isAdmin=true;
+    isAdmin = true;
     closeModal("loginModal");
     fillAdminForm();
     openModal("adminModal");
     toast("Welcome admin ♡ เข้าสู่ระบบสำเร็จ");
-  }catch(error){
+  } catch (error) {
     console.error(error);
     toast("เข้าสู่ระบบไม่สำเร็จ: ตรวจสอบ Email/Password");
   }
 }
 
-async function logoutAdmin(){
-  try{
+async function logoutAdmin() {
+  try {
     await auth.signOut();
-    isAdmin=false;
+    isAdmin = false;
     closeModal("adminModal");
     toast("Logged out");
-  }catch(error){
+  } catch (error) {
     console.error(error);
   }
 }
 
-/* ═════════════════════════════════
-   AVATAR UPLOAD FROM DEVICE
-═════════════════════════════════ */
-function handleAvatarFileSelect(e){
+/* ══════════════════════════════════════════════════════════
+   8. AVATAR UPLOAD & IMAGE PROCESSING
+══════════════════════════════════════════════════════════ */
+function handleAvatarFileSelect(e) {
   const file = e.target.files && e.target.files[0];
-  if(!file) return;
+  if (!file) return;
 
-  if(!file.type.startsWith("image/")){
+  if (!file.type.startsWith("image/")) {
     toast("กรุณาเลือกไฟล์รูปภาพค่ะ (JPG, PNG, WebP) 📷");
     return;
   }
 
-  if(file.size > 10 * 1024 * 1024){
+  if (file.size > 10 * 1024 * 1024) {
     toast("ไฟล์รูปมีขนาดใหญ่เกิน 10MB ค่ะ");
     return;
   }
 
   const status = $("avatarUploadStatus");
-  if(status) status.textContent = "กำลังประมวลผลรูปภาพ... ⏳";
+  if (status) status.textContent = "กำลังประมวลผลรูปภาพ... ⏳";
 
   const reader = new FileReader();
-  reader.onload = function(evt){
+  reader.onload = function(evt) {
     const img = new Image();
-    img.onload = function(){
-      // Crop square & compress to 360x360 px for optimal speed & quality
+    img.onload = function() {
+      // Crop square & compress to 360x360 px
       const canvas = document.createElement("canvas");
       const MAX_SIZE = 360;
-      let width = img.width;
-      let height = img.height;
-      const minSide = Math.min(width, height);
-      const startX = (width - minSide) / 2;
-      const startY = (height - minSide) / 2;
+      const minSide = Math.min(img.width, img.height);
+      const startX = (img.width - minSide) / 2;
+      const startY = (img.height - minSide) / 2;
 
       canvas.width = MAX_SIZE;
       canvas.height = MAX_SIZE;
@@ -1569,75 +1624,78 @@ function handleAvatarFileSelect(e){
       $("editAvatarUrl").value = compressedDataUrl;
       updateAvatarPreviewUI(compressedDataUrl);
 
-      if(status) status.textContent = "✓ เลือกรูปภาพสำเร็จแล้วค่ะ (อย่าลืมกด save changes ด้านล่างน้า ♡)";
+      if (status) status.textContent = "✓ เลือกรูปภาพสำเร็จแล้วค่ะ (อย่าลืมกด save changes ด้านล่างน้า ♡)";
       toast("เลือกรูปโปรไฟล์สำเร็จ ♡");
     };
-    img.onerror = function(){
+    img.onerror = function() {
       toast("ไม่สามารถโหลดรูปภาพนี้ได้ กรุณาลองรูปอื่นค่ะ");
-      if(status) status.textContent = "เกิดข้อผิดพลาดในการโหลดรูป";
+      if (status) status.textContent = "เกิดข้อผิดพลาดในการโหลดรูป";
     };
     img.src = evt.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-function updateAvatarPreviewUI(url){
+function updateAvatarPreviewUI(url) {
   const img = $("avatarPreviewImg");
   const placeholder = $("avatarPreviewPlaceholder");
   const removeBtn = $("removeAvatarBtn");
   const valid = safeAvatarUrl(url);
 
-  if(valid){
+  if (valid) {
     img.src = valid;
     img.style.display = "block";
-    if(placeholder) placeholder.style.display = "none";
-    if(removeBtn) removeBtn.style.display = "inline-block";
-  }else{
+    if (placeholder) placeholder.style.display = "none";
+    if (removeBtn) removeBtn.style.display = "inline-block";
+  } else {
     img.removeAttribute("src");
     img.style.display = "none";
-    if(placeholder) placeholder.style.display = "flex";
-    if(removeBtn) removeBtn.style.display = "none";
+    if (placeholder) placeholder.style.display = "flex";
+    if (removeBtn) removeBtn.style.display = "none";
   }
 }
 
-function clearAvatar(){
+function clearAvatar() {
   $("editAvatarUrl").value = "";
   const fileInput = $("avatarFileInput");
-  if(fileInput) fileInput.value = "";
+  if (fileInput) fileInput.value = "";
   updateAvatarPreviewUI("");
   const status = $("avatarUploadStatus");
-  if(status) status.textContent = "นำรูปภาพออกแล้วค่ะ (กลับไปใช้รูปเริ่มต้น)";
+  if (status) status.textContent = "นำรูปภาพออกแล้วค่ะ (กลับไปใช้รูปเริ่มต้น)";
   toast("นำรูปภาพออกแล้วค่ะ");
 }
 
-function syncAvatarUrlPreview(val){
+function syncAvatarUrlPreview(val) {
   updateAvatarPreviewUI(val);
 }
 
-function fillAdminForm(){
-  setVal("editDisplayName", settings.displayName||defaults.displayName);
-  setVal("editBioText", settings.bioText||defaults.bioText);
-  setVal("editAvatarUrl", settings.avatarUrl||"");
-  updateAvatarPreviewUI(settings.avatarUrl||"");
-  setVal("editDonateUrl", settings.donateUrl||defaults.donateUrl);
-  setVal("editTikTokUrl", settings.tiktokUrl||defaults.tiktokUrl);
-  setVal("editSoundCloudUrl", settings.soundcloudUrl||defaults.soundcloudUrl);
-  setVal("editTwitchUrl", settings.twitchUrl||defaults.twitchUrl);
-  setVal("editInstagramUrl", settings.instagramUrl||defaults.instagramUrl);
-  setVal("editExtraText", settings.extraText||defaults.extraText);
-  setVal("editMusicUrl", settings.musicUrl||defaults.musicUrl);
+/* ══════════════════════════════════════════════════════════
+   9. ADMIN SETTINGS FORM & SAVE
+══════════════════════════════════════════════════════════ */
+function fillAdminForm() {
+  setVal("editDisplayName", settings.displayName || defaults.displayName);
+  setVal("editBioText", settings.bioText || defaults.bioText);
+  setVal("editAvatarUrl", settings.avatarUrl || "");
+  updateAvatarPreviewUI(settings.avatarUrl || "");
+  setVal("editDonateUrl", settings.donateUrl || defaults.donateUrl);
+  setVal("editTikTokUrl", settings.tiktokUrl || defaults.tiktokUrl);
+  setVal("editSoundCloudUrl", settings.soundcloudUrl || defaults.soundcloudUrl);
+  setVal("editTwitchUrl", settings.twitchUrl || defaults.twitchUrl);
+  setVal("editInstagramUrl", settings.instagramUrl || defaults.instagramUrl);
+  setVal("editExtraText", settings.extraText || defaults.extraText);
+  setVal("editMusicUrl", settings.musicUrl || defaults.musicUrl);
 
   const currentVol = Math.round(getActiveVolume() * 100);
-  if($("editMusicVolume")) $("editMusicVolume").value = currentVol;
-  if($("volumeValueLabel")) $("volumeValueLabel").textContent = currentVol + "%";
+  if ($("editMusicVolume")) $("editMusicVolume").value = currentVol;
+  if ($("volumeValueLabel")) $("volumeValueLabel").textContent = currentVol + "%";
 
   const currentBgOp = Math.round(((typeof settings.bgOpacity === "number") ? settings.bgOpacity : defaults.bgOpacity) * 100);
-  if($("editBgOpacity")) $("editBgOpacity").value = currentBgOp;
-  if($("bgOpacityValueLabel")) $("bgOpacityValueLabel").textContent = currentBgOp + "%";
+  if ($("editBgOpacity")) $("editBgOpacity").value = currentBgOp;
+  if ($("bgOpacityValueLabel")) $("bgOpacityValueLabel").textContent = currentBgOp + "%";
 }
 
-async function saveAdminSettings(){
-  if(!isAdmin){
+async function saveAdminSettings() {
+  if (!isAdmin) {
     toast("Admin access required");
     return;
   }
@@ -1648,57 +1706,44 @@ async function saveAdminSettings(){
   const bgOpInput = $("editBgOpacity");
   const bgOpacity = bgOpInput ? (Number(bgOpInput.value) / 100) : defaults.bgOpacity;
 
-  const updated={
-    displayName: val("editDisplayName")||defaults.displayName,
-    bioText: val("editBioText")||defaults.bioText,
+  const updated = {
+    displayName: val("editDisplayName") || defaults.displayName,
+    bioText: val("editBioText") || defaults.bioText,
     avatarUrl: val("editAvatarUrl"),
-    donateUrl: val("editDonateUrl")||defaults.donateUrl,
-    tiktokUrl: val("editTikTokUrl")||defaults.tiktokUrl,
-    soundcloudUrl: val("editSoundCloudUrl")||defaults.soundcloudUrl,
-    twitchUrl: val("editTwitchUrl")||defaults.twitchUrl,
-    instagramUrl: val("editInstagramUrl")||defaults.instagramUrl,
+    donateUrl: val("editDonateUrl") || defaults.donateUrl,
+    tiktokUrl: val("editTikTokUrl") || defaults.tiktokUrl,
+    soundcloudUrl: val("editSoundCloudUrl") || defaults.soundcloudUrl,
+    twitchUrl: val("editTwitchUrl") || defaults.twitchUrl,
+    instagramUrl: val("editInstagramUrl") || defaults.instagramUrl,
     extraText: val("editExtraText"),
-    musicUrl: val("editMusicUrl")||defaults.musicUrl,
+    musicUrl: val("editMusicUrl") || defaults.musicUrl,
     musicVolume: musicVolume,
     bgOpacity: bgOpacity
   };
 
-  try{
-    await settingsRef.set(updated, {merge:true});
-    settings = {...settings, ...updated};
-    try{ localStorage.setItem("creatorHubSettings", JSON.stringify(settings)); }catch(e){}
+  try {
+    await settingsRef.set(updated, { merge: true });
+    settings = { ...settings, ...updated };
+    try { localStorage.setItem("creatorHubSettings", JSON.stringify(settings)); } catch (e) {}
     renderHub();
     closeModal("adminModal");
     toast("บันทึกข้อมูลเรียบร้อยแล้วค่ะ ♡");
-  }catch(error){
+  } catch (error) {
     console.error(error);
     toast("บันทึกไม่สำเร็จ: ตรวจสอบ Firestore Rules");
   }
 }
 
-/* ═════════════════════════════════
-   FIRESTORE REALTIME SYNC
-═════════════════════════════════ */
-settingsRef.onSnapshot(snapshot=>{
-  if(snapshot.exists){
-    const data = snapshot.data();
-    const oldPlaceholders = ["https://easydonate.in.th/", "https://www.tiktok.com/", "https://soundcloud.com/", "https://twitch.tv/", "https://instagram.com/"];
-    ["donateUrl", "tiktokUrl", "soundcloudUrl", "twitchUrl", "instagramUrl"].forEach(k => {
-      if(!data[k] || oldPlaceholders.includes(data[k])){
-        data[k] = defaults[k];
-      }
-    });
-    settings = {...defaults, ...data};
-    if(typeof settings.musicVolume !== "number"){
-      settings.musicVolume = defaults.musicVolume;
-    }
-    if(typeof settings.bgOpacity !== "number"){
-      settings.bgOpacity = defaults.bgOpacity;
-    }
-    try{ localStorage.setItem("creatorHubSettings", JSON.stringify(settings)); }catch(e){}
+/* ══════════════════════════════════════════════════════════
+   10. REALTIME DATA SYNC & INITIALIZATION
+══════════════════════════════════════════════════════════ */
+settingsRef.onSnapshot(snapshot => {
+  if (snapshot.exists) {
+    settings = sanitizeSettings(snapshot.data());
+    try { localStorage.setItem("creatorHubSettings", JSON.stringify(settings)); } catch (e) {}
     renderHub();
   }
-}, err=>{
+}, err => {
   console.log("Firestore sync info:", err);
 });
 
