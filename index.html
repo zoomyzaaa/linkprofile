@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
 <meta name="theme-color" content="#fff5f8">
-<title>⠀𐄙ִּ♡ﾟ𓈒บ๊ะ ཾจ่าง𓈒 ♡ﾟ༷ </title>
+<title>♡ Profile Link ♡</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1116,7 +1116,7 @@ textarea.input{min-height:90px;resize:vertical}
     </div>
 
     <div class="profile-header-center">
-      <div class="shop-title" id="mainShopName">line . @O35yfbcd .</div>
+      <div class="shop-title" id="mainShopName">My Profile ♡</div>
       <div class="bunny-row">
         <!-- Cute Custom Vector Bunny -->
         <svg class="bunny-icon" viewBox="0 0 36 32" fill="none">
@@ -1372,7 +1372,7 @@ textarea.input{min-height:90px;resize:vertical}
         <div class="admin-section-title">♡ Profile settings</div>
         <div class="field">
           <label>Shop name / Line ID</label>
-          <input class="input" id="editShopName" placeholder="line . @O35yfbcd .">
+          <input class="input" id="editShopName" placeholder="ชื่อร้าน หรือ LINE ID ของคุณ">
         </div>
         <div class="field">
           <label>Profile picture URL</label>
@@ -1639,7 +1639,7 @@ const $=id=>document.getElementById(id);
    DEFAULT SETTINGS
 ====================================== */
 const defaults={
-  shopName:"line . @035yfbcd .",
+  shopName:"My Profile ♡",
   avatarUrl:"",
   bio:"",
   mainMessage:"",
@@ -1652,13 +1652,13 @@ const defaults={
   menuHeading:"menu ♡",
   menuSubtitle:"",
   circles:[
-    {icon:"heart",label:". เครดิต.เก่า ♡",url:"",action:"reviews"},
-    {icon:"music",label:"· ex from ·",url:"",action:"menu"}
+    {icon:"heart",label:". เครดิต ♡",url:"",action:"reviews"},
+    {icon:"music",label:"· ผลงาน ·",url:"",action:"menu"}
   ],
   contacts:[
-    {icon:"lock",title:"♡ .line .oa ♡",subtitle:"ˏ ! ♡ ｡",url:"https://line.me/"},
-    {icon:"arch",title:". fb ♡",subtitle:"♡ ! ｡",url:"https://facebook.com/"},
-    {icon:"hearts",title:". X ! ♡",subtitle:"ˏ !",url:"https://x.com/"}
+    {icon:"lock",title:"♡ LINE Official ♡",subtitle:"ˏ ! ♡ ｡",url:"https://line.me/"},
+    {icon:"arch",title:". Facebook ♡",subtitle:"♡ ! ｡",url:"https://facebook.com/"},
+    {icon:"hearts",title:". X (Twitter) ♡",subtitle:"ˏ !",url:"https://x.com/"}
   ]
 };
 
@@ -1706,12 +1706,16 @@ function toast(message){
 }
 
 function copyProfileId(){
-  const name=settings.shopName||"line . @O35yfbcd .";
-  const cleanId = name.replace(/[^a-zA-Z0-9@._]/g,"") || "@O35yfbcd";
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(cleanId).then(()=>toast("♡ คัดลอก LINE ID เรียบร้อยแล้ว ♡"));
+  const name=settings.shopName||"";
+  const cleanId = name.replace(/[^a-zA-Z0-9@._]/g,"");
+  if(cleanId){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(cleanId).then(()=>toast("♡ คัดลอก " + cleanId + " เรียบร้อยแล้ว ♡"));
+    }else{
+      toast("♡ คัดลอก: " + cleanId + " ♡");
+    }
   }else{
-    toast("♡ คัดลอก LINE ID: " + cleanId + " ♡");
+    toast("♡ ยินดีต้อนรับนะคะ ♡");
   }
 }
 
@@ -2154,7 +2158,7 @@ createUpload("reviewUploadMount","review","add review photo ♡");
    MAIN PAGE RENDER
 ====================================== */
 function renderMain(){
-  $("mainShopName").textContent=settings.shopName||"line . @O35yfbcd .";
+  $("mainShopName").textContent=settings.shopName||"My Profile ♡";
   $("mainBio").textContent=settings.bio||"";
   
   if(settings.mainMessage){
@@ -2181,7 +2185,7 @@ function renderMain(){
     $("mainExtraBox").style.display="none";
   }
 
-  document.title=settings.shopName||"⠀𐄙ִּ♡ﾟ𓈒บ๊ะ ཾจ่าง𓈒 ♡ﾟ༷ ";
+  document.title=settings.shopName||"♡ Profile Link ♡";
 
   // Avatar handling
   const avatarBox=$("avatarBox");
@@ -2718,7 +2722,7 @@ async function saveMain(){
   if(uploadBusy("avatar")) return toast("Wait for image to finish ♡");
 
   const data={
-    shopName:val("editShopName")||"line . @O35yfbcd .",
+    shopName:val("editShopName")||"My Profile ♡",
     avatarUrl:uploadData("avatar")||val("editAvatarUrl"),
     bio:val("editBio"),
     mainMessage:val("editMainMessage"),
