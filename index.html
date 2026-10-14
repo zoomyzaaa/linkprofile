@@ -1088,6 +1088,14 @@ textarea.input{min-height:85px;resize:vertical}
       <label>♫ ลิงก์เพลงพื้นหลัง (Direct MP3 URL)</label>
       <input class="input" id="editMusicUrl" placeholder="https://.../music.mp3">
     </div>
+    <div class="field">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <label style="margin-bottom:0;">🔊 ระดับเสียงคลอเบาๆ (Background Volume)</label>
+        <span id="volumeValueLabel" style="font-size:12px; font-weight:700; color:var(--darkpink);">20%</span>
+      </div>
+      <input type="range" id="editMusicVolume" min="5" max="100" step="5" value="20" style="width:100%; accent-color:var(--darkpink); cursor:pointer;" oninput="updateVolumePreview(this.value)">
+      <div class="hint">ตั้งไว้ที่ 20% เพื่อเปิดคลอเบาๆ สบายหู ไม่ดังหูแตก ปรับเลื่อนแล้วฟังระดับเสียงจริงได้ทันทีค่ะ ♡</div>
+    </div>
 
     <div style="margin-top:16px; display:flex; gap:8px;">
       <button type="button" class="primary full" onclick="saveAdminSettings()">save changes ♡</button>
@@ -1138,7 +1146,8 @@ const defaults={
   discordUrl:"https://discord.com/",
   instagramUrl:"https://instagram.com/",
   extraText:"ขอบคุณทุกคนที่แวะมาหากันนะคะ 🎀 เจอกันในสตรีมน้า ♡",
-  musicUrl:"https://www.image2url.com/r2/default/audio/1791461860465-d3c9e01c-0913-46aa-aac7-9421e51b0f5b.mp3"
+  musicUrl:"https://www.image2url.com/r2/default/audio/1791461860465-d3c9e01c-0913-46aa-aac7-9421e51b0f5b.mp3",
+  musicVolume:0.2
 };
 
 let settings={...defaults};
@@ -1147,7 +1156,13 @@ let isAdmin=false;
 /* Load instant cache from localStorage if available */
 try{
   const cached=localStorage.getItem("creatorHubSettings");
-  if(cached) settings={...defaults,...JSON.parse(cached)};
+  if(cached){
+    const parsed=JSON.parse(cached);
+    settings={...defaults,...parsed};
+    if(typeof settings.musicVolume!=="number"){
+      settings.musicVolume=defaults.musicVolume;
+    }
+  }
 }catch(e){}
 
 function val(id){return $(id).value.trim();}
@@ -1220,6 +1235,7 @@ function renderHub(){
   $("linkInstagram").href = safeUrl(settings.instagramUrl)||defaults.instagramUrl;
 
   $("mainExtraBox").textContent = settings.extraText||defaults.extraText;
+  if(music) music.volume = getActiveVolume();
 }
 
 /* ═════════════════════════════════
@@ -1229,6 +1245,22 @@ const music=$("bgMusic");
 let musicStarted=false;
 let musicManuallyPaused=false;
 
+function getActiveVolume(){
+  const vol = (typeof settings.musicVolume === 'number') ? settings.musicVolume : defaults.musicVolume;
+  return Math.max(0, Math.min(1, vol));
+}
+
+function updateVolumePreview(percent){
+  const p = Math.max(5, Math.min(100, Number(percent)||20));
+  const lbl = $("volumeValueLabel");
+  if(lbl) lbl.textContent = p + "%";
+  if(music){
+    music.volume = p / 100;
+  }
+}
+
+if(music) music.volume = getActiveVolume();
+
 function getActiveMusicUrl(){
   return safeUrl(settings.musicUrl) || defaults.musicUrl;
 }
@@ -1237,6 +1269,8 @@ function startMusicPlayback(){
   if(musicManuallyPaused) return;
   const url = getActiveMusicUrl();
   if(!url) return;
+
+  music.volume = getActiveVolume();
 
   if(music.getAttribute("src") !== url){
     music.src = url;
@@ -1259,6 +1293,7 @@ function toggleMusic(e){
 
   if(music.paused){
     musicManuallyPaused = false;
+    music.volume = getActiveVolume();
     music.play().then(()=>{
       musicStarted = true;
       $("soundwaveBtn").classList.add("playing");
@@ -1375,6 +1410,10 @@ function fillAdminForm(){
   setVal("editInstagramUrl", settings.instagramUrl||defaults.instagramUrl);
   setVal("editExtraText", settings.extraText||defaults.extraText);
   setVal("editMusicUrl", settings.musicUrl||defaults.musicUrl);
+
+  const currentVol = Math.round(getActiveVolume() * 100);
+  if($("editMusicVolume")) $("editMusicVolume").value = currentVol;
+  if($("volumeValueLabel")) $("volumeValueLabel").textContent = currentVol + "%";
 }
 
 async function saveAdminSettings(){
@@ -1382,6 +1421,9 @@ async function saveAdminSettings(){
     toast("Admin access required");
     return;
   }
+
+  const volInput = $("editMusicVolume");
+  const musicVolume = volInput ? (Number(volInput.value) / 100) : defaults.musicVolume;
 
   const updated={
     displayName: val("editDisplayName")||defaults.displayName,
@@ -1394,7 +1436,8 @@ async function saveAdminSettings(){
     discordUrl: val("editDiscordUrl")||defaults.discordUrl,
     instagramUrl: val("editInstagramUrl")||defaults.instagramUrl,
     extraText: val("editExtraText"),
-    musicUrl: val("editMusicUrl")||defaults.musicUrl
+    musicUrl: val("editMusicUrl")||defaults.musicUrl,
+    musicVolume: musicVolume
   };
 
   try{
@@ -1417,6 +1460,9 @@ settingsRef.onSnapshot(snapshot=>{
   if(snapshot.exists){
     const data = snapshot.data();
     settings = {...defaults, ...data};
+    if(typeof settings.musicVolume !== "number"){
+      settings.musicVolume = defaults.musicVolume;
+    }
     try{ localStorage.setItem("creatorHubSettings", JSON.stringify(settings)); }catch(e){}
     renderHub();
   }
