@@ -1230,7 +1230,7 @@ const defaults = {
   twitchUrl: "https://www.twitch.tv/anisubu",
   instagramUrl: "https://www.instagram.com/neqrrt",
   soundcloudUrl: "https://soundcloud.com/tlqkbal",
-  musicUrl: "https://www.image2url.com/r2/default/audio/1791461860465-d3c9e01c-0913-46aa-aac7-9421e51b0f5b.mp3",
+  musicUrl: "",
   musicVolume: 0.2,
   bgOpacity: 0.22
 };
@@ -1729,9 +1729,26 @@ async function saveAdminSettings() {
 ══════════════════════════════════════════════════════════ */
 settingsRef.onSnapshot(snapshot => {
   if (snapshot.exists) {
+    const prevMusicUrl = safeUrl(settings.musicUrl);
     settings = sanitizeSettings(snapshot.data());
     try { localStorage.setItem("creatorHubSettings", JSON.stringify(settings)); } catch (e) {}
     renderHub();
+
+    const newMusicUrl = getActiveMusicUrl();
+    if (newMusicUrl && newMusicUrl !== prevMusicUrl) {
+      if (music && music.getAttribute("src") !== newMusicUrl) {
+        music.src = newMusicUrl;
+        if (!musicManuallyPaused && (musicStarted || document.body.classList.contains("entered"))) {
+          music.volume = getActiveVolume();
+          music.play().then(() => {
+            musicStarted = true;
+            $("soundwaveBtn")?.classList.add("playing");
+          }).catch(err => {
+            console.log("Audio waiting for first interaction:", err);
+          });
+        }
+      }
+    }
   }
 }, err => {
   console.log("Firestore sync info:", err);
