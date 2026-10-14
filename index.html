@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff4f8">
+  <meta name="description" content="รวมทุกช่องทางโซเชียลมีเดียของฉันไว้ที่นี่">
+  <title>My Little Links ♡</title>
+  <style>
+    :root {
+      --ink: #514553; --muted: #89798a; --pink: #f6c9dc;
+      --lavender: #e4dafa; --mint: #d8f1e7; --cream: #fffaf4;
+      --card: rgba(255,255,255,.78);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--ink);
+      font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 8% 12%, #ffe0ec 0, transparent 34%),
+        radial-gradient(ellipse at 92% 20%, #e6ddff 0, transparent 34%),
+        radial-gradient(ellipse at 60% 100%, #dcf6ec 0, transparent 38%),
+        #fff8fb;
+      padding: 34px 16px 24px; overflow-x: hidden;
+    }
+    .wrap { width: min(100%, 440px); margin: auto; position: relative; }
+    .sparkle { position: absolute; color: #d9a5c1; font-size: 24px; animation: float 4s ease-in-out infinite; }
+    .s1 { top: 18px; left: 5px; } .s2 { top: 94px; right: 3px; animation-delay: -2s; }
+    .s3 { top: 290px; left: 0; font-size: 18px; animation-delay: -1s; }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-8px) rotate(8deg); } }
+    header { text-align: center; padding: 10px 20px 20px; }
+    .avatar {
+      width: 104px; height: 104px; margin: 0 auto 15px; border-radius: 36px;
+      display: grid; place-items: center; font-size: 48px;
+      background: linear-gradient(145deg, #ffe1ed, #e9e1ff 65%, #dff6e9);
+      border: 4px solid rgba(255,255,255,.9); box-shadow: 0 12px 30px #dcbcd344;
+      transform: rotate(-4deg);
+    }
+    h1 { font-size: clamp(27px, 7vw, 34px); margin: 0 0 8px; letter-spacing: -.8px; }
+    .handle { font-size: 14px; color: #a7839a; margin-bottom: 10px; }
+    .bio { font-size: 14px; line-height: 1.7; color: var(--muted); margin: 0 auto; max-width: 290px; }
+    .links { display: grid; gap: 12px; padding: 8px 4px 0; }
+    .link {
+      display: flex; align-items: center; gap: 13px; min-height: 68px;
+      padding: 12px 15px; border-radius: 21px; text-decoration: none; color: var(--ink);
+      background: var(--card); border: 1px solid #fff; box-shadow: 0 8px 22px #bba1b51c;
+      backdrop-filter: blur(10px); transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .link:hover { transform: translateY(-3px); box-shadow: 0 12px 25px #bba1b52b; }
+    .link:focus-visible { outline: 3px solid #bd9ae7; outline-offset: 3px; }
+    .icon {
+      flex: 0 0 43px; height: 43px; display: grid; place-items: center;
+      border-radius: 15px; font-size: 21px; background: #ffe4ee;
+    }
+    .link:nth-child(2) .icon { background: #e9e1ff; }
+    .link:nth-child(3) .icon { background: #dff4e9; }
+    .link:nth-child(4) .icon { background: #ffedcf; }
+    .link:nth-child(5) .icon { background: #dff0ff; }
+    .link:nth-child(6) .icon { background: #fce0df; }
+    .label { flex: 1; min-width: 0; }
+    .label strong { display: block; font-size: 15px; font-weight: 750; }
+    .label small { display: block; font-size: 12px; color: #9b8c9b; margin-top: 3px; }
+    .arrow { color: #b9a3b7; font-size: 20px; padding-left: 4px; }
+    .note { margin: 23px 0 0; text-align: center; color: #a08da0; font-size: 12px; }
+    .note span { color: #df8eb5; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="sparkle s1" aria-hidden="true">✦</span>
+    <span class="sparkle s2" aria-hidden="true">♡</span>
+    <span class="sparkle s3" aria-hidden="true">✧</span>
+    <header>
+      <div class="avatar" aria-hidden="true">🌷</div>
+      <h1>YOUR NAME ♡</h1>
+      <div class="handle">@yourusername</div>
+      <p class="bio">ยินดีต้อนรับสู่พื้นที่เล็ก ๆ ของเรา<br>รวมช่องทางต่าง ๆ ไว้ตรงนี้แล้วนะ ✿</p>
+    </header>
+
+    <nav class="links" aria-label="Social media links">
+      <!-- เปลี่ยน href เป็นลิงก์จริงของคุณ และแก้ชื่อ/คำอธิบายได้ -->
+      <a class="link" href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true">📸</span>
+        <span class="label"><strong>Instagram</strong><small>รูปถ่ายและเรื่องราวของฉัน</small></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="link" href="https://www.tiktok.com/@yourusername" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true">🎵</span>
+        <span class="label"><strong>TikTok</strong><small>คลิปสั้น ๆ ที่อยากแบ่งปัน</small></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="link" href="https://www.facebook.com/yourusername" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true">💌</span>
+        <span class="label"><strong>Facebook</strong><small>ติดตามอัปเดตกันได้ที่นี่</small></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="link" href="https://www.youtube.com/@yourusername" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true">🎬</span>
+        <span class="label"><strong>YouTube</strong><small>วิดีโอและคอนเทนต์ของฉัน</small></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="link" href="https://x.com/yourusername" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true">🫧</span>
+        <span class="label"><strong>X / Twitter</strong><small>แวะมาทักทายกันได้นะ</small></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="link" href="https://discord.com/" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true">🎮</span>
+        <span class="label"><strong>Discord</strong><small>มาเล่นเกมหรือคุยกัน ♡</small></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </nav>
+    <p class="note">made with <span>♥</span> and a little bit of magic</p>
+  </main>
+</body>
+</html>
