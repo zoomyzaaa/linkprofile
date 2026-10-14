@@ -1602,16 +1602,16 @@ textarea.input{min-height:90px;resize:vertical}
    FIREBASE CONFIG
 ====================================== */
 const firebaseConfig={
-  apiKey:"AIzaSyDz7qCYeQrh476zvPYRVRz1NraLV76M8kE",
-  authDomain:"doll-fa6c9.firebaseapp.com",
-  projectId:"doll-fa6c9",
-  storageBucket:"doll-fa6c9.firebasestorage.app",
-  messagingSenderId:"219662610987",
-  appId:"1:219662610987:web:42b91d3fe66c90b4b0706e",
-  measurementId:"G-3LVZDQ5550"
+  apiKey:"AIzaSyD6iOvBIoVoVXzrA8VlXr4dSitW-nrjBxE",
+  authDomain:"my-shop-profile.firebaseapp.com",
+  projectId:"my-shop-profile",
+  storageBucket:"my-shop-profile.firebasestorage.app",
+  messagingSenderId:"200741341090",
+  appId:"1:200741341090:web:9de641f55ae35cdf3a14fb",
+  measurementId:"G-E95EM8MNWT"
 };
 
-const ADMIN_UID="uowysuoQByQMHOIhkynDHDZfI9r2";
+const ADMIN_UID="";
 
 firebase.initializeApp(firebaseConfig);
 const db=firebase.firestore();
@@ -2542,7 +2542,7 @@ async function submitReview(){
    ADMIN AUTHENTICATION & EDITORS
 ====================================== */
 auth.onAuthStateChanged(user=>{
-  isAdmin=Boolean(user&&user.uid===ADMIN_UID);
+  isAdmin=Boolean(user && !user.isAnonymous && (!ADMIN_UID || user.uid===ADMIN_UID));
   renderAdminReviews();
 });
 
@@ -2558,22 +2558,22 @@ function openAdmin(){
 async function loginAdmin(){
   const email=val("adminEmail");
   const password=$("adminPassword").value;
-  if(!email||!password) return toast("Enter email and password");
+  if(!email||!password) return toast("กรุณากรอก Email และ Password");
 
   try{
     const result=await auth.signInWithEmailAndPassword(email,password);
-    if(result.user.uid!==ADMIN_UID){
+    if(result.user.isAnonymous || (ADMIN_UID && result.user.uid!==ADMIN_UID)){
       await auth.signOut();
-      return toast("Not an admin account");
+      return toast("ไม่ใช่บัญชีแอดมิน");
     }
     isAdmin=true;
     closeModal("loginModal");
     fillAdmin();
     openModal("adminModal");
-    toast("Welcome admin ♡");
+    toast("Welcome admin ♡ เข้าสู่ระบบแอดมินสำเร็จ");
   }catch(error){
     console.error(error);
-    toast("Login failed");
+    toast("เข้าสู่ระบบไม่สำเร็จ: ตรวจสอบ Email/Password");
   }
 }
 
