@@ -2,196 +2,238 @@
 <html lang="th">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffeef5">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#fff0f5">
   <title>Profile ♡</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400&family=Sarabun:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --pink:        #f9adc9;
-      --pink-deep:   #e8789e;
-      --pink-light:  #fff0f6;
-      --pink-border: #f5c6da;
-      --text:        #5c3a4a;
-      --text-muted:  #c49bab;
-      --white:       #ffffff;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #ffe8f2;
+      background: #f5d5e5;
       font-family: 'Sarabun', 'Mitr', sans-serif;
-      color: var(--text);
       display: flex;
       justify-content: center;
       min-height: 100vh;
     }
 
-    .container {
+    .phone {
       width: 100%;
-      max-width: 420px;
-      background: #fff8fb;
+      max-width: 390px;
       min-height: 100vh;
+      background: #fff8fa;
+      display: flex;
+      flex-direction: column;
       position: relative;
-      padding-bottom: 100px;
+      overflow-x: hidden;
     }
 
-    /* ────── TOP BAR ────── */
+    /* ═══════════════════════════════
+       SECTION 1 — TOP BAR
+    ═══════════════════════════════ */
     .top-bar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 14px 18px 10px;
-      border-bottom: 1.5px dashed #fcd5e4;
+      justify-content: space-between;
+      padding: 14px 16px 12px;
+      border-bottom: 1.5px dashed #f0c0d5;
+      background: #fff8fa;
     }
 
-    .top-deco {
-      font-size: 18px;
-      letter-spacing: 3px;
-      color: var(--pink);
-    }
-
-    .top-actions {
+    .top-left-deco {
       display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #e8a0bc;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+    .top-left-deco .icon-sm { font-size: 11px; }
+    .top-left-deco .heart-outline { font-size: 17px; color: #d87aa0; }
+
+    .top-right-btns {
+      display: flex;
+      align-items: center;
       gap: 8px;
     }
 
-    .icon-btn {
-      width: 42px;
-      height: 42px;
+    .sq-btn {
+      width: 44px;
+      height: 44px;
       border-radius: 14px;
-      border: 1.5px solid var(--pink-border);
-      background: var(--white);
-      display: grid;
-      place-items: center;
-      font-size: 18px;
-      cursor: pointer;
+      border: 1.5px solid #f0c8d8;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
       text-decoration: none;
-      box-shadow: 0 2px 8px rgba(240,160,195,0.15);
-      transition: transform 0.15s;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(220,140,170,0.15);
+      transition: transform 0.12s;
     }
-    .icon-btn:active { transform: scale(0.93); }
+    .sq-btn:active { transform: scale(0.91); }
 
-    /* ────── PROFILE SECTION ────── */
-    .profile-section {
+    /* right-edge partial circle (barely visible) */
+    .top-edge-circle {
+      width: 30px;
+      height: 56px;
+      background: linear-gradient(135deg, #f9b8ce, #f0a0be);
+      border-radius: 28px 0 0 28px;
+      margin-right: -16px;
+      opacity: 0.7;
+    }
+
+    /* ═══════════════════════════════
+       SECTION 2 — PROFILE BOX
+    ═══════════════════════════════ */
+    .profile-box {
+      background: #fdeef4;
+      margin: 0;
+      padding: 18px 20px 20px;
+      border-bottom: 1.5px dashed #f0c0d5;
       text-align: center;
-      padding: 20px 20px 16px;
-      border-bottom: 1.5px dashed #fcd5e4;
       position: relative;
     }
 
-    /* scattered hearts deco */
-    .profile-section::before {
-      content: '♡  ✦  ♡  ♡  ✦';
+    /* scattered tiny hearts + dots above text */
+    .profile-deco-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 0 10px;
+    }
+    .profile-deco-top span {
       font-size: 11px;
-      color: #f2b5cc;
-      letter-spacing: 8px;
-      display: block;
-      margin-bottom: 8px;
+      color: #e8b0c8;
     }
 
-    .line-id {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: 0.5px;
+    .line-id-text {
+      font-size: 15px;
+      font-weight: 400;
+      color: #5a3a47;
+      letter-spacing: 0.8px;
+      font-style: italic;
     }
 
-    .bunny-row {
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--text-muted);
+    .bunny-line {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
+      margin-top: 8px;
+      font-size: 14px;
+      color: #9a7080;
     }
+    .bunny-line .bunny { font-size: 18px; }
 
-    .bunny-emoji { font-size: 16px; }
-
-    /* ────── CIRCLES SECTION ────── */
-    .circles-section {
-      padding: 22px 20px 20px;
-      border-bottom: 1.5px dashed #fcd5e4;
+    /* ═══════════════════════════════
+       SECTION 3 — CIRCLES
+    ═══════════════════════════════ */
+    .circles-box {
+      padding: 28px 20px 24px;
+      border-bottom: 1.5px dashed #f0c0d5;
+      background: #fff8fa;
       position: relative;
     }
 
-    .circles-row {
+    .circles-inner {
       display: flex;
-      align-items: flex-end;
-      gap: 20px;
-      justify-content: center;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 18px;
     }
 
-    .circle-item {
+    /* each circle item */
+    .ci {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 0;
       text-decoration: none;
-      color: var(--text);
+      color: #5a3a47;
     }
 
-    .circle-wrap {
-      position: relative;
-      width: 110px;
-      height: 110px;
-    }
-
-    /* outer ring with curly ornament */
-    .circle-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
+    /* outer thin ring */
+    .ci-ring {
+      width: 108px;
+      height: 108px;
       border-radius: 50%;
-      border: 2px solid var(--pink-border);
-    }
-    .circle-wrap::after {
-      content: '❧';
-      position: absolute;
-      bottom: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 16px;
-      color: var(--pink);
-      line-height: 1;
-    }
-
-    .circle-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: var(--white);
-      border: 2px solid var(--pink-border);
+      border: 1.5px solid #efbdd1;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      background: transparent;
+    }
+
+    /* inner circle white */
+    .ci-inner {
+      width: 94px;
+      height: 94px;
+      border-radius: 50%;
+      border: 1.5px solid #f0c0d4;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+
+    /* music circle — filled pink bg */
+    .ci-inner.filled {
+      background: linear-gradient(135deg, #fff, #fde8f0);
+    }
+    .ci-inner.filled .music-note-icon {
       font-size: 38px;
-      box-shadow: 0 4px 14px rgba(235,160,190,0.18);
+      filter: drop-shadow(0 1px 3px rgba(220,100,140,0.3));
     }
 
-    .circle-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      margin-top: 14px;
+    /* curly ornament below ring */
+    .ci-ornament {
+      font-size: 22px;
+      color: #e0a0bc;
+      line-height: 1;
+      margin-top: -2px;
+      letter-spacing: -2px;
     }
 
-    /* floating heart on the right side */
+    .ci-label {
+      font-size: 12.5px;
+      font-weight: 400;
+      color: #5a3a47;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    /* floating heart on the right */
+    .float-heart-wrap {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 10px;
+    }
     .float-heart {
-      font-size: 26px;
-      color: #e8789e;
-      margin-bottom: 30px;
-      opacity: 0.85;
+      font-size: 30px;
+      filter: drop-shadow(0 2px 4px rgba(210,100,130,0.25));
+      animation: floatHeart 3s ease-in-out infinite;
+    }
+    @keyframes floatHeart {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
     }
 
-    /* ────── CARDS SECTION ────── */
-    .cards-section {
-      padding: 20px 16px 18px;
-      border-bottom: 1.5px dashed #fcd5e4;
+    /* ═══════════════════════════════
+       SECTION 4 — CARDS
+    ═══════════════════════════════ */
+    .cards-box {
+      padding: 18px 14px 20px;
+      border-bottom: 1.5px dashed #f0c0d5;
+      background: #fff8fa;
     }
 
     .cards-grid {
@@ -200,345 +242,419 @@
       gap: 10px;
     }
 
-    .card-btn {
-      background: var(--white);
-      border: 2px solid var(--pink-border);
-      border-radius: 22px;
-      padding: 16px 8px 14px;
-      text-align: center;
-      text-decoration: none;
-      color: var(--text);
+    .card {
+      background: #fff;
+      border: 2px solid #f0bcd2;
+      border-radius: 24px;
+      padding: 14px 8px 12px;
+      min-height: 130px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 12px rgba(240,160,195,0.12);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #5a3a47;
       position: relative;
+      box-shadow: 0 4px 14px rgba(230,150,180,0.12);
+      transition: transform 0.15s, box-shadow 0.15s;
+      overflow: hidden;
+    }
+    .card:active {
+      transform: scale(0.96);
+      box-shadow: 0 2px 8px rgba(230,150,180,0.18);
     }
 
-    .card-btn:hover, .card-btn:active {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(240,160,195,0.25);
-    }
-
-    /* sparkle corner deco */
-    .card-btn .sparkle {
+    /* sparkle ✦ top-right */
+    .card-sparkle {
       position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 13px;
-      color: var(--pink);
+      top: 9px;
+      right: 11px;
+      font-size: 14px;
+      color: #f0a8c4;
     }
-
-    .card-btn .heart-corner {
+    /* tiny heart top-left */
+    .card-heart-tl {
       position: absolute;
       top: 8px;
       left: 10px;
-      font-size: 11px;
-      color: var(--pink-border);
+      font-size: 10px;
+      color: #f0bcd2;
+    }
+    /* tiny heart bottom decoration on middle card */
+    .card-heart-top {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #e8a0bc;
     }
 
-    .card-icon {
-      font-size: 30px;
+    .card-icon-area {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 10px;
+    }
+
+    .card-icon-img {
+      font-size: 36px;
       line-height: 1;
     }
 
-    .card-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
+    /* pink bookmark icon for LINE */
+    .bookmark-icon {
+      width: 32px;
+      height: 40px;
+      background: linear-gradient(180deg, #f0a0be, #e07898);
+      border-radius: 6px 6px 0 0;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
     }
 
+    /* bell / notification icon */
+    .bell-icon {
+      font-size: 34px;
+      color: #b0b0c0;
+    }
+
+    /* two hearts for X */
+    .hearts-icon {
+      position: relative;
+      width: 52px;
+      height: 42px;
+    }
+    .hearts-icon .h1 {
+      position: absolute;
+      top: 0; left: 0;
+      font-size: 28px;
+      color: #f0a0be;
+    }
+    .hearts-icon .h2 {
+      position: absolute;
+      bottom: 0; right: 0;
+      font-size: 22px;
+      color: #e8789e;
+    }
+
+    .card-bottom {
+      width: 100%;
+      text-align: center;
+      padding-top: 4px;
+    }
+    .card-label {
+      font-size: 11.5px;
+      font-weight: 400;
+      color: #5a3a47;
+      display: block;
+      letter-spacing: 0.3px;
+    }
     .card-sub {
       font-size: 10px;
-      color: var(--text-muted);
+      color: #c0909f;
+      margin-top: 3px;
+      display: block;
+    }
+
+    /* ═══════════════════════════════
+       BOTTOM NAV
+    ═══════════════════════════════ */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 390px;
+      background: #fff5f8;
+      border-top: 1px solid #f0d0df;
+      display: flex;
+      padding: 6px 0 20px;
+      z-index: 100;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 8px 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: 'Sarabun', sans-serif;
+      font-size: 12px;
+      color: #c0a0b0;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-item .nav-icon-area {
+      font-size: 18px;
+      line-height: 1;
       display: flex;
       align-items: center;
       gap: 2px;
     }
 
-    /* ────── BOTTOM NAV ────── */
-    .bottom-nav-wrap {
-      position: fixed;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 32px);
-      max-width: 388px;
-      z-index: 99;
+    .nav-item.active {
+      color: #d86090;
     }
-
-    .bottom-nav {
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(10px);
-      border: 1.5px solid #f5d0e0;
-      border-radius: 28px;
-      padding: 6px 8px;
-      display: flex;
-      box-shadow: 0 8px 24px rgba(235,155,185,0.22);
-    }
-
-    .nav-btn {
-      flex: 1;
-      padding: 10px 0;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 13px;
+    .nav-item.active .nav-label {
       font-weight: 600;
-      border-radius: 22px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      font-family: 'Sarabun', sans-serif;
     }
 
-    .nav-btn .nav-icon { font-size: 17px; }
-
-    .nav-btn.active {
-      background: linear-gradient(135deg, #fcc7dc, #f08ab5);
-      color: var(--white);
-      box-shadow: 0 4px 12px rgba(240,140,175,0.3);
+    /* body padding for fixed nav */
+    .scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 80px;
     }
 
-    /* ────── PAGE SECTIONS ────── */
+    /* ═══════════════════════════════
+       PAGE CONTENT
+    ═══════════════════════════════ */
     .page { display: none; }
-    .page.active { display: block; }
+    .page.show { display: block; }
 
-    /* Reviews page */
-    .reviews-section {
-      padding: 24px 20px;
-    }
-
-    .reviews-title {
+    /* Reviews */
+    .reviews-wrap { padding: 24px 18px; }
+    .section-title {
       text-align: center;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      color: #5a3a47;
       margin-bottom: 16px;
     }
-
     .review-card {
-      background: var(--white);
-      border: 1.5px solid var(--pink-border);
-      border-radius: 20px;
+      background: #fff;
+      border: 1.5px solid #f0c5d5;
+      border-radius: 18px;
       padding: 14px 16px;
       margin-bottom: 12px;
-      box-shadow: 0 3px 10px rgba(240,160,195,0.1);
+      box-shadow: 0 3px 10px rgba(230,150,175,0.1);
     }
+    .review-stars { color: #f0a0be; font-size: 13px; }
+    .review-text  { font-size: 13px; color: #5a3a47; margin-top: 5px; }
+    .review-by    { font-size: 11px; color: #c0909f; margin-top: 4px; }
 
-    .review-stars { color: var(--pink); font-size: 14px; }
-    .review-text  { font-size: 13px; margin-top: 6px; color: var(--text); }
-    .review-by    { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-
-    /* Menu page */
-    .menu-section { padding: 24px 20px; }
-    .menu-title {
-      text-align: center;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 16px;
-    }
-    .menu-item {
-      background: var(--white);
-      border: 1.5px solid var(--pink-border);
-      border-radius: 18px;
-      padding: 14px 18px;
-      margin-bottom: 10px;
+    /* Menu */
+    .menu-wrap { padding: 24px 18px; }
+    .menu-row {
       display: flex;
       align-items: center;
       gap: 12px;
+      background: #fff;
+      border: 1.5px solid #f0c5d5;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
       text-decoration: none;
-      color: var(--text);
+      color: #5a3a47;
       font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 3px 8px rgba(240,160,195,0.1);
-      transition: transform 0.15s;
+      font-weight: 500;
+      box-shadow: 0 3px 8px rgba(230,150,175,0.1);
+      transition: transform 0.12s;
     }
-    .menu-item:active { transform: scale(0.98); }
-    .menu-item .micon { font-size: 20px; }
+    .menu-row:active { transform: scale(0.98); }
+    .menu-row .mico { font-size: 20px; }
   </style>
 </head>
 <body>
-  <main class="container">
+<div class="phone">
 
-    <!-- ── TOP BAR ── -->
-    <div class="top-bar">
-      <div class="top-deco">✦ ♡ ✦</div>
-      <div class="top-actions">
-        <a class="icon-btn" href="#" aria-label="Music">🎵</a>
-        <a class="icon-btn" href="#" aria-label="Favourite">🤍</a>
-      </div>
+  <!-- ══ TOP BAR ══ -->
+  <div class="top-bar">
+    <div class="top-left-deco">
+      <span class="icon-sm">✦</span>
+      <span class="icon-sm">·</span>
+      <span class="heart-outline">♡</span>
+      <span class="icon-sm">·</span>
+      <span class="icon-sm">·</span>
+      <span class="heart-outline">♡</span>
     </div>
+    <div class="top-right-btns">
+      <a class="sq-btn" href="#" aria-label="เพลง">🎵</a>
+      <a class="sq-btn" href="#" aria-label="ถูกใจ">🤍</a>
+      <div class="top-edge-circle"></div>
+    </div>
+  </div>
 
-    <!-- ── MAIN PAGE ── -->
-    <div id="page-main" class="page active">
+  <!-- ══ SCROLL AREA ══ -->
+  <div class="scroll-area">
 
-      <!-- Profile -->
-      <div class="profile-section">
-        <div class="line-id">line . @O35yfbcd .</div>
-        <div class="bunny-row">
-          <span class="bunny-emoji">🐰</span>
+    <!-- PAGE: MAIN -->
+    <div id="page-main" class="page show">
+
+      <!-- ── PROFILE BOX ── -->
+      <div class="profile-box">
+        <div class="profile-deco-top">
+          <span>♡</span>
+          <span>· · · · ·</span>
+          <span>♡ &nbsp; &nbsp; ♡</span>
+          <span>&nbsp;</span>
+          <span>♡</span>
+        </div>
+        <div class="line-id-text">line . @O35yfbcd .</div>
+        <div class="bunny-line">
+          <span class="bunny">🐰</span>
           <span>—</span>
         </div>
       </div>
 
-      <!-- Circles -->
-      <div class="circles-section">
-        <div class="circles-row">
-          <!-- Circle 1 -->
-          <a class="circle-item" href="#" onclick="openPage('page-credit')">
-            <div class="circle-wrap">
-              <div class="circle-inner">🤍</div>
+      <!-- ── CIRCLES ── -->
+      <div class="circles-box">
+        <div class="circles-inner">
+
+          <!-- Circle 1: Heart -->
+          <a class="ci" href="#" onclick="return false;">
+            <div class="ci-ring">
+              <div class="ci-inner">🤍</div>
             </div>
-            <div class="circle-label">. เครดิต.เก่า ♡</div>
+            <div class="ci-ornament">❧ ❧</div>
+            <div class="ci-label">. เครดิต.เก่า ♡</div>
           </a>
 
-          <!-- Circle 2 -->
-          <a class="circle-item" href="#" onclick="openPage('page-ex')">
-            <div class="circle-wrap">
-              <div class="circle-inner" style="font-size:32px">🎵</div>
+          <!-- Circle 2: Music note (pink filled) -->
+          <a class="ci" href="#" onclick="return false;">
+            <div class="ci-ring">
+              <div class="ci-inner filled">
+                <span class="music-note-icon">🎵</span>
+              </div>
             </div>
-            <div class="circle-label">· ex from.</div>
+            <div class="ci-ornament">❧ ❧</div>
+            <div class="ci-label">· ex from.</div>
           </a>
 
           <!-- Floating heart -->
-          <div class="float-heart">🩷</div>
+          <div class="float-heart-wrap">
+            <div class="float-heart">🩷</div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Cards -->
-      <div class="cards-section">
+      <!-- ── CARDS ── -->
+      <div class="cards-box">
         <div class="cards-grid">
 
-          <!-- LINE OA -->
-          <a class="card-btn" href="https://line.me/" target="_blank" rel="noopener">
-            <span class="heart-corner">♡</span>
-            <span class="sparkle">✦</span>
-            <div class="card-icon">🔖</div>
-            <div class="card-label">♡ .line .oa ♡</div>
-            <div class="card-sub">♡ 1 ♡.</div>
+          <!-- Card 1: LINE OA -->
+          <a class="card" href="https://line.me/" target="_blank" rel="noopener">
+            <span class="card-sparkle">✦</span>
+            <div class="card-icon-area">
+              <div class="bookmark-icon"></div>
+            </div>
+            <div class="card-bottom">
+              <span class="card-label">♡ .line .oa ♡</span>
+              <span class="card-sub">↑ 1 ♡.</span>
+            </div>
           </a>
 
-          <!-- Facebook -->
-          <a class="card-btn" href="https://facebook.com/" target="_blank" rel="noopener">
-            <span class="heart-corner">♡</span>
-            <div class="card-icon">🔔</div>
-            <div class="card-label">. fb♡</div>
-            <div class="card-sub">♡ 1 .</div>
+          <!-- Card 2: Facebook (middle, has top heart) -->
+          <a class="card" href="https://facebook.com/" target="_blank" rel="noopener" style="overflow:visible;">
+            <span class="card-heart-top">♡</span>
+            <div class="card-icon-area">
+              <span class="bell-icon">🔔</span>
+            </div>
+            <div class="card-bottom">
+              <span class="card-label">. fb♡</span>
+              <span class="card-sub">♡ 1 .</span>
+            </div>
           </a>
 
-          <!-- X / Twitter -->
-          <a class="card-btn" href="https://x.com/" target="_blank" rel="noopener">
-            <span class="sparkle">✦</span>
-            <div class="card-icon">🩷</div>
-            <div class="card-label">. X ! ♡</div>
-            <div class="card-sub">. 1</div>
+          <!-- Card 3: X / Twitter -->
+          <a class="card" href="https://x.com/" target="_blank" rel="noopener">
+            <span class="card-sparkle">✦</span>
+            <div class="card-icon-area">
+              <div class="hearts-icon">
+                <span class="h1">🩷</span>
+                <span class="h2">❤️</span>
+              </div>
+            </div>
+            <div class="card-bottom">
+              <span class="card-label">. X ! ♡</span>
+              <span class="card-sub">. 1</span>
+            </div>
           </a>
 
         </div>
       </div>
 
-    </div><!-- end #page-main -->
+    </div><!-- /page-main -->
 
-    <!-- ── REVIEWS PAGE ── -->
+    <!-- PAGE: REVIEWS -->
     <div id="page-reviews" class="page">
-      <div class="reviews-section">
-        <div class="reviews-title">♡ รีวิวจากลูกค้า ♡</div>
+      <div class="reviews-wrap">
+        <div class="section-title">♡ รีวิวจากลูกค้า ♡</div>
 
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-text">บริการดีมากเลยค่า ส่งไวมากก ประทับใจสุดๆ 🩷</div>
           <div class="review-by">— ลูกค้าคนที่ 1</div>
         </div>
-
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-text">ของมาครบ แพคดีมาก ขอบคุณมากนะคะ ♡</div>
           <div class="review-by">— ลูกค้าคนที่ 2</div>
         </div>
-
         <div class="review-card">
           <div class="review-stars">★★★★☆</div>
           <div class="review-text">สวยมากตามรูปเลย แนะนำเลยค่า~</div>
           <div class="review-by">— ลูกค้าคนที่ 3</div>
         </div>
       </div>
-    </div>
+    </div><!-- /page-reviews -->
 
-    <!-- ── MENU PAGE ── -->
+    <!-- PAGE: MENU -->
     <div id="page-menu" class="page">
-      <div class="menu-section">
-        <div class="menu-title">≡ เมนู</div>
-
-        <a class="menu-item" href="https://line.me/" target="_blank" rel="noopener">
-          <span class="micon">💬</span> LINE Official
+      <div class="menu-wrap">
+        <div class="section-title">≡ เมนูทั้งหมด</div>
+        <a class="menu-row" href="https://line.me/" target="_blank" rel="noopener">
+          <span class="mico">💬</span> LINE Official
         </a>
-        <a class="menu-item" href="https://facebook.com/" target="_blank" rel="noopener">
-          <span class="micon">📘</span> Facebook
+        <a class="menu-row" href="https://facebook.com/" target="_blank" rel="noopener">
+          <span class="mico">📘</span> Facebook
         </a>
-        <a class="menu-item" href="https://x.com/" target="_blank" rel="noopener">
-          <span class="micon">🐦</span> X (Twitter)
+        <a class="menu-row" href="https://x.com/" target="_blank" rel="noopener">
+          <span class="mico">🐦</span> X (Twitter)
         </a>
-        <a class="menu-item" href="#" onclick="openPage('page-reviews')">
-          <span class="micon">⭐</span> รีวิวทั้งหมด
-        </a>
-        <a class="menu-item" href="#">
-          <span class="micon">📦</span> สินค้า / Order
+        <a class="menu-row" href="#" onclick="switchPage('reviews'); return false;">
+          <span class="mico">⭐</span> รีวิวทั้งหมด
         </a>
       </div>
-    </div>
+    </div><!-- /page-menu -->
 
-    <!-- ── BOTTOM NAVIGATION ── -->
-    <nav class="bottom-nav-wrap">
-      <div class="bottom-nav">
-        <button class="nav-btn active" id="btn-main" onclick="switchPage('page-main','btn-main')">
-          <span class="nav-icon">♡</span>
-          main
-        </button>
-        <button class="nav-btn" id="btn-reviews" onclick="switchPage('page-reviews','btn-reviews')">
-          <span class="nav-icon">🩷</span>
-          reviews
-        </button>
-        <button class="nav-btn" id="btn-menu" onclick="switchPage('page-menu','btn-menu')">
-          <span class="nav-icon">≡</span>
-          menu
-        </button>
-      </div>
-    </nav>
+  </div><!-- /scroll-area -->
 
-  </main>
+  <!-- ══ BOTTOM NAV ══ -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" id="nav-main" onclick="switchPage('main')">
+      <div class="nav-icon-area">♡</div>
+      <div class="nav-label">main</div>
+    </button>
+    <button class="nav-item" id="nav-reviews" onclick="switchPage('reviews')">
+      <div class="nav-icon-area">🩷 ✏️</div>
+      <div class="nav-label">reviews</div>
+    </button>
+    <button class="nav-item" id="nav-menu" onclick="switchPage('menu')">
+      <div class="nav-icon-area">≡</div>
+      <div class="nav-label">menu</div>
+    </button>
+  </nav>
 
-  <script>
-    const pages   = ['page-main','page-reviews','page-menu'];
-    const navBtns = ['btn-main','btn-reviews','btn-menu'];
+</div><!-- /phone -->
 
-    function switchPage(pageId, btnId) {
-      pages.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.toggle('active', id === pageId);
-      });
-      navBtns.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.toggle('active', id === btnId);
-      });
-    }
-
-    function openPage(pageId) {
-      const map = {
-        'page-main':    'btn-main',
-        'page-reviews': 'btn-reviews',
-        'page-menu':    'btn-menu',
-      };
-      switchPage(pageId, map[pageId] || 'btn-main');
-      return false;
-    }
-  </script>
+<script>
+  function switchPage(name) {
+    ['main','reviews','menu'].forEach(p => {
+      document.getElementById('page-'   + p).classList.toggle('show', p === name);
+      document.getElementById('nav-'    + p).classList.toggle('active', p === name);
+    });
+  }
+</script>
 </body>
 </html>
