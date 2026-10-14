@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
 <meta name="theme-color" content="#ffffff">
-<title>sosoli ♡ platform</title>
+<title>ต๊อด ♡ platform</title>
 
 <!-- Fonts & Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,26 +15,35 @@
 <style>
 @font-face {
   font-family: 'Biski';
-  src: url('fonts/Biski.woff2') format('woff2'),
-       url('fonts/Biski.otf') format('opentype'),
-       url('fonts/Biski.ttf') format('truetype'),
-       local('Biski');
+  src: url('fonts/Biski-Regular.otf') format('opentype'),
+       url('fonts/biski-font/BiskiDemoRegular-RpEmE.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Biski';
+  src: url('fonts/Biski-Bold.otf') format('opentype'),
+       url('fonts/biski-font/BiskiDemoBold-X3nxG.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Lulu Font TH';
-  src: url('fonts/LuluFontTH.woff2') format('woff2'),
-       url('fonts/LuluFontTH.otf') format('opentype'),
-       url('fonts/LuluFontTH.ttf') format('truetype'),
-       local('Lulu Font TH');
+  src: url('fonts/Lulu.ttf') format('truetype'),
+       url('fonts/lulu sample/Lulu.ttf') format('truetype'),
+       url('fonts/biski-font/Lulu.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica Thai';
-  src: url('fonts/HelveticaThai.woff2') format('woff2'),
-       url('fonts/HelveticaThai.otf') format('opentype'),
-       url('fonts/HelveticaThai.ttf') format('truetype'),
-       local('Helvetica Thai');
+  src: url('fonts/HelveticaThai.otf') format('opentype'),
+       url('fonts/helvetica-similar-fonts/helvetica-similar-fonts/freesans/FreeSans.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
   font-display: swap;
 }
 </style>
@@ -52,9 +61,11 @@
   --pink: #ea5e89;
   --bubble-pink: #e29cb0;
   --topbar-pink: #f1b3c4;
+  --banner-pink: #faedf2;
   --line-dashed: #edd0dc;
   --text-dark: #2e2b2a;
   --text-muted: #b8a8ad;
+  --text-bio: #8d8582;
   --mic-gray: #bdb9b9;
   --bg-opacity: 0.22;
 }
@@ -99,7 +110,7 @@ body::before {
 }
 
 /* ══════════════════════════════════════════════════════════
-   3. APP CONTAINER (MATCHING MOCKUP PHONE PROPORTION)
+   3. APP CONTAINER
 ══════════════════════════════════════════════════════════ */
 .app {
   width: 100%;
@@ -204,10 +215,12 @@ body::before {
 }
 
 /* ══════════════════════════════════════════════════════════
-   5. PROFILE SECTION (AVATAR, BUBBLE & MIC 1)
+   5. PROFILE SECTION (PALE PINK BANNER + SUB-ROW)
 ══════════════════════════════════════════════════════════ */
-.profile-section {
-  padding: 24px 20px 20px;
+.profile-banner-wrap {
+  background: var(--banner-pink);
+  padding: 22px 20px 20px;
+  width: 100%;
 }
 
 .profile-row {
@@ -239,15 +252,25 @@ body::before {
   align-items: flex-start;
 }
 
+.profile-nickname {
+  font-family: 'Biski', 'Comfortaa', 'Itim', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #554e4c;
+  margin-bottom: 5px;
+  padding-left: 4px;
+  letter-spacing: 0.2px;
+}
+
 .speech-bubble {
   position: relative;
   background: var(--bubble-pink);
   color: #ffffff;
   font-family: 'Biski', 'Comfortaa', 'Itim', cursive, sans-serif;
-  font-size: 15.5px;
+  font-size: 15px;
   font-weight: 500;
-  padding: 9px 20px;
-  border-radius: 20px;
+  padding: 8px 18px;
+  border-radius: 18px;
   box-shadow: 0 4px 14px rgba(226, 156, 176, 0.28);
   letter-spacing: 0.3px;
   max-width: 100%;
@@ -267,10 +290,23 @@ body::before {
   border-right: 8px solid var(--bubble-pink);
 }
 
+.profile-sub-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: #ffffff;
+}
+
+.profile-bio-text {
+  font-family: 'Biski', 'Comfortaa', 'Itim', sans-serif;
+  color: var(--text-bio);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
 .mic1-btn {
-  margin-top: 22px;
-  align-self: flex-end;
-  margin-right: 2px;
   background: #ffffff;
   border: 1px solid rgba(235, 140, 175, 0.2);
   border-radius: 20px;
@@ -309,13 +345,13 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px 20px 16px;
+  padding: 14px 20px 16px;
 }
 
 .mic2-btn {
   position: absolute;
   left: 18px;
-  top: 10px;
+  top: 12px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -382,14 +418,14 @@ body::before {
 }
 
 /* ══════════════════════════════════════════════════════════
-   7. MUSTACHE DIVIDER
+   7. MUSTACHE DIVIDER (BIG MUSTACHE)
 ══════════════════════════════════════════════════════════ */
 .mustache-divider-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 18px 0 24px;
+  margin: 20px 0 26px;
 }
 
 .mustache-divider-line {
@@ -406,30 +442,30 @@ body::before {
   z-index: 2;
   background: #ffffff;
   padding: 0 12px;
-  width: 90px;
+  width: 110px;
   height: auto;
   object-fit: contain;
 }
 
 /* ══════════════════════════════════════════════════════════
-   8. 4 SOCIAL CARDS GRID (2x2)
+   8. 4 TALL SOCIAL CARDS GRID (VERTICAL CARDS FOR SCROLL)
 ══════════════════════════════════════════════════════════ */
 .social-section {
-  padding: 4px 20px 32px;
+  padding: 4px 20px 48px;
 }
 
 .social-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 22px 16px;
+  gap: 26px 16px;
 }
 
 .social-card {
   position: relative;
   background: #ffffff;
-  border-radius: 26px;
-  padding: 26px 12px 20px;
-  min-height: 165px;
+  border-radius: 28px;
+  padding: 34px 16px 28px;
+  min-height: 205px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -459,11 +495,11 @@ body::before {
 }
 
 .card-icon-wrap {
-  width: 72px;
-  height: 72px;
+  width: 78px;
+  height: 78px;
   border-radius: 50%;
   overflow: hidden;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -479,7 +515,7 @@ body::before {
 
 .card-title {
   font-family: 'Helvetica Thai', 'Kanit', 'Quicksand', -apple-system, sans-serif;
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-dark);
   letter-spacing: 0.2px;
@@ -821,7 +857,7 @@ body::before {
     </div>
     <div class="enter-title">
       <span>୨୧</span>
-      <span id="enterSpaceName">welcome</span>
+      <span id="enterSpaceName">ต๊อด</span>
       <span>୨୧</span>
     </div>
     <div class="enter-instruction">แตะที่ไหนก็ได้เพื่อเข้าสู่หน้าเว็บ ♡</div>
@@ -862,27 +898,33 @@ body::before {
 
   <div class="dashed-divider"></div>
 
-  <!-- PROFILE SECTION -->
-  <section class="profile-section">
+  <!-- PROFILE BANNER SECTION (PALE PINK RECTANGLE) -->
+  <div class="profile-banner-wrap">
     <div class="profile-row">
       <div class="avatar-wrap" id="avatarBox" onclick="burstHearts(event)">
         <img src="images/mainprofile.png" id="mainAvatarImg" alt="Profile">
       </div>
 
       <div class="bubble-mic-col">
+        <div class="profile-nickname" id="profileNickname">ต๊อด</div>
         <div class="speech-bubble" id="profileBubble">haloooooooooo</div>
-
-        <!-- Mic 1 Button: click 🎤 -->
-        <button type="button" class="mic1-btn" onclick="playMic1(event)" title="Click to play sound">
-          <span class="mic1-label">click</span>
-          <svg class="mic-svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-          </svg>
-        </button>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- SUB-ROW BELOW BANNER (BIO ON LEFT, MIC 1 ON RIGHT) -->
+  <div class="profile-sub-row">
+    <div class="profile-bio-text" id="profileBioText">♡ welcome kaaa ♡</div>
+
+    <!-- Mic 1 Button: click 🎤 -->
+    <button type="button" class="mic1-btn" onclick="playMic1(event)" title="Click to play sound">
+      <span class="mic1-label">click</span>
+      <svg class="mic-svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+      </svg>
+    </button>
+  </div>
 
   <div class="dashed-divider"></div>
 
@@ -906,13 +948,13 @@ body::before {
     </div>
   </section>
 
-  <!-- MUSTACHE DIVIDER -->
+  <!-- MUSTACHE DIVIDER (BIG MUSTACHE) -->
   <div class="mustache-divider-container">
     <div class="mustache-divider-line"></div>
     <img src="images/หนวด.png" alt="Mustache" class="mustache-divider-img">
   </div>
 
-  <!-- 4 SOCIAL CARDS GRID -->
+  <!-- 4 TALL SOCIAL CARDS GRID -->
   <section class="social-section">
     <div class="social-grid">
 
@@ -1002,6 +1044,12 @@ body::before {
       <button type="button" class="close-btn" onclick="closeModal('adminModal')">✕</button>
     </div>
 
+    <!-- Display Name (ชื่อบนกล่องข้อความ เช่น ต๊อด) -->
+    <div class="field">
+      <label>✨ ชื่อบนกล่องข้อความ (เช่น ต๊อด)</label>
+      <input class="input" id="editDisplayName" placeholder="ต๊อด">
+    </div>
+
     <!-- Speech Bubble Text -->
     <div class="field">
       <label>💬 ข้อความในกล่องคำพูด (Speech Bubble)</label>
@@ -1009,10 +1057,11 @@ body::before {
       <div class="hint">ข้อความข้างรูปโปรไฟล์ ใช้ฟอนต์ Biski สี #ffffff</div>
     </div>
 
-    <!-- Display Name -->
+    <!-- Bio Text (คำอธิบายตัวเองแถวล่าง) -->
     <div class="field">
-      <label>✨ ชื่อหัวข้อเพจ (Display Name)</label>
-      <input class="input" id="editDisplayName" placeholder="sosoli">
+      <label>🎀 คำอธิบายตัวเองแถวล่าง (ข้างปุ่ม click)</label>
+      <input class="input" id="editBioText" placeholder="♡ welcome kaaa ♡">
+      <div class="hint">ใช้ฟอนต์ Biski รหัสสี #8d8582</div>
     </div>
 
     <!-- Profile Picture -->
@@ -1031,7 +1080,7 @@ body::before {
 
     <!-- Mic 1 Audio -->
     <div class="field">
-      <label>🎤 ไฟล์เสียงไมค์ 1 (ข้างโปรไฟล์ - click)</label>
+      <label>🎤 ไฟล์เสียงไมค์ 1 (ข้างคำอธิบาย - click)</label>
       <div style="display:flex; gap:8px; margin-bottom:8px;">
         <input type="file" id="mic1FileInput" accept="audio/*" style="display:none;" onchange="handleAudioUpload(event, 'editMic1AudioUrl', 'mic1AudioStatus')">
         <button type="button" class="secondary" style="padding:7px 12px; font-size:11px;" onclick="$('mic1FileInput').click()">📁 เลือกไฟล์เสียงจากเครื่อง</button>
@@ -1191,7 +1240,8 @@ function clearField(id) {
    3. DATA SCHEMA & SANITIZER
 ══════════════════════════════════════════════════════════ */
 const defaults = {
-  displayName: "sosoli",
+  displayName: "ต๊อด",
+  bioText: "♡ welcome kaaa ♡",
   bubbleText: "haloooooooooo",
   avatarUrl: "images/mainprofile.png",
   mic1AudioUrl: "",
@@ -1236,9 +1286,17 @@ function renderHub() {
   const enterName = $("enterSpaceName");
   if (enterName) enterName.textContent = name;
 
+  // Nickname above speech bubble
+  const nick = $("profileNickname");
+  if (nick) nick.textContent = name;
+
   // Speech bubble text
   const bubble = $("profileBubble");
   if (bubble) bubble.textContent = settings.bubbleText || defaults.bubbleText;
+
+  // Bio text below avatar on the left
+  const bio = $("profileBioText");
+  if (bio) bio.textContent = settings.bioText || defaults.bioText;
 
   // Avatar (mainprofile.png fallback)
   const avatarBox = $("avatarBox");
@@ -1622,6 +1680,7 @@ function resetAvatarToDefault() {
 
 function fillAdminForm() {
   setVal("editDisplayName", settings.displayName || defaults.displayName);
+  setVal("editBioText", settings.bioText || defaults.bioText);
   setVal("editBubbleText", settings.bubbleText || defaults.bubbleText);
   setVal("editAvatarUrl", settings.avatarUrl || "");
   setVal("editMic1AudioUrl", settings.mic1AudioUrl || "");
@@ -1656,6 +1715,7 @@ async function saveAdminSettings() {
 
   const updated = {
     displayName: val("editDisplayName") || defaults.displayName,
+    bioText: val("editBioText") || defaults.bioText,
     bubbleText: val("editBubbleText") || defaults.bubbleText,
     avatarUrl: val("editAvatarUrl"),
     mic1AudioUrl: val("editMic1AudioUrl"),
