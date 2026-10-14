@@ -3,8 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#fdf9fc">
 <title>ต๊อด ♡ </title>
+
+<!-- Primary Meta Tags -->
+<meta name="title" content="ต๊อด ♡">
+<meta name="description" content="♡ welcome kaaa ♡">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+<!-- Open Graph / Facebook / LINE / Messenger / Discord -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zoomyzaaa.github.io/linkprofile/">
+<meta property="og:title" content="ต๊อด ♡">
+<meta property="og:description" content="♡ welcome kaaa ♡">
+<meta property="og:image" content="https://raw.githubusercontent.com/zoomyzaaa/linkprofile/main/images/share-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ต๊อด ♡">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://zoomyzaaa.github.io/linkprofile/">
+<meta name="twitter:title" content="ต๊อด ♡">
+<meta name="twitter:description" content="♡ welcome kaaa ♡">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zoomyzaaa/linkprofile/main/images/share-preview.png">
 
 <!-- Fonts & Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1260,7 +1285,17 @@ try {
 ══════════════════════════════════════════════════════════ */
 function renderHub() {
   const name = settings.displayName || defaults.displayName;
-  document.title = name + " ♡";
+  const pageTitle = name + " ♡";
+  document.title = pageTitle;
+
+  // Sync Meta & Open Graph tags
+  document.querySelector('meta[name="title"]')?.setAttribute("content", pageTitle);
+  document.querySelector('meta[property="og:title"]')?.setAttribute("content", pageTitle);
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", pageTitle);
+  const bioContent = settings.bioText || defaults.bioText;
+  document.querySelector('meta[name="description"]')?.setAttribute("content", bioContent);
+  document.querySelector('meta[property="og:description"]')?.setAttribute("content", bioContent);
+  document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", bioContent);
 
   const enterName = $("enterSpaceName");
   if (enterName) enterName.textContent = name;
@@ -1274,8 +1309,8 @@ function renderHub() {
   if (bubble) bubble.textContent = settings.bubbleText || defaults.bubbleText;
 
   // Bio text below avatar on the left
-  const bio = $("profileBioText");
-  if (bio) bio.textContent = settings.bioText || defaults.bioText;
+  const bioEl = $("profileBioText");
+  if (bioEl) bioEl.textContent = bioContent;
 
   // Avatar (mainprofile.png fallback)
   const avatarBox = $("avatarBox");
