@@ -1,1423 +1,3069 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="theme-color" content="#fff5f8">
-  <title>♡ @035yfbcd ♡</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Mitr:wght@300;400;500&family=Quicksand:wght@400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-canvas: #fae6ee;
-      --bg-phone: #fdf6f9;
-      --bg-box: #fef0f5;
-      --border-dashed: #f8bdd2;
-      --border-pink: #fec2d5;
-      --border-subtle: #fee0eb;
-      --pink-primary: #ea5e89;
-      --pink-deep: #db4d78;
-      --pink-soft: #f48fb0;
-      --pink-light: #fff0f5;
-      --text-main: #583e48;
-      --text-muted: #9f828d;
-      --text-faint: #c9aeb7;
-      --shadow-pink: rgba(235, 140, 175, 0.18);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-
-    body {
-      background: var(--bg-canvas);
-      background-image: 
-        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.7) 0%, transparent 40%),
-        radial-gradient(circle at 85% 75%, rgba(255, 220, 235, 0.6) 0%, transparent 45%);
-      font-family: 'Quicksand', 'Sarabun', 'Mitr', sans-serif;
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 0;
-    }
-
-    /* Mobile Container Frame */
-    .app-screen {
-      width: 100%;
-      max-width: 410px;
-      min-height: 100vh;
-      background: var(--bg-phone);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 0 40px rgba(220, 130, 165, 0.25);
-      overflow-x: hidden;
-    }
-
-    /* Dashed Section Dividers */
-    .dashed-divider {
-      width: 100%;
-      height: 0;
-      border-top: 1.5px dashed var(--border-dashed);
-    }
-
-    /* ═════════════════════════════════════════
-       SECTION 1: TOP BAR
-    ═════════════════════════════════════════ */
-    .top-bar {
-      padding: 14px 18px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .top-decorations {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      color: var(--pink-soft);
-      font-size: 13px;
-    }
-
-    .top-decorations svg {
-      vertical-align: middle;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-    }
-
-    .top-btn {
-      width: 44px;
-      height: 44px;
-      background: #ffffff;
-      border: 1.8px solid var(--border-pink);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 3px 10px var(--shadow-pink);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-      color: var(--pink-primary);
-      position: relative;
-    }
-
-    .top-btn:active {
-      transform: scale(0.92);
-      box-shadow: 0 1px 4px var(--shadow-pink);
-      background: #fff5f8;
-    }
-
-    .top-btn.music-playing {
-      animation: musicPulse 1.8s ease-in-out infinite alternate;
-    }
-
-    @keyframes musicPulse {
-      0% { border-color: var(--border-pink); box-shadow: 0 3px 10px var(--shadow-pink); }
-      100% { border-color: var(--pink-primary); box-shadow: 0 0 14px rgba(234, 94, 137, 0.4); }
-    }
-
-    /* Right Edge Cutoff Heart */
-    .right-edge-heart {
-      position: absolute;
-      right: -14px;
-      top: 50%;
-      transform: translateY(-50%) rotate(-15deg);
-      pointer-events: none;
-      opacity: 0.85;
-    }
-
-    /* ═════════════════════════════════════════
-       SECTION 2: PROFILE / LINE ID BOX
-    ═════════════════════════════════════════ */
-    .profile-section {
-      background: var(--bg-box);
-      padding: 18px 20px 20px;
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    .profile-section:active {
-      background: #fde8f1;
-    }
-
-    /* Floating subtle sparkles & hearts in profile */
-    .profile-floats {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 16px;
-      margin-bottom: 6px;
-      opacity: 0.7;
-    }
-
-    .line-id-row {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-family: 'Comfortaa', 'Quicksand', sans-serif;
-      font-size: 15.5px;
-      font-weight: 600;
-      color: var(--text-main);
-      letter-spacing: 0.8px;
-    }
-
-    .copy-hint {
-      font-size: 10px;
-      color: var(--pink-soft);
-      letter-spacing: 0;
-      margin-left: 2px;
-      opacity: 0.8;
-    }
-
-    .bunny-row {
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .bunny-icon {
-      width: 24px;
-      height: 24px;
-    }
-
-    .bunny-line {
-      display: inline-block;
-      width: 26px;
-      height: 1.5px;
-      background: #c2a2af;
-      border-radius: 2px;
-    }
-
-    /* ═════════════════════════════════════════
-       SECTION 3: CIRCULAR BUTTONS
-    ═════════════════════════════════════════ */
-    .circles-section {
-      padding: 26px 20px 22px;
-      position: relative;
-    }
-
-    .circles-container {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 20px;
-    }
-
-    .circle-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: var(--text-main);
-      cursor: pointer;
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .circle-card:active {
-      transform: scale(0.94);
-    }
-
-    .circle-avatar-wrap {
-      width: 106px;
-      height: 106px;
-      border-radius: 50%;
-      border: 1.6px solid var(--border-pink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      background: transparent;
-    }
-
-    .circle-avatar-inner {
-      width: 92px;
-      height: 92px;
-      border-radius: 50%;
-      border: 1.6px solid var(--border-pink);
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 14px var(--shadow-pink);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .circle-avatar-inner.with-gradient {
-      background: radial-gradient(circle at 45% 45%, #ffffff 0%, #fff0f5 70%, #fee4ef 100%);
-    }
-
-    /* Cute Ribbon Bow on Circle (bottom-left) */
-    .circle-bow {
-      position: absolute;
-      bottom: -4px;
-      left: -6px;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    /* Tiny outline heart on Circle top-right */
-    .circle-corner-heart {
-      position: absolute;
-      top: 4px;
-      right: 4px;
-      z-index: 2;
-      pointer-events: none;
-      transform: rotate(15deg);
-    }
-
-    .circle-label {
-      margin-top: 10px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-main);
-      letter-spacing: 0.3px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-    }
-
-    /* 3D Floating Heart on Right */
-    .floating-heart-wrap {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-top: 8px;
-    }
-
-    .float-3d-heart {
-      transform: rotate(18deg);
-      animation: floatSmooth 3.2s ease-in-out infinite alternate;
-      cursor: pointer;
-    }
-
-    @keyframes floatSmooth {
-      0% { transform: translateY(0px) rotate(16deg); }
-      100% { transform: translateY(-7px) rotate(22deg); }
-    }
-
-    /* ═════════════════════════════════════════
-       SECTION 4: 3-CARDS GRID
-    ═════════════════════════════════════════ */
-    .cards-section {
-      padding: 20px 14px 22px;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .app-card {
-      background: #ffffff;
-      border: 2px solid var(--border-pink);
-      border-radius: 26px;
-      padding: 16px 6px 14px;
-      min-height: 138px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      text-decoration: none;
-      color: var(--text-main);
-      position: relative;
-      box-shadow: 0 4px 16px rgba(235, 140, 175, 0.15);
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-      cursor: pointer;
-    }
-
-    .app-card:active {
-      transform: translateY(2px) scale(0.97);
-      box-shadow: 0 2px 8px rgba(235, 140, 175, 0.2);
-    }
-
-    /* Double inner border effect */
-    .app-card::after {
-      content: '';
-      position: absolute;
-      inset: 3px;
-      border: 1px solid rgba(254, 204, 222, 0.6);
-      border-radius: 22px;
-      pointer-events: none;
-    }
-
-    /* Corner Sparkle */
-    .card-sparkle {
-      position: absolute;
-      top: 8px;
-      right: 9px;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    /* Floating heart on middle card top */
-    .middle-card-heart {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%) rotate(-8deg);
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .card-icon-box {
-      width: 100%;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 6px;
-    }
-
-    .card-info {
-      width: 100%;
-      text-align: center;
-      padding-top: 6px;
-    }
-
-    .card-title {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--text-main);
-      display: block;
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-    }
-
-    .card-subtext {
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-top: 3px;
-      display: block;
-      letter-spacing: 0.5px;
-    }
-
-    /* ═════════════════════════════════════════
-       SECTION 5: BOTTOM FLOATING NAVBAR
-    ═════════════════════════════════════════ */
-    .bottom-nav-container {
-      position: sticky;
-      bottom: 12px;
-      margin: 10px 14px 14px;
-      z-index: 99;
-    }
-
-    .bottom-nav-bar {
-      background: #ffffff;
-      border: 1.8px solid var(--border-pink);
-      border-radius: 28px;
-      padding: 5px;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 6px 22px rgba(235, 140, 175, 0.24);
-      backdrop-filter: blur(8px);
-    }
-
-    .nav-tab-btn {
-      flex: 1;
-      border: none;
-      background: transparent;
-      padding: 9px 4px 8px;
-      border-radius: 22px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      cursor: pointer;
-      color: var(--text-muted);
-      font-family: 'Comfortaa', 'Quicksand', 'Sarabun', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-    }
-
-    .nav-tab-btn .tab-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .nav-tab-btn .tab-text {
-      letter-spacing: 0.5px;
-    }
-
-    /* Active Tab Style */
-    .nav-tab-btn.active {
-      background: #fff0f5;
-      color: var(--pink-deep);
-      box-shadow: inset 0 0 0 1px #fed2e2;
-    }
-
-    .nav-tab-btn.active .tab-text {
-      font-weight: 700;
-    }
-
-    /* Reviews badge / mini heart sticker */
-    .pencil-heart-sticker {
-      position: absolute;
-      top: -3px;
-      right: -8px;
-      pointer-events: none;
-    }
-
-    /* ═════════════════════════════════════════
-       FOOTER PEEK
-    ═════════════════════════════════════════ */
-    .footer-peek {
-      padding: 10px 20px 24px;
-      text-align: center;
-      color: var(--text-faint);
-      font-size: 11px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* ═════════════════════════════════════════
-       PAGE SWITCHING (MAIN / REVIEWS / MENU)
-    ═════════════════════════════════════════ */
-    .tab-view {
-      display: none;
-      animation: fadeInView 0.25s ease;
-    }
-
-    .tab-view.active-view {
-      display: block;
-    }
-
-    @keyframes fadeInView {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* REVIEWS VIEW */
-    .reviews-view {
-      padding: 18px 16px 20px;
-    }
-
-    .view-heading {
-      text-align: center;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .review-item {
-      background: #ffffff;
-      border: 1.6px solid var(--border-pink);
-      border-radius: 20px;
-      padding: 14px 16px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 12px var(--shadow-pink);
-    }
-
-    .review-stars-row {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      color: #f79ab8;
-      font-size: 13px;
-    }
-
-    .review-text {
-      font-size: 13px;
-      color: var(--text-main);
-      margin-top: 6px;
-      line-height: 1.5;
-    }
-
-    .review-user-row {
-      margin-top: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .verified-pill {
-      background: #fff0f5;
-      color: var(--pink-primary);
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 10px;
-      font-weight: 600;
-    }
-
-    /* MENU VIEW */
-    .menu-view {
-      padding: 18px 16px 20px;
-    }
-
-    .menu-list-btn {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: #ffffff;
-      border: 1.6px solid var(--border-pink);
-      border-radius: 18px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 13.5px;
-      font-weight: 600;
-      box-shadow: 0 3px 10px var(--shadow-pink);
-      transition: transform 0.15s ease, background 0.15s ease;
-      cursor: pointer;
-    }
-
-    .menu-list-btn:active {
-      transform: scale(0.98);
-      background: #fff5f8;
-    }
-
-    .menu-list-btn .m-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: #fff0f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .menu-list-btn .m-arrow {
-      margin-left: auto;
-      color: var(--pink-soft);
-      font-size: 14px;
-    }
-
-    /* ═════════════════════════════════════════
-       MODAL / POPUP (FOR เครดิต.เก่า & ex from)
-    ═════════════════════════════════════════ */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(88, 62, 72, 0.45);
-      backdrop-filter: blur(4px);
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-
-    .modal-overlay.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-card {
-      width: 100%;
-      max-width: 340px;
-      background: #ffffff;
-      border: 2px solid var(--border-pink);
-      border-radius: 28px;
-      padding: 22px 20px 20px;
-      box-shadow: 0 12px 35px rgba(235, 140, 175, 0.35);
-      position: relative;
-      transform: scale(0.92);
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .modal-overlay.open .modal-card {
-      transform: scale(1);
-    }
-
-    .modal-close-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #fff0f5;
-      border: 1px solid var(--border-pink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--pink-primary);
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .modal-header-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-main);
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    .modal-content-area {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    .modal-sample-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin: 14px 0 10px;
-    }
-
-    .sample-box {
-      background: #fff5f8;
-      border: 1.5px dashed var(--border-pink);
-      border-radius: 14px;
-      padding: 16px 8px;
-      font-size: 12px;
-      color: var(--pink-deep);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* TOAST NOTIFICATION */
-    .toast-msg {
-      position: fixed;
-      top: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-30px);
-      background: rgba(255, 255, 255, 0.96);
-      border: 1.8px solid var(--border-pink);
-      color: var(--pink-deep);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(235, 140, 175, 0.3);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .toast-msg.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    /* Confetti floating hearts container */
-    #confetti-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1001;
-      overflow: hidden;
-    }
-
-    .confetti-heart {
-      position: absolute;
-      animation: floatUp 1.8s ease-out forwards;
-      pointer-events: none;
-    }
-
-    @keyframes floatUp {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(0.6) rotate(0deg);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--dx), -140px) scale(1.2) rotate(var(--rot));
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#fff5f8">
+<title>⠀𐄙ִּ♡ﾟ𓈒บ๊ะ ཾจ่าง𓈒 ♡ﾟ༷ </title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Kanit:wght@300;400;500;600&family=Mitr:wght@300;400;500&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+:root{
+  --pink:#ea5e89;
+  --darkpink:#db4b78;
+  --soft:#f8a6bf;
+  --pale:#fff0f5;
+  --background:#fdf6f9;
+  --text:#583e48;
+  --muted:#9f828d;
+  --line:#f8bdd2;
+  --card:#ffffff;
+  --shadow:rgba(235, 140, 175, 0.18);
+  --border-subtle:#fee0eb;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Quicksand','Kanit',sans-serif;
+  font-weight:400;
+  color:var(--text);
+  background:radial-gradient(circle at 15% 15%,#ffe8f2,transparent 40%),radial-gradient(circle at 85% 80%,#ffeef5,transparent 45%),#fae6ee;
+  display:flex;
+  justify-content:center;
+  min-height:100vh;
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+[hidden]{display:none!important}
+.eng{font-family:'Nunito','Comfortaa',sans-serif}
+.small{font-size:11px}
+.muted{color:var(--muted)}
+.full{width:100%}
+.row{display:flex;align-items:center;gap:9px}
+.between{justify-content:space-between}
+
+.app{
+  width:100%;
+  max-width:420px;
+  min-height:100vh;
+  margin:0 auto;
+  padding-bottom:110px;
+  position:relative;
+  background:#fdf6f9;
+  box-shadow:0 0 50px rgba(220,130,165,0.22);
+  overflow-x:hidden;
+}
+
+/* TOPBAR */
+.topbar{
+  min-height:64px;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(253,246,249,0.96);
+  border-bottom:1.5px dashed var(--line);
+  backdrop-filter:blur(14px);
+}
+
+.top-left-area{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:var(--soft);
+}
+
+.top-deco-text{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:13px;
+  color:var(--soft);
+}
+
+.logo{
+  border:0;
+  background:none;
+  font:700 16px 'Comfortaa',sans-serif;
+  color:var(--darkpink);
+  text-align:left;
+  padding:0;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  position:relative;
+}
+
+.round-btn{
+  width:42px;
+  height:42px;
+  border:1.8px solid var(--line);
+  border-radius:14px;
+  background:#ffffff;
+  box-shadow:0 3px 10px var(--shadow);
+  color:var(--pink);
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .15s, box-shadow .15s;
+  padding:0;
+}
+.round-btn:active{transform:scale(0.92);box-shadow:0 1px 4px var(--shadow)}
+.round-btn svg{width:20px;height:20px}
+
+/* Cutoff heart at top right edge */
+.top-right-edge{
+  position:absolute;
+  right:-14px;
+  top:50%;
+  transform:translateY(-50%) rotate(-15deg);
+  pointer-events:none;
+  opacity:0.85;
+}
+
+/* PAGES */
+.page{display:none;animation:fade .3s ease}
+.page.active{display:block}
+@keyframes fade{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:none}
+}
+
+/* PROFILE SECTION */
+.profile{
+  position:relative;
+  padding:22px 20px 16px;
+  background:#fef0f5;
+  text-align:center;
+}
+
+.profile-top-deco{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 14px;
+  margin-bottom:8px;
+  opacity:0.75;
+}
+
+.profile-header-center{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.shop-title{
+  font:700 16px 'Comfortaa','Quicksand',sans-serif;
+  color:var(--text);
+  letter-spacing:0.8px;
+}
+
+.bunny-row{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:2px;
+}
+.bunny-icon{width:24px;height:24px}
+.bunny-line{display:inline-block;width:26px;height:1.5px;background:#c2a2af;border-radius:2px}
+
+.avatar-wrap{
+  margin:10px auto 4px;
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  padding:4px;
+  background:#fff;
+  border:2px solid var(--line);
+  box-shadow:0 4px 14px var(--shadow);
+  position:relative;
+}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.avatar-placeholder{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:radial-gradient(circle at 35% 35%,#fff,#ffe8f2);
+  color:var(--pink);
+  font-size:32px;
+}
+
+.profile-stats{
+  display:flex;
+  justify-content:center;
+  gap:22px;
+  margin-top:14px;
+}
+.stat{text-align:center}
+.stat-number{font:800 16px 'Nunito',sans-serif;color:var(--pink)}
+.stat-label{font:600 10px 'Nunito',sans-serif;color:var(--muted);margin-top:2px}
+
+.profile-bio{
+  font-size:12px;
+  line-height:1.8;
+  color:var(--muted);
+  margin-top:10px;
+  white-space:pre-wrap;
+}
+
+.main-message{
+  text-align:center;
+  white-space:pre-wrap;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.75;
+  padding:8px 16px;
+  margin:8px 16px 0;
+  background:linear-gradient(90deg,transparent,#fff0f5,transparent);
+  border-radius:20px;
+}
+
+/* DIVIDER */
+.divider{
+  border:0;
+  border-top:1.5px dashed var(--line);
+  margin:0;
+}
+
+/* CIRCLES SECTION */
+.circles-section{
+  padding:24px 18px 20px;
+  position:relative;
+}
+
+.circles-row{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:18px;
+}
+
+.circle-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:var(--text);
+  border:0;
+  background:none;
+  padding:0;
+  cursor:pointer;
+  transition:transform .2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.circle-card:active{transform:scale(0.93)}
+
+.circle-avatar-wrap{
+  width:104px;
+  height:104px;
+  border-radius:50%;
+  border:1.6px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  background:transparent;
+}
+
+.circle-avatar-inner{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  border:1.6px solid var(--line);
+  background:#ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 14px var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.circle-avatar-inner.with-gradient{
+  background:radial-gradient(circle at 45% 45%,#ffffff 0%,#fff0f5 70%,#fee4ef 100%);
+}
+
+.circle-bow{
+  position:absolute;
+  bottom:-4px;
+  left:-6px;
+  z-index:2;
+  pointer-events:none;
+}
+
+.circle-corner-heart{
+  position:absolute;
+  top:4px;
+  right:4px;
+  z-index:2;
+  pointer-events:none;
+  transform:rotate(15deg);
+}
+
+.circle-label{
+  margin-top:9px;
+  font-size:12.5px;
+  font-weight:500;
+  color:var(--text);
+  letter-spacing:0.3px;
+  text-align:center;
+}
+
+.floating-heart-wrap{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding-top:4px;
+}
+
+.float-3d-heart{
+  transform:rotate(18deg);
+  animation:floatSmooth 3.2s ease-in-out infinite alternate;
+  cursor:pointer;
+}
+
+@keyframes floatSmooth{
+  0%{transform:translateY(0px) rotate(16deg)}
+  100%{transform:translateY(-7px) rotate(22deg)}
+}
+
+/* CONTACT CARDS GRID */
+.contacts-section{
+  padding:20px 14px 22px;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+.contact-card{
+  min-height:138px;
+  padding:15px 6px 12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  text-align:center;
+  border:2px solid var(--line);
+  border-radius:24px;
+  background:#ffffff;
+  box-shadow:0 4px 16px rgba(235, 140, 175, 0.14);
+  position:relative;
+  transition:transform .2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .2s;
+  cursor:pointer;
+  text-decoration:none;
+  color:var(--text);
+}
+
+.contact-card:active{
+  transform:translateY(2px) scale(0.97);
+  box-shadow:0 2px 8px rgba(235, 140, 175, 0.2);
+}
+
+/* Double inner frame */
+.contact-card::after{
+  content:'';
+  position:absolute;
+  inset:3px;
+  border:1px solid rgba(254, 204, 222, 0.6);
+  border-radius:20px;
+  pointer-events:none;
+}
+
+.contact-card-sparkle{
+  position:absolute;
+  top:8px;
+  right:9px;
+  pointer-events:none;
+  z-index:2;
+}
+
+.contact-card-heart-top{
+  position:absolute;
+  top:-11px;
+  left:50%;
+  transform:translateX(-50%) rotate(-8deg);
+  z-index:3;
+  pointer-events:none;
+}
+
+.contact-icon-box{
+  width:100%;
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-top:4px;
+}
+
+.contact-info{
+  width:100%;
+  text-align:center;
+  padding-top:6px;
+}
+
+.contact-title{
+  font-size:11.5px;
+  font-weight:600;
+  color:var(--text);
+  display:block;
+  letter-spacing:0.2px;
+  white-space:nowrap;
+}
+
+.contact-sub{
+  font:700 9.5px 'Nunito',sans-serif;
+  color:var(--muted);
+  margin-top:3px;
+  display:block;
+  letter-spacing:0.5px;
+}
+
+.extra-box{
+  margin:10px 16px 20px;
+  padding:16px;
+  border:1.5px dashed var(--line);
+  border-radius:20px;
+  background:#fff5f8;
+  white-space:pre-wrap;
+  line-height:1.8;
+  font-size:12px;
+  text-align:center;
+  color:var(--text);
+}
+.extra-box:before{
+  content:"୨୧ little note ୨୧";
+  display:block;
+  font:700 11px 'Nunito',sans-serif;
+  color:var(--darkpink);
+  margin-bottom:6px;
+}
+
+/* COMMON CONTENT */
+.page-content{padding:24px 18px}
+.page-heading{
+  font:800 24px 'Comfortaa','Nunito',sans-serif;
+  color:var(--darkpink);
+  margin:0;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.page-sub{
+  font-size:12px;
+  line-height:1.7;
+  color:var(--muted);
+  margin:4px 0 18px;
+  white-space:pre-wrap;
+}
+
+.card{
+  padding:16px;
+  border:1.6px solid var(--line);
+  border-radius:20px;
+  background:#ffffff;
+  box-shadow:0 4px 14px var(--shadow);
+  margin-bottom:14px;
+}
+
+.primary,.secondary,.danger{
+  padding:11px 16px;
+  border-radius:14px;
+  font-size:12px;
+  font-weight:600;
+  transition:.2s;
+}
+.primary{
+  background:linear-gradient(135deg,#fa9fbd,#ee82ac);
+  border:1px solid #ef91b4;
+  color:white;
+  box-shadow:0 3px 10px rgba(234,94,137,0.3);
+}
+.secondary{
+  background:white;
+  border:1.5px solid var(--line);
+  color:var(--darkpink);
+  box-shadow:0 2px 6px var(--shadow);
+}
+.danger{
+  background:#fff1f5;
+  border:1px solid #ffc4d4;
+  color:#c85c7d;
+}
+.primary:hover,.secondary:hover{transform:translateY(-2px)}
+button:disabled{opacity:.55;cursor:not-allowed}
+
+.empty{
+  border:1.5px dashed var(--line);
+  background:var(--pale);
+  border-radius:18px;
+  text-align:center;
+  padding:24px 15px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* MENU CATEGORIES */
+.group-tabs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:4px 2px 16px;
+  scrollbar-width:thin;
+}
+.group-tab{
+  border:1.5px solid var(--line);
+  border-radius:99px;
+  padding:9px 16px;
+  background:white;
+  color:var(--text);
+  font-size:12px;
+  font-weight:500;
+  white-space:nowrap;
+  flex-shrink:0;
+  box-shadow:0 2px 6px var(--shadow);
+  transition:.2s;
+}
+.group-tab.active{
+  background:var(--pale);
+  color:var(--darkpink);
+  border-color:var(--pink);
+  font-weight:600;
+}
+
+.group-section{
+  margin-bottom:26px;
+  scroll-margin-top:80px;
+}
+.group-heading{
+  font-size:17px;
+  font-weight:600;
+  color:var(--darkpink);
+  border-bottom:1px dashed var(--line);
+  padding-bottom:10px;
+  margin-bottom:14px;
+}
+.group-heading:before{content:"୨୧ ";color:var(--pink)}
+
+/* WORK CARDS */
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.work-card{
+  border:1.5px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  background:white;
+  box-shadow:0 4px 12px var(--shadow);
+  transition:.25s;
+}
+.work-card:hover{transform:translateY(-3px)}
+.work-image{
+  display:block;
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  background:var(--pale);
+  border-bottom:1px dashed var(--line);
+}
+.work-no-image{
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  background:radial-gradient(circle at 30% 30%,#fff,#ffe8f2);
+  color:var(--pink);
+  font-size:36px;
+}
+.work-body{padding:12px}
+.work-name{font-size:13px;font-weight:600;overflow-wrap:anywhere}
+.work-short{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-top:4px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.work-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.work-tag{
+  display:inline-flex;
+  align-items:center;
+  border:1px solid var(--line);
+  background:var(--pale);
+  color:var(--darkpink);
+  border-radius:999px;
+  padding:3px 8px;
+  font-size:9px;
+}
+.work-details-btn{
+  display:block;
+  width:100%;
+  margin-top:12px;
+  padding:9px;
+  border-radius:12px;
+  border:1.5px solid var(--line);
+  background:#fff;
+  color:var(--darkpink);
+  font:700 11px 'Nunito',sans-serif;
+  box-shadow:0 2px 6px var(--shadow);
+  transition:.2s;
+}
+.work-details-btn:hover{background:var(--pink);color:white}
+
+/* REVIEWS */
+.review-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  text-align:center;
+}
+.review-stats>div:first-child{border-right:1px dashed var(--line)}
+.review-big{font:800 28px 'Nunito',sans-serif;color:var(--pink)}
+.review-name{font-size:13px;font-weight:600}
+.review-date{font-size:10px;color:var(--muted)}
+.review-stars{font-size:17px;color:#f889ab;margin:8px 0}
+.review-text{font-size:12px;line-height:1.8;white-space:pre-wrap}
+.review-photo{
+  display:block;
+  width:100%;
+  max-height:350px;
+  object-fit:contain;
+  border-radius:12px;
+  margin-top:8px;
+  border:1px solid var(--line);
+}
+.stars{display:flex;justify-content:center;gap:6px}
+.star-btn{border:0;background:none;font-size:30px;color:#f3d4e1}
+.star-btn.selected{color:var(--pink)}
+.review-button{white-space:nowrap;flex-shrink:0}
+
+/* UPLOAD COMPONENT */
+.cute-upload{
+  position:relative;
+  width:100%;
+  border:2px dashed var(--pink);
+  border-radius:20px;
+  background:#fffafd;
+  padding:20px 14px;
+  text-align:center;
+  transition:.25s;
+  box-shadow:inset 0 0 0 4px white,0 4px 10px var(--shadow);
+  cursor:pointer;
+}
+.cute-upload:hover,.cute-upload.dragover{
+  border-color:var(--darkpink);
+  background:var(--pale);
+}
+.upload-illustration{
+  width:58px;
+  height:58px;
+  margin:0 auto 10px;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#ffe1ef,#f3e4ff);
+  border:1.5px solid var(--line);
+  font-size:26px;
+  color:var(--pink);
+  box-shadow:0 4px 0 #ffe1eb;
+}
+.upload-title{font-size:13px;font-weight:600;color:var(--darkpink)}
+.upload-subtitle{font-size:10px;color:var(--muted);margin-top:4px}
+.upload-choose{
+  display:inline-block;
+  padding:8px 18px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:white;
+  color:var(--darkpink);
+  font-size:11px;
+  font-weight:600;
+  margin-top:12px;
+  box-shadow:0 2px 6px var(--shadow);
+}
+.cute-upload input[type=file]{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  cursor:pointer;
+}
+.upload-preview-area{
+  margin-top:12px;
+  padding:10px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+.upload-preview-area img{
+  max-width:100%;
+  max-height:220px;
+  object-fit:contain;
+  margin:0 auto;
+  border-radius:10px;
+  display:block;
+}
+.upload-filename{font-size:10px;color:var(--muted);margin-top:6px}
+.upload-remove{
+  padding:7px 14px;
+  margin-top:8px;
+  border:1px solid #f7c5d5;
+  border-radius:10px;
+  background:#fff0f5;
+  color:#c96991;
+  font-size:11px;
+}
+
+/* CATEGORY CHECKBOXES */
+.category-picker{
+  border:1.5px dashed var(--line);
+  background:var(--pale);
+  border-radius:18px;
+  padding:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.category-option{position:relative;cursor:pointer}
+.category-option input{position:absolute;opacity:0;width:1px;height:1px}
+.category-option span{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  border-radius:999px;
+  border:1.5px solid var(--line);
+  background:white;
+  padding:8px 12px;
+  font-size:11px;
+  color:var(--text);
+  transition:.2s;
+}
+.category-option input:checked+span{
+  background:var(--pink);
+  border-color:var(--pink);
+  color:white;
+  box-shadow:0 3px 8px rgba(234,94,137,0.3);
+}
+
+/* BOTTOM NAV - FLOATING CAPSULE */
+.bottom-nav-container{
+  position:fixed;
+  bottom:max(12px,env(safe-area-inset-bottom));
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 24px);
+  max-width:390px;
+  z-index:40;
+}
+
+.bottom-nav{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:4px;
+  padding:5px;
+  background:rgba(255,255,255,0.97);
+  border:1.8px solid var(--line);
+  border-radius:28px;
+  box-shadow:0 8px 24px var(--shadow);
+  backdrop-filter:blur(14px);
+}
+
+.nav-btn{
+  border:0;
+  background:none;
+  color:var(--muted);
+  border-radius:22px;
+  padding:8px 4px 7px;
+  font:700 11.5px 'Comfortaa','Nunito',sans-serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  transition:all .2s cubic-bezier(0.4, 0, 0.2, 1);
+  position:relative;
+}
+
+.nav-btn .nav-icon-box{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.nav-btn.active{
+  background:var(--pale);
+  color:var(--darkpink);
+  box-shadow:inset 0 0 0 1px #fed2e2;
+}
+
+.nav-sticker-heart{
+  position:absolute;
+  top:-3px;
+  right:-8px;
+  pointer-events:none;
+}
+
+/* MODALS */
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  background:rgba(74,41,71,.44);
+  backdrop-filter:blur(8px);
+}
+.overlay.active{display:flex}
+.modal{
+  width:100%;
+  max-width:440px;
+  max-height:90vh;
+  overflow-y:auto;
+  scrollbar-width:thin;
+  background:#fffafd;
+  border:2px solid var(--line);
+  border-radius:26px;
+  padding:20px;
+  box-shadow:0 20px 60px rgba(109,60,92,0.35);
+}
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:16px;
+}
+.modal-heading{
+  font:800 20px 'Comfortaa','Nunito',sans-serif;
+  color:var(--darkpink);
+}
+.close-btn{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1.5px solid var(--line);
+  background:white;
+  color:var(--pink);
+  font-size:18px;
+  display:grid;
+  place-items:center;
+}
+
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--text)}
+.input{
+  display:block;
+  width:100%;
+  padding:11px 13px;
+  border:1.5px solid var(--line);
+  border-radius:13px;
+  background:white;
+  color:var(--text);
+  font-size:12px;
+  outline:none;
+}
+.input:focus{border-color:var(--pink);box-shadow:0 0 0 3px var(--pale)}
+textarea.input{min-height:90px;resize:vertical}
+.hint{font-size:10px;line-height:1.7;color:var(--muted);margin:5px 0 11px}
+
+.admin-tabs{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:4px 1px 14px;
+}
+.admin-tab{
+  padding:8px 14px;
+  border:1.5px solid var(--line);
+  border-radius:99px;
+  background:white;
+  color:var(--text);
+  font-size:11.5px;
+  font-weight:600;
+  white-space:nowrap;
+}
+.admin-tab.active{background:var(--pale);border-color:var(--pink);color:var(--darkpink)}
+.admin-panel{display:none}
+.admin-panel.active{display:block}
+.admin-section{padding-top:16px;margin:16px 0;border-top:1px dashed var(--line)}
+.admin-section-title{font-size:14px;font-weight:600;color:var(--darkpink);margin-bottom:12px}
+.admin-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  border:1.5px solid var(--line);
+  border-radius:14px;
+  background:white;
+  padding:11px;
+  margin-bottom:9px;
+}
+.admin-item-name{font-size:12px;font-weight:600}
+.admin-item-sub{font-size:10px;color:var(--muted)}
+.admin-actions{display:flex;gap:5px;flex-shrink:0}
+.small-btn{
+  font-size:10px;
+  padding:7px 9px;
+  border-radius:9px;
+  border:1px solid var(--line);
+  background:var(--pale);
+  color:var(--darkpink);
+}
+
+.save-row{position:sticky;bottom:-20px;background:#fffafd;padding:12px 0 16px}
+
+.toast{
+  position:fixed;
+  z-index:200;
+  top:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(-20px);
+  background:rgba(255,255,255,0.96);
+  color:var(--darkpink);
+  border:1.8px solid var(--line);
+  border-radius:99px;
+  padding:10px 22px;
+  font-size:12px;
+  font-weight:600;
+  box-shadow:0 8px 25px rgba(235,140,175,0.3);
+  backdrop-filter:blur(8px);
+  opacity:0;
+  pointer-events:none;
+  transition:all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* FALLING EFFECTS */
+.sparkle{
+  position:fixed;
+  top:-30px;
+  z-index:60;
+  pointer-events:none;
+  color:var(--pink);
+  animation:float 8s linear forwards;
+}
+@keyframes float{
+  0%{transform:translateY(-30px) rotate(0);opacity:0}
+  15%{opacity:.8}
+  100%{transform:translateY(110vh) rotate(200deg);opacity:0}
+}
+
+.details-cover{
+  width:100%;
+  max-height:280px;
+  object-fit:contain;
+  background:var(--pale);
+  border:1.5px solid var(--line);
+  border-radius:18px;
+  margin-bottom:14px;
+}
+.details-placeholder{
+  height:160px;
+  display:grid;
+  place-items:center;
+  border:2px dashed var(--line);
+  background:var(--pale);
+  border-radius:18px;
+  font-size:44px;
+  color:var(--pink);
+  margin-bottom:14px;
+}
+.details-title{font-size:19px;font-weight:600;color:var(--darkpink);margin:0 0 8px}
+.details-description{
+  font-size:12px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  padding:13px;
+  border:1px dashed var(--line);
+  border-radius:15px;
+  background:var(--pale);
+  margin-top:12px;
+}
+.details-heading{font-size:12px;font-weight:600;color:var(--darkpink);margin:16px 0 6px}
+.details-link{
+  display:block;
+  text-align:center;
+  margin-top:16px;
+  padding:12px;
+  border-radius:14px;
+  background:var(--pink);
+  color:white;
+  font-size:12px;
+  font-weight:600;
+}
+</style>
 </head>
 <body>
 
-  <!-- Confetti Hearts Layer -->
-  <div id="confetti-container"></div>
+<div class="app">
 
-  <!-- Toast Message -->
-  <div id="toast" class="toast-msg">♡ คัดลอก LINE ID เรียบร้อยแล้ว ♡</div>
+<!-- ════════ TOPBAR ════════ -->
+<header class="topbar">
+  <div class="top-left-area">
+    <button type="button" class="logo" id="topLogo" onclick="goPage('main')">
+      <!-- 4-point sparkle SVG -->
+      <svg width="11" height="11" viewBox="0 0 20 20" fill="none">
+        <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#f09ab5"/>
+      </svg>
+      <span style="font-size:11px;color:#f6bdd1;">·</span>
+      <!-- Heart outline SVG -->
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      <span style="font-size:11px;color:#f6bdd1;">·</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    </button>
+  </div>
 
-  <!-- Main Mobile Canvas -->
-  <main class="app-screen">
+  <div class="top-actions">
+    <!-- Music Button -->
+    <button type="button" class="round-btn" id="musicButton" onclick="toggleMusic()" title="Music" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18V5l12-2v13"></path>
+        <circle cx="6" cy="18" r="3" fill="currentColor"></circle>
+        <circle cx="18" cy="16" r="3" fill="currentColor"></circle>
+      </svg>
+    </button>
 
-    <!-- ═════════════════════════════════════════
-         TOP BAR
-    ═════════════════════════════════════════ -->
-    <header class="top-bar">
-      <!-- Left decorative symbols (exact aesthetic) -->
-      <div class="top-decorations">
-        <!-- 4-point sparkle -->
-        <svg width="11" height="11" viewBox="0 0 20 20" fill="none">
-          <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#f09ab5"/>
-        </svg>
-        <span style="font-size:12px; color:#f6bdd1;">·</span>
-        <!-- Small outline heart -->
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-        <span style="font-size:12px; color:#f6bdd1;">·</span>
-        <!-- Second outline heart -->
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-      </div>
+    <!-- Admin / Heart Button -->
+    <button type="button" class="round-btn" onclick="openAdmin()" title="Admin ♡">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    </button>
 
-      <!-- Right Action Buttons -->
-      <div class="top-actions">
-        <!-- Music Button -->
-        <button class="top-btn" id="btn-music" aria-label="เปิดเพลง" title="เล่นเพลง ♡" onclick="togglePlayMusic(event)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18V5l12-2v13"></path>
-            <circle cx="6" cy="18" r="3" fill="currentColor"></circle>
-            <circle cx="18" cy="16" r="3" fill="currentColor"></circle>
-          </svg>
-        </button>
+    <!-- Cutoff decorative heart on edge -->
+    <div class="top-right-edge">
+      <svg width="32" height="32" viewBox="0 0 36 36">
+        <defs>
+          <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffb8cc"/>
+            <stop offset="50%" stop-color="#f27aa0"/>
+            <stop offset="100%" stop-color="#db4b78"/>
+          </linearGradient>
+        </defs>
+        <path d="M18 31l-2.2-2C7.9 21.8 2.7 17.1 2.7 11.3 2.7 6.6 6.4 3 11.1 3c2.6 0 5.1 1.2 6.9 3.1C19.8 4.2 22.3 3 24.9 3c4.7 0 8.4 3.6 8.4 8.3 0 5.8-5.2 10.5-13.1 17.7L18 31z" fill="url(#edgeGrad)"/>
+      </svg>
+    </div>
+  </div>
+</header>
 
-        <!-- Like / Heart Button -->
-        <button class="top-btn" id="btn-like" aria-label="ถูกใจ" title="ส่งหัวใจ ♡" onclick="burstHearts(event)">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-        </button>
+<!-- ════════ MAIN PAGE ════════ -->
+<section class="page active" id="page-main">
 
-        <!-- Right-edge partially cropped 3D heart -->
-        <div class="right-edge-heart">
-          <svg width="34" height="34" viewBox="0 0 36 36">
-            <defs>
-              <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffb8cc"/>
-                <stop offset="50%" stop-color="#f27aa0"/>
-                <stop offset="100%" stop-color="#db4b78"/>
-              </linearGradient>
-            </defs>
-            <path d="M18 31l-2.2-2C7.9 21.8 2.7 17.1 2.7 11.3 2.7 6.6 6.4 3 11.1 3c2.6 0 5.1 1.2 6.9 3.1C19.8 4.2 22.3 3 24.9 3c4.7 0 8.4 3.6 8.4 8.3 0 5.8-5.2 10.5-13.1 17.7L18 31z" fill="url(#edgeGrad)"/>
-          </svg>
-        </div>
-      </div>
-    </header>
-
-    <div class="dashed-divider"></div>
-
-    <!-- ═════════════════════════════════════════
-         VIEW 1: MAIN TAB CONTENT
-    ═════════════════════════════════════════ -->
-    <div id="view-main" class="tab-view active-view">
-
-      <!-- PROFILE BOX -->
-      <section class="profile-section" onclick="copyLineId()" title="แตะเพื่อคัดลอก LINE ID">
-        <div class="profile-floats">
-          <!-- Tiny floating heart -->
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e89cb5" stroke-width="1.8">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-          <span style="color:#f2b6cb; font-size:10px; letter-spacing:4px;">· · · · ·</span>
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e89cb5" stroke-width="1.8">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-        </div>
-
-        <div class="line-id-row">
-          <span>line . @O35yfbcd .</span>
-          <span class="copy-hint">(แตะคัดลอก)</span>
-        </div>
-
-        <div class="bunny-row">
-          <!-- Cute Custom Vector Bunny (No missing emoji) -->
-          <svg class="bunny-icon" viewBox="0 0 36 32" fill="none">
-            <!-- Left ear -->
-            <path d="M12 14 C10 3, 14 1, 16 5 C17 9, 16 13, 16 14" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
-            <path d="M13 11 C12 6, 14 4, 15 6" fill="#fecddb"/>
-            <!-- Right ear -->
-            <path d="M20 14 C20 13, 19 9, 20 5 C22 1, 26 3, 24 14" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
-            <path d="M21 11 C21 6, 22 4, 23 6" fill="#fecddb"/>
-            <!-- Bunny Head -->
-            <ellipse cx="18" cy="20" rx="11" ry="9" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
-            <!-- Cheeks blush -->
-            <ellipse cx="11.5" cy="21.5" rx="2" ry="1.2" fill="#ffb8cc" opacity="0.85"/>
-            <ellipse cx="24.5" cy="21.5" rx="2" ry="1.2" fill="#ffb8cc" opacity="0.85"/>
-            <!-- Eyes -->
-            <circle cx="14" cy="19" r="1.3" fill="#4a353d"/>
-            <circle cx="22" cy="19" r="1.3" fill="#4a353d"/>
-            <circle cx="13.5" cy="18.5" r="0.4" fill="#ffffff"/>
-            <circle cx="21.5" cy="18.5" r="0.4" fill="#ffffff"/>
-            <!-- Mouth -->
-            <path d="M17 21 Q18 22 19 21" stroke="#c09ba8" stroke-width="1" stroke-linecap="round"/>
-          </svg>
-          <span class="bunny-line"></span>
-        </div>
-      </section>
-
-      <div class="dashed-divider"></div>
-
-      <!-- CIRCULAR BUTTONS SECTION -->
-      <section class="circles-section">
-        <div class="circles-container">
-
-          <!-- Circle 1: เครดิต.เก่า ♡ -->
-          <div class="circle-card" onclick="openModal('credit')">
-            <div class="circle-avatar-wrap">
-              <!-- Ribbon bow on bottom-left -->
-              <svg class="circle-bow" width="34" height="22" viewBox="0 0 50 30" fill="none">
-                <path d="M 23,15 C 10,5 5,10 8,18 C 11,24 21,17 23,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
-                <path d="M 27,15 C 40,5 45,10 42,18 C 39,24 29,17 27,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
-                <circle cx="25" cy="15" r="3.5" fill="#ea5e89"/>
-                <path d="M 23,17 C 18,23 14,27 11,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
-                <path d="M 27,17 C 32,23 36,27 39,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-
-              <!-- Tiny outline heart on top-right -->
-              <svg class="circle-corner-heart" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-
-              <div class="circle-avatar-inner">
-                <!-- Clean outline heart -->
-                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
-              </div>
-            </div>
-            <div class="circle-label">
-              <span>ˏ เครดิต.เก่า ♡</span>
-            </div>
-          </div>
-
-          <!-- Circle 2: · ex from · -->
-          <div class="circle-card" onclick="openModal('portfolio')">
-            <div class="circle-avatar-wrap">
-              <!-- Ribbon bow on bottom-left -->
-              <svg class="circle-bow" width="34" height="22" viewBox="0 0 50 30" fill="none">
-                <path d="M 23,15 C 10,5 5,10 8,18 C 11,24 21,17 23,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
-                <path d="M 27,15 C 40,5 45,10 42,18 C 39,24 29,17 27,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
-                <circle cx="25" cy="15" r="3.5" fill="#ea5e89"/>
-                <path d="M 23,17 C 18,23 14,27 11,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
-                <path d="M 27,17 C 32,23 36,27 39,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-
-              <div class="circle-avatar-inner with-gradient">
-                <!-- Pink beamed music note -->
-                <svg width="42" height="42" viewBox="0 0 32 32" fill="none">
-                  <defs>
-                    <linearGradient id="noteGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#f889ab"/>
-                      <stop offset="100%" stop-color="#ea4f7e"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M11 25a4 4 0 1 1-4-4c1.1 0 2.1.4 2.8 1.1L11 8l14-3v14a4 4 0 1 1-4-4c1.1 0 2.1.4 2.8 1.1L25 7.2 13 9.8v11.4c-.6-.1-1.3-.2-2-.2z" fill="url(#noteGrad)"/>
-                </svg>
-              </div>
-            </div>
-            <div class="circle-label">
-              <span>· ex from ·</span>
-            </div>
-          </div>
-
-          <!-- 3D Shaded Floating Heart on Right -->
-          <div class="floating-heart-wrap">
-            <div class="float-3d-heart" onclick="burstHearts(event)">
-              <svg width="40" height="40" viewBox="0 0 40 40">
-                <defs>
-                  <linearGradient id="heart3d" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ffb3c7"/>
-                    <stop offset="45%" stop-color="#f07297"/>
-                    <stop offset="100%" stop-color="#cc3d68"/>
-                  </linearGradient>
-                  <filter id="heartGlow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#ea5e89" flood-opacity="0.35"/>
-                  </filter>
-                </defs>
-                <path d="M20 34l-2.4-2.2C8.8 23.8 3 18.6 3 12.2 3 7 7.1 3 12.3 3c2.9 0 5.7 1.4 7.7 3.5C22 4.4 24.8 3 27.7 3 32.9 3 37 7 37 12.2c0 6.4-5.8 11.6-14.6 19.6L20 34z" fill="url(#heart3d)" filter="url(#heartGlow)"/>
-              </svg>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <div class="dashed-divider"></div>
-
-      <!-- 3-CARDS SECTION -->
-      <section class="cards-section">
-        <div class="cards-grid">
-
-          <!-- CARD 1: LINE OA -->
-          <a class="app-card" href="https://line.me/" target="_blank" rel="noopener">
-            <!-- 4-point sparkle top-right -->
-            <svg class="card-sparkle" width="14" height="14" viewBox="0 0 20 20">
-              <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
-            </svg>
-
-            <div class="card-icon-box">
-              <!-- Open Padlock Icon -->
-              <svg width="34" height="38" viewBox="0 0 36 42" fill="none">
-                <!-- Open Shackle -->
-                <path d="M 12,18 V 11 C 12,6 16,3 21,3 C 26,3 29,6 29,11 V 13" stroke="#ea5e89" stroke-width="3" stroke-linecap="round"/>
-                <!-- Padlock Body -->
-                <rect x="5" y="16" width="24" height="22" rx="7" fill="#ea5e89"/>
-                <!-- Keyhole -->
-                <circle cx="17" cy="25" r="2.5" fill="#ffffff"/>
-                <path d="M 16,26 L 15,30 H 19 L 18,26 Z" fill="#ffffff"/>
-              </svg>
-            </div>
-
-            <div class="card-info">
-              <span class="card-title">♡ .line .oa ♡</span>
-              <span class="card-subtext">ˏ ! ♡ ｡</span>
-            </div>
-          </a>
-
-          <!-- CARD 2: FACEBOOK -->
-          <a class="app-card" href="https://facebook.com/" target="_blank" rel="noopener" style="overflow:visible;">
-            <!-- Heart sitting right on the top border -->
-            <svg class="middle-card-heart" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-
-            <div class="card-icon-box">
-              <!-- Archway / Window Portal Icon -->
-              <svg width="30" height="38" viewBox="0 0 36 42" fill="none" stroke="#ea5e89" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M 8,33 V 17 C 8,9 12,4 18,4 C 24,4 28,9 28,17 V 33"/>
-                <path d="M 4,33 H 32"/>
-                <path d="M 7,37 H 29"/>
-              </svg>
-            </div>
-
-            <div class="card-info">
-              <span class="card-title">. fb ♡</span>
-              <span class="card-subtext">♡ ! ｡</span>
-            </div>
-          </a>
-
-          <!-- CARD 3: X (TWITTER) -->
-          <a class="app-card" href="https://x.com/" target="_blank" rel="noopener">
-            <!-- 4-point sparkle top-right -->
-            <svg class="card-sparkle" width="14" height="14" viewBox="0 0 20 20">
-              <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
-            </svg>
-
-            <div class="card-icon-box">
-              <!-- Multi Heart Sticker Icon -->
-              <svg width="42" height="38" viewBox="0 0 46 40" fill="none">
-                <!-- Faint shadow heart -->
-                <path d="M 12 24 C 8 20 6 17 6 14 C 6 11 8 8.5 11 8.5 C 12.8 8.5 14.5 9.5 15.5 11 C 16.5 9.5 18.2 8.5 20 8.5 C 23 8.5 25 11 25 14 C 25 17 23 20 19 24 L 15.5 27 Z" fill="#fec2d5" opacity="0.65"/>
-                <!-- Tilted soft rose heart -->
-                <g transform="rotate(-15 22 18)">
-                  <path d="M 22 28 C 17 23 15 20 15 16.5 C 15 13 17.5 10.5 21 10.5 C 23 10.5 25 11.8 26.5 13.5 C 28 11.8 30 10.5 32 10.5 C 35.5 10.5 38 13 38 16.5 C 38 20 36 23 31 28 L 26.5 32 Z" fill="#f48fb0"/>
-                </g>
-                <!-- Vibrant main pink heart -->
-                <path d="M 32 30 C 27 25 25 21.5 25 18 C 25 14 28 11.5 32 11.5 C 34.5 11.5 36.8 12.8 38 14.8 C 39.2 12.8 41.5 11.5 44 11.5 C 48 11.5 51 14 51 18 C 51 21.5 49 25 44 30 L 38 35 Z" fill="#ea4f7e" transform="scale(0.8) translate(3, 1)"/>
-              </svg>
-            </div>
-
-            <div class="card-info">
-              <span class="card-title">. X ! ♡</span>
-              <span class="card-subtext">ˏ !</span>
-            </div>
-          </a>
-
-        </div>
-      </section>
-
-      <div class="dashed-divider"></div>
-
-    </div><!-- /view-main -->
-
-    <!-- ═════════════════════════════════════════
-         VIEW 2: REVIEWS TAB CONTENT
-    ═════════════════════════════════════════ -->
-    <div id="view-reviews" class="tab-view">
-      <div class="reviews-view">
-        <h2 class="view-heading">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-          รีวิวจากลูกค้าที่น่ารัก ♡
-        </h2>
-
-        <div class="review-item">
-          <div class="review-stars-row">
-            <span>★★★★★</span>
-            <span class="verified-pill">สั่งซื้อสำเร็จ</span>
-          </div>
-          <div class="review-text">บริการดีมากเลยค่า ตอบไว ให้คำแนะนำดีมากกก งานเสร็จเร็วกว่าที่คิดเยอะเลย ประทับใจสุดๆ 🩷</div>
-          <div class="review-user-row">
-            <span>@nong_iceee</span>
-            <span>เมื่อวานนี้</span>
-          </div>
-        </div>
-
-        <div class="review-item">
-          <div class="review-stars-row">
-            <span>★★★★★</span>
-            <span class="verified-pill">สั่งซื้อสำเร็จ</span>
-          </div>
-          <div class="review-text">น่ารักมากกก ตรงปกสุดๆ ถูกใจมากเลยค่ะ แอดมินใจดีมาก มีสั่งรอบสองแน่นอนค่า ♡</div>
-          <div class="review-user-row">
-            <span>@fah_sky</span>
-            <span>3 วันที่แล้ว</span>
-          </div>
-        </div>
-
-        <div class="review-item">
-          <div class="review-stars-row">
-            <span>★★★★★</span>
-            <span class="verified-pill">สั่งซื้อสำเร็จ</span>
-          </div>
-          <div class="review-text">งานละเอียด น่ารักมุ้งมิ้งมากค่ะ คุ้มค่าคุ้มราคา แนะนำร้านนี้เลยยยย 🎀✨</div>
-          <div class="review-user-row">
-            <span>@cream_my</span>
-            <span>1 สัปดาห์ที่แล้ว</span>
-          </div>
-        </div>
-      </div>
-    </div><!-- /view-reviews -->
-
-    <!-- ═════════════════════════════════════════
-         VIEW 3: MENU TAB CONTENT
-    ═════════════════════════════════════════ -->
-    <div id="view-menu" class="tab-view">
-      <div class="menu-view">
-        <h2 class="view-heading">≡ เมนูทั้งหมด</h2>
-
-        <a class="menu-list-btn" href="https://line.me/" target="_blank" rel="noopener">
-          <div class="m-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-          </div>
-          <span>ติดต่อทาง LINE Official</span>
-          <span class="m-arrow">›</span>
-        </a>
-
-        <a class="menu-list-btn" href="https://facebook.com/" target="_blank" rel="noopener">
-          <div class="m-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-            </svg>
-          </div>
-          <span>เพจ Facebook หลัก</span>
-          <span class="m-arrow">›</span>
-        </a>
-
-        <a class="menu-list-btn" href="https://x.com/" target="_blank" rel="noopener">
-          <div class="m-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-              <path d="M4 4l16 16m0-16L4 20"/>
-            </svg>
-          </div>
-          <span>อัปเดตงานบน X (Twitter)</span>
-          <span class="m-arrow">›</span>
-        </a>
-
-        <div class="menu-list-btn" onclick="openModal('credit')">
-          <div class="m-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-            </svg>
-          </div>
-          <span>ดูเครดิตการส่งงาน / รีวิวเก่า</span>
-          <span class="m-arrow">›</span>
-        </div>
-
-        <div class="menu-list-btn" onclick="openModal('portfolio')">
-          <div class="m-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              <circle cx="8.5" cy="8.5" r="1.5"/>
-              <polyline points="21 15 16 10 5 21"/>
-            </svg>
-          </div>
-          <span>ตัวอย่างผลงานที่ผ่านมา (ex from)</span>
-          <span class="m-arrow">›</span>
-        </div>
-      </div>
-    </div><!-- /view-menu -->
-
-    <!-- ═════════════════════════════════════════
-         BOTTOM FLOATING NAV BAR
-    ═════════════════════════════════════════ -->
-    <div class="bottom-nav-container">
-      <nav class="bottom-nav-bar" role="navigation">
-
-        <!-- Tab 1: main (Active) -->
-        <button class="nav-tab-btn active" id="tab-main" onclick="switchNavTab('main')">
-          <div class="tab-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-          </div>
-          <span class="tab-text">main</span>
-        </button>
-
-        <!-- Tab 2: reviews -->
-        <button class="nav-tab-btn" id="tab-reviews" onclick="switchNavTab('reviews')">
-          <div class="tab-icon">
-            <!-- Pencil SVG -->
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-            </svg>
-            <!-- Floating sticker heart beside pencil -->
-            <svg class="pencil-heart-sticker" width="11" height="11" viewBox="0 0 24 24" fill="#f48fb0">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-          </div>
-          <span class="tab-text">reviews</span>
-        </button>
-
-        <!-- Tab 3: menu -->
-        <button class="nav-tab-btn" id="tab-menu" onclick="switchNavTab('menu')">
-          <div class="tab-icon">
-            <!-- 3 Rounded Bars Hamburger -->
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-              <line x1="4" y1="7" x2="20" y2="7"/>
-              <line x1="4" y1="12" x2="20" y2="12"/>
-              <line x1="4" y1="17" x2="20" y2="17"/>
-            </svg>
-          </div>
-          <span class="tab-text">menu</span>
-        </button>
-
-      </nav>
+  <div class="profile" onclick="copyProfileId()" title="แตะเพื่อคัดลอก ♡">
+    <div class="profile-top-deco">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e89cb5" stroke-width="1.8">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      <span style="color:#f2b6cb; font-size:10px; letter-spacing:4px;">· · · · ·</span>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e89cb5" stroke-width="1.8">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
     </div>
 
-    <!-- Peek Footer Decorations -->
-    <footer class="footer-peek">
-      <div>♡ ~ ｡ ~ ♡</div>
-      <div>welcome to my sweet little link ♡</div>
-    </footer>
+    <!-- Avatar (only shows if avatarUrl exists) -->
+    <div id="avatarContainer" style="display:none;">
+      <div class="avatar-wrap" id="avatarBox">
+        <div class="avatar-placeholder">♡</div>
+      </div>
+    </div>
 
-  </main>
+    <div class="profile-header-center">
+      <div class="shop-title" id="mainShopName">line . @O35yfbcd .</div>
+      <div class="bunny-row">
+        <!-- Cute Custom Vector Bunny -->
+        <svg class="bunny-icon" viewBox="0 0 36 32" fill="none">
+          <path d="M12 14 C10 3, 14 1, 16 5 C17 9, 16 13, 16 14" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
+          <path d="M13 11 C12 6, 14 4, 15 6" fill="#fecddb"/>
+          <path d="M20 14 C20 13, 19 9, 20 5 C22 1, 26 3, 24 14" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
+          <path d="M21 11 C21 6, 22 4, 23 6" fill="#fecddb"/>
+          <ellipse cx="18" cy="20" rx="11" ry="9" fill="#ffffff" stroke="#c09ba8" stroke-width="1.3"/>
+          <ellipse cx="11.5" cy="21.5" rx="2" ry="1.2" fill="#ffb8cc" opacity="0.85"/>
+          <ellipse cx="24.5" cy="21.5" rx="2" ry="1.2" fill="#ffb8cc" opacity="0.85"/>
+          <circle cx="14" cy="19" r="1.3" fill="#4a353d"/>
+          <circle cx="22" cy="19" r="1.3" fill="#4a353d"/>
+          <circle cx="13.5" cy="18.5" r="0.4" fill="#ffffff"/>
+          <circle cx="21.5" cy="18.5" r="0.4" fill="#ffffff"/>
+          <path d="M17 21 Q18 22 19 21" stroke="#c09ba8" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+        <span class="bunny-line"></span>
+      </div>
+    </div>
 
-  <!-- ═════════════════════════════════════════
-       MODAL POPUP
-  ═════════════════════════════════════════ -->
-  <div id="app-modal" class="modal-overlay" onclick="closeModalOnBackdrop(event)">
-    <div class="modal-card">
-      <button class="modal-close-btn" onclick="closeModal()">✕</button>
-      <h3 class="modal-header-title" id="modal-title">♡ เครดิต.เก่า ♡</h3>
-      <div class="modal-content-area" id="modal-body">
-        รวบรวมหลักฐานและเครดิตการส่งงานจากลูกค้าที่น่ารักทั้งหมดค่า ♡
-        <div class="modal-sample-grid">
-          <div class="sample-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
-            <span>ยอดส่ง 500+ ออเดอร์</span>
-          </div>
-          <div class="sample-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-            <span>รีวิว 5 ดาว 100%</span>
-          </div>
-        </div>
-        <p style="font-size: 11.5px; color: #b698a3;">สามารถทัก LINE มาขอดูสลิปหรือหลักฐานเพิ่มเติมได้เลยนะคะ 🎀</p>
+    <div class="profile-bio" id="mainBio"></div>
+
+    <div class="profile-stats" id="profileStatsRow" style="display:none;">
+      <div class="stat">
+        <div class="stat-number eng" id="mainReviewsCount">0</div>
+        <div class="stat-label eng">reviews</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number eng" id="mainFollowers">0</div>
+        <div class="stat-label eng">followers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number eng" id="mainFollowing">0</div>
+        <div class="stat-label eng">following</div>
       </div>
     </div>
   </div>
 
-  <!-- ═════════════════════════════════════════
-       INTERACTIVE JAVASCRIPT
-  ═════════════════════════════════════════ -->
-  <script>
-    // Tab Switching
-    function switchNavTab(tabName) {
-      const tabs = ['main', 'reviews', 'menu'];
-      tabs.forEach(t => {
-        const view = document.getElementById('view-' + t);
-        const btn = document.getElementById('tab-' + t);
-        if (view) view.classList.toggle('active-view', t === tabName);
-        if (btn) btn.classList.toggle('active', t === tabName);
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Copy LINE ID
-    function copyLineId() {
-      const id = '@O35yfbcd';
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(id).then(showToast);
-      } else {
-        showToast();
-      }
-    }
-
-    function showToast() {
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2200);
-    }
-
-    // Modal Control
-    function openModal(type) {
-      const modal = document.getElementById('app-modal');
-      const title = document.getElementById('modal-title');
-      const body = document.getElementById('modal-body');
-
-      if (type === 'credit') {
-        title.innerHTML = '♡ เครดิต.เก่า ♡';
-        body.innerHTML = `
-          รวบรวมหลักฐานและเครดิตการส่งงานจากลูกค้าที่น่ารักทั้งหมดค่า ♡
-          <div class="modal-sample-grid">
-            <div class="sample-box">
-              <span style="font-size:18px;">📦</span>
-              <span>ส่งจริง 500+ รายการ</span>
-            </div>
-            <div class="sample-box">
-              <span style="font-size:18px;">⭐</span>
-              <span>คะแนนเต็ม 5 ดาว</span>
-            </div>
-          </div>
-          <p style="font-size: 12px; color: #b698a3; margin-top:8px;">
-            เช็กเครดิตย้อนหลังได้ตลอดเวลา ทักไลน์มาสอบถามได้เลยน้า 🎀
-          </p>
-        `;
-      } else if (type === 'portfolio') {
-        title.innerHTML = '· ex from · ตัวอย่างงาน';
-        body.innerHTML = `
-          รวมตัวอย่างผลงานดีไซน์และเทมเพลตที่เคยทำให้ลูกค้าค่า 🎀
-          <div class="modal-sample-grid">
-            <div class="sample-box">
-              <span style="font-size:18px;">🎨</span>
-              <span>งาน Bio Link</span>
-            </div>
-            <div class="sample-box">
-              <span style="font-size:18px;">✨</span>
-              <span>ป้าย / Banner</span>
-            </div>
-          </div>
-          <p style="font-size: 12px; color: #b698a3; margin-top:8px;">
-            ต้องการสั่งทำสไตล์ไหน ส่งเรฟมาประเมินราคาฟรีได้เลยค่า ♡
-          </p>
-        `;
-      }
-
-      modal.classList.add('open');
-    }
-
-    function closeModal() {
-      document.getElementById('app-modal').classList.remove('open');
-    }
-
-    function closeModalOnBackdrop(e) {
-      if (e.target.id === 'app-modal') {
-        closeModal();
-      }
-    }
-
-    // Burst Floating Hearts Confetti
-    function burstHearts(e) {
-      const container = document.getElementById('confetti-container');
-      const rect = e.currentTarget.getBoundingClientRect();
-      const originX = rect.left + rect.width / 2;
-      const originY = rect.top + rect.height / 2;
-
-      for (let i = 0; i < 9; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'confetti-heart';
-        heart.innerHTML = `
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="${i % 2 === 0 ? '#ea5e89' : '#f889ab'}">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  <div class="main-message" id="mainMessage" style="display:none;"></div>
+  
+  <hr class="divider">
+  
+  <!-- Circles Section -->
+  <div class="circles-section">
+    <div class="circles-row">
+      <div style="display:flex; gap:16px;" id="mainCircles"></div>
+      
+      <!-- 3D Shaded Floating Heart on Right -->
+      <div class="floating-heart-wrap">
+        <div class="float-3d-heart" onclick="toast('ส่งความรักให้แล้วนะคะ ♡')">
+          <svg width="38" height="38" viewBox="0 0 40 40">
+            <defs>
+              <linearGradient id="heart3d" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffb3c7"/>
+                <stop offset="45%" stop-color="#f07297"/>
+                <stop offset="100%" stop-color="#cc3d68"/>
+              </linearGradient>
+              <filter id="heartGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#ea5e89" flood-opacity="0.35"/>
+              </filter>
+            </defs>
+            <path d="M20 34l-2.4-2.2C8.8 23.8 3 18.6 3 12.2 3 7 7.1 3 12.3 3c2.9 0 5.7 1.4 7.7 3.5C22 4.4 24.8 3 27.7 3 32.9 3 37 7 37 12.2c0 6.4-5.8 11.6-14.6 19.6L20 34z" fill="url(#heart3d)" filter="url(#heartGlow)"/>
           </svg>
-        `;
-        heart.style.left = originX + 'px';
-        heart.style.top = originY + 'px';
-        const dx = (Math.random() - 0.5) * 160 + 'px';
-        const rot = (Math.random() - 0.5) * 60 + 'deg';
-        heart.style.setProperty('--dx', dx);
-        heart.style.setProperty('--rot', rot);
+        </div>
+      </div>
+    </div>
+  </div>
 
-        container.appendChild(heart);
-        setTimeout(() => heart.remove(), 1800);
+  <hr class="divider">
+  
+  <!-- Contact Cards Grid -->
+  <div class="contacts-section">
+    <div class="contact-grid" id="mainContacts"></div>
+  </div>
+  
+  <div class="extra-box" id="mainExtraBox" style="display:none;"></div>
+</section>
+
+<!-- ════════ REVIEWS PAGE ════════ -->
+<section class="page" id="page-reviews">
+  <div class="page-content">
+    <div class="row between">
+      <div>
+        <h1 class="page-heading eng">reviews ♡</h1>
+        <div class="page-sub">รีวิวจากลูกค้าที่น่ารัก</div>
+      </div>
+      <button type="button" class="primary review-button" id="openReviewButton" onclick="openReview()">+ review</button>
+    </div>
+    
+    <div class="card review-stats">
+      <div>
+        <div class="review-big eng" id="reviewTotal">0</div>
+        <div class="small muted">reviews</div>
+      </div>
+      <div>
+        <div class="review-big eng" id="reviewAverage">0.0</div>
+        <div class="small muted">average rating</div>
+      </div>
+    </div>
+    
+    <div id="reviewsContainer"></div>
+  </div>
+</section>
+
+<!-- ════════ MENU PAGE ════════ -->
+<section class="page" id="page-menu">
+  <div class="page-content">
+    <h1 class="page-heading eng" id="menuHeading">menu ♡</h1>
+    <div class="page-sub" id="menuSubtitle">text</div>
+    <div class="group-tabs" id="groupTabs"></div>
+    <div id="menuGroupsContainer"></div>
+  </div>
+</section>
+
+</div><!-- /app -->
+
+<!-- ════════ BOTTOM NAV ════════ -->
+<div class="bottom-nav-container">
+  <nav class="bottom-nav">
+    <button type="button" class="nav-btn active" data-page="main" onclick="goPage('main')">
+      <div class="nav-icon-box">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <span>main</span>
+    </button>
+    
+    <button type="button" class="nav-btn" data-page="reviews" onclick="goPage('reviews')">
+      <div class="nav-icon-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+        </svg>
+        <svg class="nav-sticker-heart" width="10" height="10" viewBox="0 0 24 24" fill="#f48fb0">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <span>reviews</span>
+    </button>
+    
+    <button type="button" class="nav-btn" data-page="menu" onclick="goPage('menu')">
+      <div class="nav-icon-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </div>
+      <span>menu</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ════════ POPUPS & MODALS ════════ -->
+
+<!-- WORK DETAILS POPUP -->
+<div class="overlay" id="detailsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-heading">work details ♡</div>
+      <button type="button" class="close-btn" onclick="closeModal('detailsModal')">✕</button>
+    </div>
+    <div id="detailsContent"></div>
+  </div>
+</div>
+
+<!-- REVIEW POPUP -->
+<div class="overlay" id="reviewModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-heading">add review ♡</div>
+      <button type="button" class="close-btn" onclick="closeModal('reviewModal')">✕</button>
+    </div>
+
+    <div class="field">
+      <label for="reviewName">ชื่อ / นามแฝง</label>
+      <input class="input" id="reviewName" maxlength="60" placeholder="ชื่อของคุณ ♡">
+    </div>
+
+    <div class="field">
+      <label>ให้คะแนน ♡</label>
+      <div class="stars" id="ratingStars">
+        <button type="button" class="star-btn selected" onclick="selectRating(1)">★</button>
+        <button type="button" class="star-btn selected" onclick="selectRating(2)">★</button>
+        <button type="button" class="star-btn selected" onclick="selectRating(3)">★</button>
+        <button type="button" class="star-btn selected" onclick="selectRating(4)">★</button>
+        <button type="button" class="star-btn selected" onclick="selectRating(5)">★</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="reviewVote">+1 / -1</label>
+      <select class="input" id="reviewVote">
+        <option value="1">+1 ♡ แนะนำมาก</option>
+        <option value="-1">-1</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="reviewText">รีวิวของคุณ</label>
+      <textarea class="input" id="reviewText" maxlength="1500" placeholder="เขียนความประทับใจของคุณ..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>รูปภาพรีวิว (ไม่บังคับ)</label>
+      <div id="reviewUploadMount"></div>
+    </div>
+
+    <button type="button" class="primary full" id="submitReviewButton" onclick="submitReview()">submit review ♡</button>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div class="overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-heading">admin login ♡</div>
+      <button type="button" class="close-btn" onclick="closeModal('loginModal')">✕</button>
+    </div>
+    <div class="field">
+      <label for="adminEmail">Email</label>
+      <input class="input" id="adminEmail" type="email" placeholder="admin@example.com">
+    </div>
+    <div class="field">
+      <label for="adminPassword">Password</label>
+      <input class="input" id="adminPassword" type="password" placeholder="Password">
+    </div>
+    <button type="button" class="primary full" onclick="loginAdmin()">login ♡</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="overlay" id="adminModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-heading">admin panel ♡</div>
+      <button type="button" class="close-btn" onclick="closeModal('adminModal')">✕</button>
+    </div>
+
+    <button type="button" class="secondary full" style="margin-bottom:16px" onclick="closeModal('adminModal');goPage('main')">← back to website</button>
+
+    <div class="admin-tabs">
+      <button type="button" class="admin-tab active" data-tab="main" onclick="adminTab('main')">main</button>
+      <button type="button" class="admin-tab" data-tab="menu" onclick="adminTab('menu')">menu</button>
+      <button type="button" class="admin-tab" data-tab="categories" onclick="adminTab('categories')">categories</button>
+      <button type="button" class="admin-tab" data-tab="design" onclick="adminTab('design')">design</button>
+      <button type="button" class="admin-tab" data-tab="reviews" onclick="adminTab('reviews')">reviews</button>
+    </div>
+
+    <!-- MAIN ADMIN -->
+    <section class="admin-panel active" id="admin-main">
+      <div class="admin-section">
+        <div class="admin-section-title">♡ Profile settings</div>
+        <div class="field">
+          <label>Shop name / Line ID</label>
+          <input class="input" id="editShopName" placeholder="line . @O35yfbcd .">
+        </div>
+        <div class="field">
+          <label>Profile picture URL</label>
+          <input class="input" id="editAvatarUrl" placeholder="https://...">
+        </div>
+        <div class="field">
+          <label>Or upload a picture</label>
+          <div id="avatarUploadMount"></div>
+        </div>
+        <div class="field">
+          <label>Bio</label>
+          <textarea class="input" id="editBio" placeholder="ข้อความแนะนำตัว"></textarea>
+        </div>
+        <div class="field">
+          <label>Message under profile</label>
+          <textarea class="input" id="editMainMessage" placeholder="ข้อความใต้โปรไฟล์"></textarea>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">♡ Profile counters</div>
+        <div class="field">
+          <label>Followers</label>
+          <input class="input" id="editFollowers">
+        </div>
+        <div class="field">
+          <label>Following</label>
+          <input class="input" id="editFollowing">
+        </div>
+        <div class="hint">Review count updates automatically from Firestore.</div>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">୨୧ Circle buttons</div>
+        <div class="hint">For action, use main, reviews, menu or external URL.</div>
+        <div id="adminCircleEditors"></div>
+        <button type="button" class="secondary full" onclick="addCircle()">+ add circle ♡</button>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">♡ Contact cards</div>
+        <div id="adminContactEditors"></div>
+        <button type="button" class="secondary full" onclick="addContact()">+ add contact ♡</button>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">♡ Extra note</div>
+        <textarea class="input" id="editExtraText" placeholder="text"></textarea>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">♫ Background music</div>
+        <div class="field">
+          <label>Direct audio URL</label>
+          <input class="input" id="editMusicUrl" placeholder="https://example.com/music.mp3">
+        </div>
+      </div>
+
+      <div class="save-row">
+        <button type="button" class="primary full" onclick="saveMain()">save main page ♡</button>
+      </div>
+    </section>
+
+    <!-- MENU ADMIN -->
+    <section class="admin-panel" id="admin-menu">
+      <div class="admin-section">
+        <div class="admin-section-title">♡ Menu settings</div>
+        <div class="field">
+          <label>Menu title</label>
+          <input class="input" id="editMenuHeading">
+        </div>
+        <div class="field">
+          <label>Subtitle</label>
+          <textarea class="input" id="editMenuSubtitle"></textarea>
+        </div>
+        <button type="button" class="primary full" onclick="saveMenuSettings()">save menu settings ♡</button>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">♡ Add work</div>
+        <div class="field">
+          <label>Work title</label>
+          <input class="input" id="newWorkTitle" placeholder="ชื่อผลงาน">
+        </div>
+        <div class="field">
+          <label>Choose categories ♡</label>
+          <div class="category-picker" id="newWorkCategories"></div>
+        </div>
+        <div class="field">
+          <label>Short description</label>
+          <textarea class="input" id="newWorkShort"></textarea>
+        </div>
+        <div class="field">
+          <label>Full details</label>
+          <textarea class="input" id="newWorkDescription"></textarea>
+        </div>
+        <div class="field">
+          <label>Image URL</label>
+          <input class="input" id="newWorkImageUrl">
+        </div>
+        <div class="field">
+          <label>Or upload image</label>
+          <div id="newWorkUploadMount"></div>
+        </div>
+        <div class="field">
+          <label>Work link</label>
+          <input class="input" id="newWorkLink">
+        </div>
+        <button type="button" class="primary full" id="addWorkButton" onclick="addWork()">+ add work ♡</button>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">♡ Manage works</div>
+        <div id="adminWorksList"></div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES ADMIN -->
+    <section class="admin-panel" id="admin-categories">
+      <div class="admin-section-title">୨୧ Categories</div>
+      <div class="hint">Create unlimited categories for your works.</div>
+      <div id="adminGroupList"></div>
+
+      <div class="admin-section">
+        <div class="field">
+          <label>New category name</label>
+          <input class="input" id="newGroupName" placeholder="ชื่อหมวดหมู่">
+        </div>
+        <div class="field">
+          <label>Category description</label>
+          <textarea class="input" id="newGroupDescription"></textarea>
+        </div>
+        <button type="button" class="primary full" onclick="addWorkGroup()">+ add category ♡</button>
+      </div>
+    </section>
+
+    <!-- DESIGN ADMIN -->
+    <section class="admin-panel" id="admin-design">
+      <div class="admin-section-title">♡ Customize design</div>
+      <div class="field">
+        <label>Color theme</label>
+        <select class="input" id="editTheme">
+          <option value="pink">🎀 Dreamy Pink</option>
+          <option value="blue">☁️ Baby Blue</option>
+          <option value="purple">🪻 Lavender</option>
+          <option value="cream">🍮 Cream</option>
+          <option value="mono">♡ Monochrome</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Falling effects</label>
+        <select class="input" id="editEffects">
+          <option value="hearts">Hearts ♡</option>
+          <option value="stars">Stars ✦</option>
+          <option value="flowers">Flowers ❀</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+      <button type="button" class="primary full" onclick="saveDesign()">save design ♡</button>
+    </section>
+
+    <!-- REVIEWS ADMIN -->
+    <section class="admin-panel" id="admin-reviews">
+      <div class="admin-section-title">♡ Manage reviews</div>
+      <div id="adminReviewsList"></div>
+    </section>
+
+    <hr class="divider" style="margin:20px 0;">
+    <button type="button" class="danger full" onclick="logoutAdmin()">logout</button>
+  </div>
+</div>
+
+<!-- EDIT CATEGORY -->
+<div class="overlay" id="editGroupModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-heading">edit category ♡</div>
+      <button type="button" class="close-btn" onclick="closeModal('editGroupModal')">✕</button>
+    </div>
+    <input type="hidden" id="editGroupId">
+    <div class="field">
+      <label>Name</label>
+      <input class="input" id="editGroupName">
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <textarea class="input" id="editGroupDescription"></textarea>
+    </div>
+    <button type="button" class="primary full" onclick="saveWorkGroup()">save category ♡</button>
+  </div>
+</div>
+
+<!-- EDIT WORK -->
+<div class="overlay" id="editWorkModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-heading">edit work ♡</div>
+      <button type="button" class="close-btn" onclick="closeModal('editWorkModal')">✕</button>
+    </div>
+    <input type="hidden" id="editWorkId">
+    <div class="field">
+      <label>Title</label>
+      <input class="input" id="editWorkTitle">
+    </div>
+    <div class="field">
+      <label>Categories</label>
+      <div class="category-picker" id="editWorkCategories"></div>
+    </div>
+    <div class="field">
+      <label>Short description</label>
+      <textarea class="input" id="editWorkShort"></textarea>
+    </div>
+    <div class="field">
+      <label>Full details</label>
+      <textarea class="input" id="editWorkDescription"></textarea>
+    </div>
+    <div class="field">
+      <label>Image URL</label>
+      <input class="input" id="editWorkImageUrl">
+    </div>
+    <div class="field">
+      <label>Replace image</label>
+      <div id="editWorkUploadMount"></div>
+    </div>
+    <div class="field">
+      <label>Work link</label>
+      <input class="input" id="editWorkLink">
+    </div>
+    <button type="button" class="primary full" id="saveWorkButton" onclick="saveWork()">save work ♡</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<audio id="bgMusic" loop preload="none"></audio>
+
+<script>
+/* ======================================
+   FIREBASE CONFIG
+====================================== */
+const firebaseConfig={
+  apiKey:"AIzaSyDz7qCYeQrh476zvPYRVRz1NraLV76M8kE",
+  authDomain:"doll-fa6c9.firebaseapp.com",
+  projectId:"doll-fa6c9",
+  storageBucket:"doll-fa6c9.firebasestorage.app",
+  messagingSenderId:"219662610987",
+  appId:"1:219662610987:web:42b91d3fe66c90b4b0706e",
+  measurementId:"G-3LVZDQ5550"
+};
+
+const ADMIN_UID="uowysuoQByQMHOIhkynDHDZfI9r2";
+
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+const auth=firebase.auth();
+
+const settingsRef=db.collection("siteSettings").doc("main");
+const groupsRef=db.collection("workGroups");
+const worksRef=db.collection("workItems");
+const reviewsRef=db.collection("reviews");
+
+const $=id=>document.getElementById(id);
+
+/* ======================================
+   DEFAULT SETTINGS
+====================================== */
+const defaults={
+  shopName:"line . @035yfbcd .",
+  avatarUrl:"",
+  bio:"",
+  mainMessage:"",
+  followers:"",
+  following:"",
+  extraText:"",
+  musicUrl:"",
+  theme:"pink",
+  effects:"none",
+  menuHeading:"menu ♡",
+  menuSubtitle:"",
+  circles:[
+    {icon:"heart",label:". เครดิต.เก่า ♡",url:"",action:"reviews"},
+    {icon:"music",label:"· ex from ·",url:"",action:"menu"}
+  ],
+  contacts:[
+    {icon:"lock",title:"♡ .line .oa ♡",subtitle:"ˏ ! ♡ ｡",url:"https://line.me/"},
+    {icon:"arch",title:". fb ♡",subtitle:"♡ ! ｡",url:"https://facebook.com/"},
+    {icon:"hearts",title:". X ! ♡",subtitle:"ˏ !",url:"https://x.com/"}
+  ]
+};
+
+let settings=JSON.parse(JSON.stringify(defaults));
+let groups=[];
+let works=[];
+let reviews=[];
+let isAdmin=false;
+let selectedRating=5;
+let circleDraft=[];
+let contactDraft=[];
+
+/* ======================================
+   HELPERS & SVGS
+====================================== */
+function el(tag,cls,text){
+  const node=document.createElement(tag);
+  if(cls)node.className=cls;
+  if(text!==undefined)node.textContent=text;
+  return node;
+}
+
+function val(id){return $(id).value.trim();}
+function setVal(id,value){$(id).value=value??"";}
+
+function safeUrl(value){
+  try{
+    const u=new URL(String(value||"").trim());
+    return ["http:","https:"].includes(u.protocol)?u.href:"";
+  }catch(e){return "";}
+}
+
+function safeImage(value){
+  const s=String(value||"");
+  if(/^data:image\/(?:jpeg|png|webp);base64,/i.test(s))return s;
+  return safeUrl(s);
+}
+
+function toast(message){
+  const node=$("toast");
+  node.textContent=message;
+  node.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer=setTimeout(()=>node.classList.remove("show"),2400);
+}
+
+function copyProfileId(){
+  const name=settings.shopName||"line . @O35yfbcd .";
+  const cleanId = name.replace(/[^a-zA-Z0-9@._]/g,"") || "@O35yfbcd";
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(cleanId).then(()=>toast("♡ คัดลอก LINE ID เรียบร้อยแล้ว ♡"));
+  }else{
+    toast("♡ คัดลอก LINE ID: " + cleanId + " ♡");
+  }
+}
+
+function openModal(id){
+  const modal=$(id);
+  if(!modal)return;
+  modal.classList.add("active");
+  document.body.style.overflow="hidden";
+}
+
+function closeModal(id){
+  const modal=$(id);
+  if(modal)modal.classList.remove("active");
+  if(!document.querySelector(".overlay.active")){
+    document.body.style.overflow="";
+  }
+}
+
+function adminOnly(){
+  if(!isAdmin){toast("Admin access required");return false;}
+  return true;
+}
+
+document.querySelectorAll(".overlay").forEach(node=>{
+  node.addEventListener("click",event=>{if(event.target===node)closeModal(node.id);});
+});
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    const active=[...document.querySelectorAll(".overlay.active")];
+    if(active.length)closeModal(active[active.length-1].id);
+  }
+});
+
+/* ======================================
+   CUSTOM VECTOR SVG GENERATORS
+====================================== */
+function getSvgRibbonBow(){
+  return `<svg class="circle-bow" width="32" height="20" viewBox="0 0 50 30" fill="none">
+    <path d="M 23,15 C 10,5 5,10 8,18 C 11,24 21,17 23,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
+    <path d="M 27,15 C 40,5 45,10 42,18 C 39,24 29,17 27,15 Z" fill="#fff0f5" stroke="#ea5e89" stroke-width="2"/>
+    <circle cx="25" cy="15" r="3.5" fill="#ea5e89"/>
+    <path d="M 23,17 C 18,23 14,27 11,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 27,17 C 32,23 36,27 39,29" stroke="#ea5e89" stroke-width="2" stroke-linecap="round"/>
+  </svg>`;
+}
+
+function getCircleIconHtml(iconType, index){
+  if(iconType === "music" || index === 1){
+    return `<svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+      <defs>
+        <linearGradient id="noteGrad_${index}" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f889ab"/>
+          <stop offset="100%" stop-color="#ea4f7e"/>
+        </linearGradient>
+      </defs>
+      <path d="M11 25a4 4 0 1 1-4-4c1.1 0 2.1.4 2.8 1.1L11 8l14-3v14a4 4 0 1 1-4-4c1.1 0 2.1.4 2.8 1.1L25 7.2 13 9.8v11.4c-.6-.1-1.3-.2-2-.2z" fill="url(#noteGrad_${index})"/>
+    </svg>`;
+  }
+  return `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>`;
+}
+
+function getContactIconHtml(iconType, title="", index=0){
+  const lower = (iconType + " " + title).toLowerCase();
+  
+  // 1. Line OA / Lock
+  if(lower.includes("line") || lower.includes("lock") || index === 0){
+    return `<svg width="34" height="38" viewBox="0 0 36 42" fill="none">
+      <path d="M 12,18 V 11 C 12,6 16,3 21,3 C 26,3 29,6 29,11 V 13" stroke="#ea5e89" stroke-width="3" stroke-linecap="round"/>
+      <rect x="5" y="16" width="24" height="22" rx="7" fill="#ea5e89"/>
+      <circle cx="17" cy="25" r="2.5" fill="#ffffff"/>
+      <path d="M 16,26 L 15,30 H 19 L 18,26 Z" fill="#ffffff"/>
+    </svg>`;
+  }
+  
+  // 2. Facebook / Arch
+  if(lower.includes("fb") || lower.includes("face") || lower.includes("arch") || index === 1){
+    return `<svg width="30" height="38" viewBox="0 0 36 42" fill="none" stroke="#ea5e89" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 8,33 V 17 C 8,9 12,4 18,4 C 24,4 28,9 28,17 V 33"/>
+      <path d="M 4,33 H 32"/>
+      <path d="M 7,37 H 29"/>
+    </svg>`;
+  }
+  
+  // 3. X / Twitter / Multi Hearts
+  return `<svg width="42" height="38" viewBox="0 0 46 40" fill="none">
+    <path d="M 12 24 C 8 20 6 17 6 14 C 6 11 8 8.5 11 8.5 C 12.8 8.5 14.5 9.5 15.5 11 C 16.5 9.5 18.2 8.5 20 8.5 C 23 8.5 25 11 25 14 C 25 17 23 20 19 24 L 15.5 27 Z" fill="#fec2d5" opacity="0.65"/>
+    <g transform="rotate(-15 22 18)">
+      <path d="M 22 28 C 17 23 15 20 15 16.5 C 15 13 17.5 10.5 21 10.5 C 23 10.5 25 11.8 26.5 13.5 C 28 11.8 30 10.5 32 10.5 C 35.5 10.5 38 13 38 16.5 C 38 20 36 23 31 28 L 26.5 32 Z" fill="#f48fb0"/>
+    </g>
+    <path d="M 32 30 C 27 25 25 21.5 25 18 C 25 14 28 11.5 32 11.5 C 34.5 11.5 36.8 12.8 38 14.8 C 39.2 12.8 41.5 11.5 44 11.5 C 48 11.5 51 14 51 18 C 51 21.5 49 25 44 30 L 38 35 Z" fill="#ea4f7e" transform="scale(0.8) translate(3, 1)"/>
+  </svg>`;
+}
+
+/* ======================================
+   NAVIGATION
+====================================== */
+function goPage(page){
+  document.querySelectorAll(".page").forEach(node=>{
+    node.classList.toggle("active",node.id==="page-"+page);
+  });
+  document.querySelectorAll(".nav-btn").forEach(node=>{
+    node.classList.toggle("active",node.dataset.page===page);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function adminTab(name){
+  document.querySelectorAll(".admin-panel").forEach(node=>{
+    node.classList.toggle("active",node.id==="admin-"+name);
+  });
+  document.querySelectorAll(".admin-tab").forEach(node=>{
+    node.classList.toggle("active",node.dataset.tab===name);
+  });
+}
+
+/* ======================================
+   THEMES & EFFECTS
+====================================== */
+const themes={
+  pink:{
+    pink:"#ea5e89",darkpink:"#db4b78",soft:"#f8a6bf",pale:"#fff0f5",
+    background:"#fdf6f9",text:"#583e48",muted:"#9f828d",line:"#f8bdd2"
+  },
+  blue:{
+    pink:"#70a9db",darkpink:"#538ebd",soft:"#b8dcff",pale:"#eef7ff",
+    background:"#f8fbfe",text:"#486072",muted:"#8ba2b5",line:"#c5e2fa"
+  },
+  purple:{
+    pink:"#b08bd4",darkpink:"#936db8",soft:"#dfc9f8",pale:"#f8f2ff",
+    background:"#fcf9fe",text:"#5e4c6e",muted:"#a293b0",line:"#dfcef8"
+  },
+  cream:{
+    pink:"#d49265",darkpink:"#b87447",soft:"#fcdfc8",pale:"#fff6ef",
+    background:"#fdfaf7",text:"#684d3b",muted:"#ab9686",line:"#f2dcce"
+  },
+  mono:{
+    pink:"#666666",darkpink:"#444444",soft:"#cccccc",pale:"#f5f5f5",
+    background:"#ffffff",text:"#333333",muted:"#888888",line:"#dddddd"
+  }
+};
+
+function applyTheme(name){
+  const theme=themes[name]||themes.pink;
+  Object.entries(theme).forEach(([key,value])=>{
+    document.documentElement.style.setProperty("--"+key,value);
+  });
+  document.querySelector('meta[name="theme-color"]').content=theme.background;
+}
+
+function spawnEffect(){
+  if(settings.effects==="none"||document.hidden)return;
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  if(document.querySelectorAll(".sparkle").length>14)return;
+
+  const choices={
+    hearts:["♡","♥"],
+    stars:["✦","✧","⋆"],
+    flowers:["❀","✿"]
+  }[settings.effects]||["♡"];
+
+  const node=el("span","sparkle",choices[Math.floor(Math.random()*choices.length)]);
+  node.style.left=Math.random()*100+"vw";
+  node.style.fontSize=(10+Math.random()*12)+"px";
+  node.style.animationDuration=(6+Math.random()*4)+"s";
+
+  document.body.appendChild(node);
+  node.addEventListener("animationend",()=>node.remove());
+}
+setInterval(spawnEffect,1200);
+
+/* ======================================
+   MUSIC
+====================================== */
+const music=$("bgMusic");
+let musicStarted=false;
+let musicManuallyPaused=false;
+
+function syncMusic(){
+  const url=safeUrl(settings.musicUrl);
+  $("musicButton").hidden=!url;
+
+  if(!url){
+    music.pause();
+    music.removeAttribute("src");
+    musicStarted=false;
+    return;
+  }
+
+  if(music.getAttribute("src")!==url){
+    music.pause();
+    music.src=url;
+    musicStarted=false;
+    musicManuallyPaused=false;
+  }
+}
+
+function toggleMusic(){
+  if(!music.getAttribute("src")){
+    // Fallback cute chime if no custom URL
+    playWebAudioChime();
+    toast("เล่นเพลงน่ารัก ๆ ให้ฟังนะคะ 🎵");
+    return;
+  }
+
+  if(music.paused){
+    musicManuallyPaused=false;
+    music.play().then(()=>{
+      musicStarted=true;
+      toast("Music playing ♫");
+    }).catch(()=>toast("Music unavailable"));
+  }else{
+    music.pause();
+    musicManuallyPaused=true;
+    toast("Music paused");
+  }
+}
+
+let audioCtx=null;
+function playWebAudioChime(){
+  try{
+    const AudioContext=window.AudioContext||window.webkitAudioContext;
+    if(!audioCtx)audioCtx=new AudioContext();
+    if(audioCtx.state==='suspended')audioCtx.resume();
+    const notes=[523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq,idx)=>{
+      const osc=audioCtx.createOscillator();
+      const gain=audioCtx.createGain();
+      osc.type='sine';
+      osc.frequency.setValueAtTime(freq,audioCtx.currentTime+idx*0.12);
+      gain.gain.setValueAtTime(0,audioCtx.currentTime+idx*0.12);
+      gain.gain.linearRampToValueAtTime(0.08,audioCtx.currentTime+idx*0.12+0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+idx*0.12+1.2);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(audioCtx.currentTime+idx*0.12);
+      osc.stop(audioCtx.currentTime+idx*0.12+1.3);
+    });
+  }catch(e){}
+}
+
+/* ======================================
+   IMAGE COMPRESSION & UPLOAD
+====================================== */
+async function compressImage(file,maxSide=800,maxChars=160000){
+  if(!file)return "";
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+    throw Error("Please choose JPG, PNG or WEBP");
+  }
+  if(file.size>10*1024*1024) throw Error("Image must be under 10 MB");
+
+  const source=await new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+
+  const image=await new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>resolve(img);
+    img.onerror=reject;
+    img.src=source;
+  });
+
+  const scale=Math.min(1,maxSide/Math.max(image.width,image.height));
+  let width=Math.max(1,Math.round(image.width*scale));
+  let height=Math.max(1,Math.round(image.height*scale));
+
+  for(let attempt=0;attempt<7;attempt++){
+    const canvas=document.createElement("canvas");
+    canvas.width=width;
+    canvas.height=height;
+    const ctx=canvas.getContext("2d");
+    ctx.fillStyle="#fff";
+    ctx.fillRect(0,0,width,height);
+    ctx.drawImage(image,0,0,width,height);
+
+    let quality=.8;
+    let output=canvas.toDataURL("image/jpeg",quality);
+    while(output.length>maxChars&&quality>.35){
+      quality-=.09;
+      output=canvas.toDataURL("image/jpeg",quality);
+    }
+    if(output.length<=maxChars)return output;
+    width=Math.max(1,Math.round(width*.72));
+    height=Math.max(1,Math.round(height*.72));
+  }
+  throw Error("Could not compress image");
+}
+
+const uploadStates={};
+
+function createUpload(mountId,key,title){
+  const mount=$(mountId);
+  if(!mount)return;
+
+  const state={
+    data:"",name:"",busy:false,version:0,
+    clear:null,setExisting:null,promise:Promise.resolve()
+  };
+  uploadStates[key]=state;
+
+  const box=el("div","cute-upload");
+  const illustration=el("div","upload-illustration","♡");
+  const heading=el("div","upload-title",title);
+  const subtitle=el("div","upload-subtitle","JPG • PNG • WEBP | Max 10 MB");
+  const choose=el("div","upload-choose","＋ choose image");
+  const input=el("input");
+  input.type="file";
+  input.accept="image/jpeg,image/png,image/webp";
+
+  box.append(illustration,heading,subtitle,choose,input);
+
+  const preview=el("div","upload-preview-area");
+  preview.hidden=true;
+  const image=el("img");
+  image.alt="Upload preview";
+  const filename=el("div","upload-filename");
+  const remove=el("button","upload-remove","♡ remove image");
+  remove.type="button";
+
+  preview.append(image,filename,remove);
+  mount.replaceChildren(box,preview);
+
+  state.clear=function(){
+    state.version++;
+    state.data="";
+    state.name="";
+    state.busy=false;
+    state.promise=Promise.resolve();
+    input.value="";
+    preview.hidden=true;
+    image.removeAttribute("src");
+    filename.textContent="";
+  };
+
+  state.setExisting=function(url){
+    state.clear();
+    const valid=safeImage(url);
+    if(!valid)return;
+    state.data=valid;
+    state.name="Current image";
+    image.src=valid;
+    filename.textContent=state.name;
+    preview.hidden=false;
+  };
+
+  async function process(file){
+    if(!file)return;
+    const version=++state.version;
+    state.busy=true;
+    filename.textContent="Preparing image...";
+    try{
+      const data=await compressImage(file,800,160000);
+      if(version!==state.version)return;
+      state.data=data;
+      state.name=file.name;
+      image.src=data;
+      filename.textContent=file.name;
+      preview.hidden=false;
+      toast("Image ready ♡");
+    }catch(error){
+      if(version!==state.version)return;
+      console.error(error);
+      state.clear();
+      toast(error.message||"Image upload failed");
+    }finally{
+      if(version===state.version)state.busy=false;
+    }
+  }
+
+  input.addEventListener("change",()=>state.promise=process(input.files?.[0]));
+  remove.addEventListener("click",()=>state.clear());
+  box.addEventListener("dragover",e=>{e.preventDefault();box.classList.add("dragover");});
+  box.addEventListener("dragleave",()=>box.classList.remove("dragover"));
+  box.addEventListener("drop",e=>{
+    e.preventDefault();
+    box.classList.remove("dragover");
+    state.promise=process(e.dataTransfer.files?.[0]);
+  });
+
+  return state;
+}
+
+function resetUpload(key){uploadStates[key]?.clear?.();}
+function existingUpload(key,url){uploadStates[key]?.setExisting?.(url);}
+function uploadData(key){return uploadStates[key]?.data||"";}
+function uploadBusy(key){return !!uploadStates[key]?.busy;}
+
+createUpload("avatarUploadMount","avatar","upload profile picture ♡");
+createUpload("newWorkUploadMount","newWork","upload your work ♡");
+createUpload("editWorkUploadMount","editWork","replace work image ♡");
+createUpload("reviewUploadMount","review","add review photo ♡");
+
+/* ======================================
+   MAIN PAGE RENDER
+====================================== */
+function renderMain(){
+  $("mainShopName").textContent=settings.shopName||"line . @O35yfbcd .";
+  $("mainBio").textContent=settings.bio||"";
+  
+  if(settings.mainMessage){
+    $("mainMessage").style.display="block";
+    $("mainMessage").textContent=settings.mainMessage;
+  }else{
+    $("mainMessage").style.display="none";
+  }
+
+  $("mainFollowers").textContent=settings.followers||"0";
+  $("mainFollowing").textContent=settings.following||"0";
+  
+  // Show stats row if either followers or following is set
+  if(settings.followers || settings.following){
+    $("profileStatsRow").style.display="flex";
+  }else{
+    $("profileStatsRow").style.display="none";
+  }
+
+  if(settings.extraText){
+    $("mainExtraBox").style.display="block";
+    $("mainExtraBox").textContent=settings.extraText;
+  }else{
+    $("mainExtraBox").style.display="none";
+  }
+
+  document.title=settings.shopName||"⠀𐄙ִּ♡ﾟ𓈒บ๊ะ ཾจ่าง𓈒 ♡ﾟ༷ ";
+
+  // Avatar handling
+  const avatarBox=$("avatarBox");
+  const avatarContainer=$("avatarContainer");
+  const image=safeImage(settings.avatarUrl);
+
+  if(image){
+    avatarContainer.style.display="block";
+    avatarBox.replaceChildren();
+    const img=el("img");
+    img.src=image;
+    img.alt="Profile";
+    img.onerror=()=>{
+      avatarBox.replaceChildren(el("div","avatar-placeholder","♡"));
+    };
+    avatarBox.appendChild(img);
+  }else{
+    avatarContainer.style.display="none";
+  }
+
+  // Render Circles with custom Vector SVGs
+  const circlesContainer=$("mainCircles");
+  circlesContainer.replaceChildren();
+
+  (settings.circles||[]).forEach((item, idx)=>{
+    const card=el("button","circle-card");
+    card.type="button";
+
+    const wrap=el("div","circle-avatar-wrap");
+    wrap.innerHTML=getSvgRibbonBow();
+
+    const cornerHeart=el("div","circle-corner-heart");
+    cornerHeart.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>`;
+    wrap.appendChild(cornerHeart);
+
+    const inner=el("div","circle-avatar-inner" + (idx === 1 ? " with-gradient" : ""));
+    inner.innerHTML=getCircleIconHtml(item.icon, idx);
+    wrap.appendChild(inner);
+
+    const label=el("div","circle-label",item.label||"text");
+
+    card.append(wrap,label);
+
+    card.onclick=()=>{
+      const url=safeUrl(item.url);
+      if(url){
+        window.open(url,"_blank","noopener,noreferrer");
+      }else if(["main","reviews","menu"].includes(item.action)){
+        goPage(item.action);
+      }else{
+        toast("เปิดหมวดหมู่ " + (item.label||""));
       }
+    };
+
+    circlesContainer.appendChild(card);
+  });
+
+  // Render Contact Cards with double frame & sparkle & top heart
+  const contactsContainer=$("mainContacts");
+  contactsContainer.replaceChildren();
+
+  (settings.contacts||[]).forEach((item, idx)=>{
+    const card=el("a","contact-card");
+    const url=safeUrl(item.url);
+
+    if(url){
+      card.href=url;
+      card.target="_blank";
+      card.rel="noopener noreferrer";
+    }else{
+      card.onclick=e=>{e.preventDefault();toast("แตะเพื่อเปิด " + (item.title||""));};
     }
 
-    // Web Audio Soft Lo-Fi Chime
-    let isPlayingAudio = false;
-    let audioTimer = null;
-    let audioCtx = null;
+    // Sparkle or Top Heart decorations
+    if(idx === 1){
+      const topHeart=el("div","contact-card-heart-top");
+      topHeart.innerHTML=`<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="1.8">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>`;
+      card.appendChild(topHeart);
+    }else{
+      const sparkle=el("div","contact-card-sparkle");
+      sparkle.innerHTML=`<svg width="13" height="13" viewBox="0 0 20 20">
+        <path d="M10,0 Q10,10 0,10 Q10,10 10,20 Q10,10 20,10 Q10,10 10,0 Z" fill="#eb5886"/>
+      </svg>`;
+      card.appendChild(sparkle);
+    }
 
-    function playSoftChime() {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!audioCtx) audioCtx = new AudioContext();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
+    const iconBox=el("div","contact-icon-box");
+    iconBox.innerHTML=getContactIconHtml(item.icon, item.title, idx);
 
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 (Sweet chord)
-        notes.forEach((freq, idx) => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
+    const info=el("div","contact-info");
+    info.append(
+      el("span","contact-title",item.title||"text"),
+      el("span","contact-sub",item.subtitle||"click to view")
+    );
 
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.12);
+    card.append(iconBox,info);
+    contactsContainer.appendChild(card);
+  });
 
-          gain.gain.setValueAtTime(0, audioCtx.currentTime + idx * 0.12);
-          gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + idx * 0.12 + 0.05);
-          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.12 + 1.2);
+  applyTheme(settings.theme);
+  syncMusic();
+}
 
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
+/* ======================================
+   MULTIPLE CATEGORY SUPPORT
+====================================== */
+function getWorkCategories(work){
+  if(Array.isArray(work.categoryIds)){
+    return [...new Set(work.categoryIds.filter(id=>typeof id==="string"))];
+  }
+  return work.groupId?[work.groupId]:[];
+}
 
-          osc.start(audioCtx.currentTime + idx * 0.12);
-          osc.stop(audioCtx.currentTime + idx * 0.12 + 1.3);
+function categoryNames(work){
+  return getWorkCategories(work)
+    .map(id=>groups.find(group=>group.id===id)?.name)
+    .filter(Boolean);
+}
+
+function renderCategoryPicker(containerId,selected=[]){
+  const container=$(containerId);
+  if(!container)return;
+  container.replaceChildren();
+
+  if(!groups.length){
+    container.appendChild(el("div","hint","Create a category in Admin → categories first ♡"));
+    return;
+  }
+
+  groups.forEach(group=>{
+    const label=el("label","category-option");
+    const checkbox=el("input");
+    checkbox.type="checkbox";
+    checkbox.value=group.id;
+    checkbox.checked=selected.includes(group.id);
+    const text=el("span","","♡ "+(group.name||"text"));
+    label.append(checkbox,text);
+    container.appendChild(label);
+  });
+}
+
+function selectedCategories(containerId){
+  const box=$(containerId);
+  if(!box)return [];
+  return [...box.querySelectorAll('input[type="checkbox"]:checked')].map(node=>node.value);
+}
+
+/* ======================================
+   MENU RENDER
+====================================== */
+function renderMenu(){
+  $("menuHeading").textContent=settings.menuHeading||"menu ♡";
+  $("menuSubtitle").textContent=settings.menuSubtitle||"";
+
+  const tabs=$("groupTabs");
+  const container=$("menuGroupsContainer");
+
+  tabs.replaceChildren();
+  container.replaceChildren();
+
+  if(!groups.length){
+    container.appendChild(el("div","empty","ยังไม่มีหมวดหมู่ ♡"));
+    return;
+  }
+
+  groups.forEach((group,index)=>{
+    const tab=el("button","group-tab"+(index===0?" active":""),group.name||"text");
+    tab.type="button";
+    tab.onclick=()=>{
+      document.querySelectorAll(".group-tab").forEach(node=>node.classList.remove("active"));
+      tab.classList.add("active");
+      $("group-"+group.id)?.scrollIntoView({behavior:"smooth",block:"start"});
+    };
+    tabs.appendChild(tab);
+
+    const section=el("section","group-section");
+    section.id="group-"+group.id;
+    section.appendChild(el("div","group-heading",group.name||"text"));
+
+    if(group.description){
+      section.appendChild(el("div","page-sub",group.description));
+    }
+
+    const grid=el("div","work-grid");
+    const filtered=works.filter(work=>getWorkCategories(work).includes(group.id));
+
+    if(!filtered.length){
+      grid.appendChild(el("div","empty","ยังไม่มีผลงานในหมวดหมู่นี้ ♡"));
+    }
+
+    filtered.forEach(work=>{
+      const card=el("article","work-card");
+      const image=safeImage(work.imageUrl);
+
+      if(image){
+        const img=el("img","work-image");
+        img.src=image;
+        img.alt=work.title||"Work";
+        img.loading="lazy";
+        img.onerror=()=>{img.replaceWith(el("div","work-no-image","♡"));};
+        card.appendChild(img);
+      }else{
+        card.appendChild(el("div","work-no-image","♡"));
+      }
+
+      const body=el("div","work-body");
+      body.appendChild(el("div","work-name",work.title||"text"));
+
+      const short=work.shortDescription||work.description||"";
+      if(short)body.appendChild(el("div","work-short",short));
+
+      const tags=el("div","work-tags");
+      categoryNames(work).forEach(name=>{
+        tags.appendChild(el("span","work-tag",name));
+      });
+      body.appendChild(tags);
+
+      const details=el("button","work-details-btn","♡ details ↗");
+      details.type="button";
+      details.onclick=()=>openWorkDetails(work.id);
+
+      body.appendChild(details);
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+}
+
+/* ======================================
+   WORK DETAILS POPUP
+====================================== */
+function openWorkDetails(id){
+  const work=works.find(item=>item.id===id);
+  if(!work)return;
+
+  const container=$("detailsContent");
+  container.replaceChildren();
+
+  const image=safeImage(work.imageUrl);
+  if(image){
+    const img=el("img","details-cover");
+    img.src=image;
+    img.alt=work.title||"Work";
+    img.onerror=()=>{img.replaceWith(el("div","details-placeholder","♡"));};
+    container.appendChild(img);
+  }else{
+    container.appendChild(el("div","details-placeholder","♡"));
+  }
+
+  container.appendChild(el("h2","details-title",work.title||"text"));
+
+  const tags=el("div","work-tags");
+  categoryNames(work).forEach(name=>{
+    tags.appendChild(el("span","work-tag","♡ "+name));
+  });
+  container.appendChild(tags);
+
+  if(work.shortDescription){
+    container.appendChild(el("div","details-heading","♡ Short description"));
+    container.appendChild(el("div","details-description",work.shortDescription));
+  }
+
+  if(work.description){
+    container.appendChild(el("div","details-heading","♡ More details"));
+    container.appendChild(el("div","details-description",work.description));
+  }
+
+  const link=safeUrl(work.link);
+  if(link){
+    const button=el("a","details-link","♡ open work link ↗");
+    button.href=link;
+    button.target="_blank";
+    button.rel="noopener noreferrer";
+    container.appendChild(button);
+  }
+
+  openModal("detailsModal");
+}
+
+/* ======================================
+   REVIEW RENDER
+====================================== */
+function renderReviews(){
+  $("reviewTotal").textContent=reviews.length;
+  $("mainReviewsCount").textContent=reviews.length;
+
+  const average=reviews.length
+    ?reviews.reduce((sum,r)=>sum+Number(r.rating||0),0)/reviews.length
+    :0;
+
+  $("reviewAverage").textContent=average.toFixed(1);
+
+  const box=$("reviewsContainer");
+  box.replaceChildren();
+
+  if(!reviews.length){
+    box.appendChild(el("div","empty","ยังไม่มีรีวิว ♡"));
+    return;
+  }
+
+  reviews.forEach(review=>{
+    const card=el("div","card");
+    card.appendChild(el("div","review-name",review.name||"anonymous"));
+
+    const date=review.createdAt?.toDate
+      ?review.createdAt.toDate().toLocaleDateString("th-TH")
+      :"";
+
+    card.appendChild(el("div","review-date",date));
+
+    const rating=Math.max(0,Math.min(5,Math.round(Number(review.rating||0))));
+    card.appendChild(el("div","review-stars","★".repeat(rating)+"☆".repeat(5-rating)));
+    card.appendChild(el("div","review-text",review.text||""));
+
+    const image=safeImage(review.imageData);
+    if(image){
+      const img=el("img","review-photo");
+      img.src=image;
+      img.alt="Review image";
+      img.loading="lazy";
+      card.appendChild(img);
+    }
+
+    box.appendChild(card);
+  });
+}
+
+function selectRating(number){
+  selectedRating=number;
+  const buttons=$("ratingStars").querySelectorAll(".star-btn");
+  buttons.forEach((button,index)=>{
+    button.classList.toggle("selected",index<number);
+  });
+}
+
+function openReview(){
+  selectRating(5);
+  setVal("reviewName","");
+  setVal("reviewText","");
+  setVal("reviewVote","1");
+  resetUpload("review");
+  openModal("reviewModal");
+}
+
+async function submitReview(){
+  const name=val("reviewName");
+  const text=val("reviewText");
+
+  if(!name||!text) return toast("กรอกชื่อและรีวิวก่อน ♡");
+  if(uploadBusy("review")) return toast("Wait for image to finish ♡");
+
+  const button=$("submitReviewButton");
+  button.disabled=true;
+  button.textContent="submitting...";
+
+  try{
+    let user=auth.currentUser;
+    if(!user){
+      user=(await auth.signInAnonymously()).user;
+    }
+
+    const data={
+      name,
+      text,
+      uid:user.uid,
+      rating:selectedRating,
+      vote:Number(val("reviewVote"))>=0?1:-1,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    const image=uploadData("review");
+    if(image)data.imageData=image;
+
+    const reviewDoc=reviewsRef.doc();
+    const batch=db.batch();
+    batch.set(reviewDoc,data);
+
+    if(user.isAnonymous){
+      batch.set(db.collection("reviewRateLimits").doc(user.uid),{
+        lastReviewAt:firebase.firestore.FieldValue.serverTimestamp(),
+        lastReviewId:reviewDoc.id
+      });
+    }
+
+    await batch.commit();
+
+    setVal("reviewName","");
+    setVal("reviewText","");
+    resetUpload("review");
+
+    closeModal("reviewModal");
+    toast("Review submitted ♡ ขอบคุณมากนะคะ");
+  }catch(error){
+    console.error("Review failed:",error);
+    toast("Review failed - check Firebase rules");
+  }finally{
+    button.disabled=false;
+    button.textContent="submit review ♡";
+  }
+}
+
+/* ======================================
+   ADMIN AUTHENTICATION & EDITORS
+====================================== */
+auth.onAuthStateChanged(user=>{
+  isAdmin=Boolean(user&&user.uid===ADMIN_UID);
+  renderAdminReviews();
+});
+
+function openAdmin(){
+  if(isAdmin){
+    fillAdmin();
+    openModal("adminModal");
+  }else{
+    openModal("loginModal");
+  }
+}
+
+async function loginAdmin(){
+  const email=val("adminEmail");
+  const password=$("adminPassword").value;
+  if(!email||!password) return toast("Enter email and password");
+
+  try{
+    const result=await auth.signInWithEmailAndPassword(email,password);
+    if(result.user.uid!==ADMIN_UID){
+      await auth.signOut();
+      return toast("Not an admin account");
+    }
+    isAdmin=true;
+    closeModal("loginModal");
+    fillAdmin();
+    openModal("adminModal");
+    toast("Welcome admin ♡");
+  }catch(error){
+    console.error(error);
+    toast("Login failed");
+  }
+}
+
+async function logoutAdmin(){
+  try{
+    await auth.signOut();
+    isAdmin=false;
+    closeModal("adminModal");
+    toast("Logged out");
+  }catch(error){
+    console.error(error);
+    toast("Logout failed");
+  }
+}
+
+function makeField(label,value,onInput){
+  const wrapper=el("div","field");
+  const title=el("label","",label);
+  const input=el("input","input");
+  input.value=value??"";
+  input.placeholder="text";
+  input.oninput=()=>onInput(input.value);
+  wrapper.append(title,input);
+  return wrapper;
+}
+
+function arrayEditor(containerId,array,fields,rerender){
+  const box=$(containerId);
+  box.replaceChildren();
+
+  array.forEach((item,index)=>{
+    const card=el("div","card");
+    card.appendChild(el("div","admin-section-title","item "+(index+1)+" ♡"));
+
+    fields.forEach(key=>{
+      card.appendChild(makeField(key,item[key],value=>item[key]=value));
+    });
+
+    const remove=el("button","danger full","delete");
+    remove.type="button";
+    remove.onclick=()=>{array.splice(index,1);rerender();};
+
+    card.appendChild(remove);
+    box.appendChild(card);
+  });
+}
+
+function renderCircleEditors(){
+  arrayEditor("adminCircleEditors",circleDraft,["icon","label","url","action"],renderCircleEditors);
+}
+
+function renderContactEditors(){
+  arrayEditor("adminContactEditors",contactDraft,["icon","title","subtitle","url"],renderContactEditors);
+}
+
+function addCircle(){
+  circleDraft.push({icon:"heart",label:"text",url:"",action:"menu"});
+  renderCircleEditors();
+}
+
+function addContact(){
+  contactDraft.push({icon:"lock",title:"text",subtitle:"click to view",url:""});
+  renderContactEditors();
+}
+
+function fillAdmin(){
+  const fields={
+    editShopName:"shopName",editAvatarUrl:"avatarUrl",editBio:"bio",
+    editMainMessage:"mainMessage",editFollowers:"followers",editFollowing:"following",
+    editExtraText:"extraText",editMusicUrl:"musicUrl",editMenuHeading:"menuHeading",
+    editMenuSubtitle:"menuSubtitle",editTheme:"theme",editEffects:"effects"
+  };
+
+  Object.entries(fields).forEach(([id,key])=>{setVal(id,settings[key]);});
+
+  circleDraft=JSON.parse(JSON.stringify(settings.circles||[]));
+  contactDraft=JSON.parse(JSON.stringify(settings.contacts||[]));
+
+  renderCircleEditors();
+  renderContactEditors();
+  resetUpload("avatar");
+  renderAdminGroups();
+  renderAdminWorks();
+  renderAdminReviews();
+  renderCategoryPicker("newWorkCategories");
+}
+
+async function saveMain(){
+  if(!adminOnly())return;
+  if(uploadBusy("avatar")) return toast("Wait for image to finish ♡");
+
+  const data={
+    shopName:val("editShopName")||"line . @O35yfbcd .",
+    avatarUrl:uploadData("avatar")||val("editAvatarUrl"),
+    bio:val("editBio"),
+    mainMessage:val("editMainMessage"),
+    followers:val("editFollowers"),
+    following:val("editFollowing"),
+    extraText:val("editExtraText"),
+    musicUrl:val("editMusicUrl"),
+    circles:circleDraft,
+    contacts:contactDraft
+  };
+
+  try{
+    await settingsRef.set(data,{merge:true});
+    resetUpload("avatar");
+    toast("Main page saved ♡");
+  }catch(error){
+    console.error(error);
+    toast("Save failed");
+  }
+}
+
+async function saveMenuSettings(){
+  if(!adminOnly())return;
+  try{
+    await settingsRef.set({
+      menuHeading:val("editMenuHeading"),
+      menuSubtitle:val("editMenuSubtitle")
+    },{merge:true});
+    toast("Menu saved ♡");
+  }catch(error){
+    console.error(error);
+    toast("Save failed");
+  }
+}
+
+async function saveDesign(){
+  if(!adminOnly())return;
+  try{
+    await settingsRef.set({
+      theme:val("editTheme"),
+      effects:val("editEffects")
+    },{merge:true});
+    toast("Design saved ♡");
+  }catch(error){
+    console.error(error);
+    toast("Save failed");
+  }
+}
+
+/* ======================================
+   CATEGORIES ADMIN
+====================================== */
+function renderAdminGroups(){
+  const box=$("adminGroupList");
+  box.replaceChildren();
+  if(!groups.length){
+    box.appendChild(el("div","empty","No categories yet ♡"));
+  }
+
+  groups.forEach(group=>{
+    const row=el("div","admin-item");
+    const info=el("div");
+    info.append(
+      el("div","admin-item-name",group.name),
+      el("div","admin-item-sub",group.description||"")
+    );
+
+    const actions=el("div","admin-actions");
+    const edit=el("button","small-btn","edit");
+    edit.type="button";
+    edit.onclick=()=>editWorkGroup(group.id);
+
+    const remove=el("button","small-btn","delete");
+    remove.type="button";
+    remove.onclick=()=>deleteWorkGroup(group.id);
+
+    actions.append(edit,remove);
+    row.append(info,actions);
+    box.appendChild(row);
+  });
+}
+
+async function addWorkGroup(){
+  if(!adminOnly())return;
+  const name=val("newGroupName");
+  if(!name)return toast("Enter category name");
+
+  try{
+    await groupsRef.add({
+      name,
+      description:val("newGroupDescription"),
+      order:groups.length,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    setVal("newGroupName","");
+    setVal("newGroupDescription","");
+    toast("Category added ♡");
+  }catch(error){
+    console.error(error);
+    toast("Could not add category");
+  }
+}
+
+function editWorkGroup(id){
+  if(!adminOnly())return;
+  const group=groups.find(item=>item.id===id);
+  if(!group)return;
+  setVal("editGroupId",id);
+  setVal("editGroupName",group.name);
+  setVal("editGroupDescription",group.description);
+  openModal("editGroupModal");
+}
+
+async function saveWorkGroup(){
+  if(!adminOnly())return;
+  const id=val("editGroupId");
+  const name=val("editGroupName");
+  if(!id||!name)return toast("Enter category name");
+
+  try{
+    await groupsRef.doc(id).update({
+      name,
+      description:val("editGroupDescription")
+    });
+    closeModal("editGroupModal");
+    toast("Category saved ♡");
+  }catch(error){
+    console.error(error);
+    toast("Save failed");
+  }
+}
+
+async function deleteWorkGroup(id){
+  if(!adminOnly())return;
+  if(!confirm("Delete this category? Works shared with other categories will stay."))return;
+
+  try{
+    const affected=works.filter(work=>getWorkCategories(work).includes(id));
+    const batch=db.batch();
+    affected.forEach(work=>{
+      const remaining=getWorkCategories(work).filter(cId=>cId!==id);
+      if(remaining.length){
+        batch.update(worksRef.doc(work.id),{
+          categoryIds:remaining,
+          groupId:firebase.firestore.FieldValue.delete()
         });
-      } catch (err) {
-        console.log('Audio note played');
+      }else{
+        batch.delete(worksRef.doc(work.id));
       }
-    }
+    });
+    batch.delete(groupsRef.doc(id));
+    await batch.commit();
+    toast("Category deleted ♡");
+  }catch(error){
+    console.error(error);
+    toast("Delete failed");
+  }
+}
 
-    function togglePlayMusic(e) {
-      const btn = document.getElementById('btn-music');
-      isPlayingAudio = !isPlayingAudio;
-      btn.classList.toggle('music-playing', isPlayingAudio);
+/* ======================================
+   WORK ADMIN
+====================================== */
+function renderAdminWorks(){
+  const box=$("adminWorksList");
+  box.replaceChildren();
+  if(!works.length){
+    box.appendChild(el("div","empty","No works yet ♡"));
+    return;
+  }
 
-      if (isPlayingAudio) {
-        playSoftChime();
-        burstHearts(e);
-        audioTimer = setInterval(playSoftChime, 3000);
-      } else {
-        if (audioTimer) clearInterval(audioTimer);
-      }
-    }
-  </script>
+  works.forEach(work=>{
+    const row=el("div","admin-item");
+    const info=el("div");
+    info.append(
+      el("div","admin-item-name",work.title||"text"),
+      el("div","admin-item-sub",categoryNames(work).join(", ")||"Uncategorized")
+    );
+
+    const actions=el("div","admin-actions");
+    const edit=el("button","small-btn","edit");
+    edit.type="button";
+    edit.onclick=()=>editWork(work.id);
+
+    const remove=el("button","small-btn","delete");
+    remove.type="button";
+    remove.onclick=()=>deleteWork(work.id);
+
+    actions.append(edit,remove);
+    row.append(info,actions);
+    box.appendChild(row);
+  });
+}
+
+async function addWork(){
+  if(!adminOnly())return;
+  const title=val("newWorkTitle");
+  const categoryIds=selectedCategories("newWorkCategories");
+
+  if(!title)return toast("Enter work title");
+  if(!categoryIds.length)return toast("Select at least one category ♡");
+  if(uploadBusy("newWork"))return toast("Wait for image to finish ♡");
+
+  const imageUrl=uploadData("newWork")||val("newWorkImageUrl");
+  const link=val("newWorkLink");
+
+  const button=$("addWorkButton");
+  button.disabled=true;
+
+  try{
+    await worksRef.add({
+      title,
+      categoryIds,
+      shortDescription:val("newWorkShort"),
+      description:val("newWorkDescription"),
+      imageUrl,
+      link,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    ["newWorkTitle","newWorkShort","newWorkDescription","newWorkImageUrl","newWorkLink"].forEach(id=>setVal(id,""));
+    resetUpload("newWork");
+    renderCategoryPicker("newWorkCategories");
+    toast("Work added ♡");
+  }catch(error){
+    console.error(error);
+    toast("Could not add work");
+  }finally{
+    button.disabled=false;
+  }
+}
+
+function editWork(id){
+  if(!adminOnly())return;
+  const work=works.find(item=>item.id===id);
+  if(!work)return;
+
+  setVal("editWorkId",id);
+  setVal("editWorkTitle",work.title);
+  setVal("editWorkShort",work.shortDescription||"");
+  setVal("editWorkDescription",work.description||"");
+  setVal("editWorkImageUrl",work.imageUrl||"");
+  setVal("editWorkLink",work.link||"");
+
+  renderCategoryPicker("editWorkCategories",getWorkCategories(work));
+  resetUpload("editWork");
+  openModal("editWorkModal");
+}
+
+async function saveWork(){
+  if(!adminOnly())return;
+  const id=val("editWorkId");
+  const title=val("editWorkTitle");
+  const categoryIds=selectedCategories("editWorkCategories");
+
+  if(!id||!title)return toast("Enter work title");
+  if(!categoryIds.length)return toast("Select at least one category");
+  if(uploadBusy("editWork"))return toast("Wait for image to finish ♡");
+
+  const imageUrl=uploadData("editWork")||val("editWorkImageUrl");
+  const link=val("editWorkLink");
+  const button=$("saveWorkButton");
+  button.disabled=true;
+
+  try{
+    await worksRef.doc(id).update({
+      title,
+      categoryIds,
+      shortDescription:val("editWorkShort"),
+      description:val("editWorkDescription"),
+      imageUrl,
+      link,
+      groupId:firebase.firestore.FieldValue.delete()
+    });
+    closeModal("editWorkModal");
+    resetUpload("editWork");
+    toast("Work saved ♡");
+  }catch(error){
+    console.error(error);
+    toast("Save failed");
+  }finally{
+    button.disabled=false;
+  }
+}
+
+async function deleteWork(id){
+  if(!adminOnly())return;
+  if(!confirm("Delete this work from every category?"))return;
+
+  try{
+    await worksRef.doc(id).delete();
+    toast("Work deleted ♡");
+  }catch(error){
+    console.error(error);
+    toast("Delete failed");
+  }
+}
+
+/* ======================================
+   ADMIN REVIEWS
+====================================== */
+function renderAdminReviews(){
+  const box=$("adminReviewsList");
+  box.replaceChildren();
+  if(!isAdmin)return;
+
+  if(!reviews.length){
+    box.appendChild(el("div","empty","No reviews ♡"));
+    return;
+  }
+
+  reviews.forEach(review=>{
+    const row=el("div","admin-item");
+    const info=el("div");
+    info.append(
+      el("div","admin-item-name",review.name||"anonymous"),
+      el("div","admin-item-sub",review.text||"")
+    );
+
+    const remove=el("button","small-btn","delete");
+    remove.type="button";
+    remove.onclick=()=>deleteReview(review.id);
+
+    row.append(info,remove);
+    box.appendChild(row);
+  });
+}
+
+async function deleteReview(id){
+  if(!adminOnly())return;
+  if(!confirm("Delete this review?"))return;
+
+  try{
+    await reviewsRef.doc(id).delete();
+    toast("Review deleted ♡");
+  }catch(error){
+    console.error(error);
+    toast("Delete failed");
+  }
+}
+
+/* ======================================
+   FIRESTORE REALTIME LISTENERS
+====================================== */
+settingsRef.onSnapshot(snapshot=>{
+  const saved=snapshot.exists?snapshot.data():{};
+  settings={
+    ...JSON.parse(JSON.stringify(defaults)),
+    ...saved,
+    circles:Array.isArray(saved.circles)?saved.circles:JSON.parse(JSON.stringify(defaults.circles)),
+    contacts:Array.isArray(saved.contacts)?saved.contacts:JSON.parse(JSON.stringify(defaults.contacts))
+  };
+  renderMain();
+  renderMenu();
+},error=>{
+  console.error("Settings:",error);
+});
+
+groupsRef.onSnapshot(snapshot=>{
+  groups=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+  groups.sort((a,b)=>(a.order||0)-(b.order||0));
+  renderMenu();
+  renderAdminGroups();
+  renderAdminWorks();
+  const currentSelection=selectedCategories("newWorkCategories");
+  renderCategoryPicker("newWorkCategories",currentSelection);
+  if(!$("editWorkModal").classList.contains("active")){
+    renderCategoryPicker("editWorkCategories");
+  }
+},error=>{
+  console.error("Categories:",error);
+});
+
+worksRef.onSnapshot(snapshot=>{
+  works=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+  works.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+  renderMenu();
+  renderAdminWorks();
+},error=>{
+  console.error("Works:",error);
+});
+
+reviewsRef.orderBy("createdAt","desc").onSnapshot(snapshot=>{
+  reviews=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+  renderReviews();
+  renderAdminReviews();
+},error=>{
+  console.error("Reviews:",error);
+});
+
+/* ======================================
+   INITIALIZATION
+====================================== */
+selectRating(5);
+renderMain();
+renderMenu();
+renderReviews();
+
+</script>
 </body>
 </html>
