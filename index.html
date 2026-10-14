@@ -27,6 +27,7 @@
   --card:#ffffff;
   --shadow:rgba(235, 140, 175, 0.18);
   --border-subtle:#fee0eb;
+  --bg-opacity:0.18;
 }
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -40,6 +41,21 @@ body{
   display:flex;
   justify-content:center;
   min-height:100vh;
+  position:relative;
+}
+
+/* ═════════════════════════════════
+   ANIMATED GIF BACKGROUND LAYER
+   Faint cherry blossom petals falling
+═════════════════════════════════ */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:url('images/bg.gif') center center / cover no-repeat;
+  opacity:calc(var(--bg-opacity, 0.18) * 0.75);
+  pointer-events:none;
+  z-index:0;
 }
 
 button,input,textarea,select{font:inherit}
@@ -61,6 +77,33 @@ a{text-decoration:none;color:inherit}
   background:#fdf6f9;
   box-shadow:0 0 50px rgba(220,130,165,0.22);
   overflow-x:hidden;
+}
+
+.app::before{
+  content:'';
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:420px;
+  height:100%;
+  height:100dvh;
+  background:url('images/bg.gif') center center / cover no-repeat;
+  opacity:var(--bg-opacity, 0.18);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* Ensure UI content sits cleanly above the animated background */
+.profile-section,
+.divider,
+.donate-highlight-wrap,
+.cards-section,
+.extra-box,
+.footer-decor{
+  position:relative;
+  z-index:2;
 }
 
 /* ═════════════════════════════════
@@ -1132,6 +1175,14 @@ textarea.input{min-height:85px;resize:vertical}
       <input type="range" id="editMusicVolume" min="5" max="100" step="5" value="20" style="width:100%; accent-color:var(--darkpink); cursor:pointer;" oninput="updateVolumePreview(this.value)">
       <div class="hint">ตั้งไว้ที่ 20% เพื่อเปิดคลอเบาๆ สบายหู ไม่ดังหูแตก ปรับเลื่อนแล้วฟังระดับเสียงจริงได้ทันทีค่ะ ♡</div>
     </div>
+    <div class="field">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <label style="margin-bottom:0;">🌸 ความชัดพื้นหลังอนิเมชั่น (Background Opacity)</label>
+        <span id="bgOpacityValueLabel" style="font-size:12px; font-weight:700; color:var(--darkpink);">18%</span>
+      </div>
+      <input type="range" id="editBgOpacity" min="5" max="60" step="1" value="18" style="width:100%; accent-color:var(--darkpink); cursor:pointer;" oninput="updateBgOpacityPreview(this.value)">
+      <div class="hint">ตั้งไว้ที่ 18% เพื่อให้เห็นอนิเมชั่นกลีบซากุระร่วงจางๆ สบายตา ไม่บดบังตัวหนังสือ สามารถเลื่อนปรับได้ตามชอบค่ะ ♡</div>
+    </div>
 
     <div style="margin-top:16px; display:flex; gap:8px;">
       <button type="button" class="primary full" onclick="saveAdminSettings()">save changes ♡</button>
@@ -1182,7 +1233,8 @@ const defaults={
   instagramUrl:"https://www.instagram.com/neqrrt",
   extraText:"ขอบคุณทุกคนที่แวะมาหากันนะคะ 🎀 เจอกันในสตรีมน้า ♡",
   musicUrl:"https://www.image2url.com/r2/default/audio/1791461860465-d3c9e01c-0913-46aa-aac7-9421e51b0f5b.mp3",
-  musicVolume:0.2
+  musicVolume:0.2,
+  bgOpacity:0.18
 };
 
 let settings={...defaults};
@@ -1202,6 +1254,9 @@ try{
     settings={...defaults,...parsed};
     if(typeof settings.musicVolume!=="number"){
       settings.musicVolume=defaults.musicVolume;
+    }
+    if(typeof settings.bgOpacity!=="number"){
+      settings.bgOpacity=defaults.bgOpacity;
     }
   }
 }catch(e){}
@@ -1284,6 +1339,9 @@ function renderHub(){
 
   $("mainExtraBox").textContent = settings.extraText||defaults.extraText;
   if(music) music.volume = getActiveVolume();
+
+  const op = (typeof settings.bgOpacity === 'number') ? settings.bgOpacity : defaults.bgOpacity;
+  document.documentElement.style.setProperty("--bg-opacity", op);
 }
 
 /* ═════════════════════════════════
@@ -1305,6 +1363,13 @@ function updateVolumePreview(percent){
   if(music){
     music.volume = p / 100;
   }
+}
+
+function updateBgOpacityPreview(percent){
+  const p = Math.max(5, Math.min(60, Number(percent)||18));
+  const lbl = $("bgOpacityValueLabel");
+  if(lbl) lbl.textContent = p + "%";
+  document.documentElement.style.setProperty("--bg-opacity", p / 100);
 }
 
 if(music) music.volume = getActiveVolume();
@@ -1574,6 +1639,10 @@ function fillAdminForm(){
   const currentVol = Math.round(getActiveVolume() * 100);
   if($("editMusicVolume")) $("editMusicVolume").value = currentVol;
   if($("volumeValueLabel")) $("volumeValueLabel").textContent = currentVol + "%";
+
+  const currentBgOp = Math.round(((typeof settings.bgOpacity === "number") ? settings.bgOpacity : defaults.bgOpacity) * 100);
+  if($("editBgOpacity")) $("editBgOpacity").value = currentBgOp;
+  if($("bgOpacityValueLabel")) $("bgOpacityValueLabel").textContent = currentBgOp + "%";
 }
 
 async function saveAdminSettings(){
@@ -1584,6 +1653,9 @@ async function saveAdminSettings(){
 
   const volInput = $("editMusicVolume");
   const musicVolume = volInput ? (Number(volInput.value) / 100) : defaults.musicVolume;
+
+  const bgOpInput = $("editBgOpacity");
+  const bgOpacity = bgOpInput ? (Number(bgOpInput.value) / 100) : defaults.bgOpacity;
 
   const updated={
     displayName: val("editDisplayName")||defaults.displayName,
@@ -1596,7 +1668,8 @@ async function saveAdminSettings(){
     instagramUrl: val("editInstagramUrl")||defaults.instagramUrl,
     extraText: val("editExtraText"),
     musicUrl: val("editMusicUrl")||defaults.musicUrl,
-    musicVolume: musicVolume
+    musicVolume: musicVolume,
+    bgOpacity: bgOpacity
   };
 
   try{
@@ -1627,6 +1700,9 @@ settingsRef.onSnapshot(snapshot=>{
     settings = {...defaults, ...data};
     if(typeof settings.musicVolume !== "number"){
       settings.musicVolume = defaults.musicVolume;
+    }
+    if(typeof settings.bgOpacity !== "number"){
+      settings.bgOpacity = defaults.bgOpacity;
     }
     try{ localStorage.setItem("creatorHubSettings", JSON.stringify(settings)); }catch(e){}
     renderHub();
