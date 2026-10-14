@@ -56,7 +56,7 @@ a{text-decoration:none;color:inherit}
   max-width:420px;
   min-height:100vh;
   margin:0 auto;
-  padding-bottom:100px;
+  padding-bottom:30px;
   position:relative;
   background:#fdf6f9;
   box-shadow:0 0 50px rgba(220,130,165,0.22);
@@ -599,57 +599,6 @@ a{text-decoration:none;color:inherit}
 }
 
 /* ═════════════════════════════════
-   BOTTOM QUICK JUMP BAR (OPTION A)
-═════════════════════════════════ */
-.bottom-nav-container{
-  position:fixed;
-  bottom:max(12px,env(safe-area-inset-bottom));
-  left:50%;
-  transform:translateX(-50%);
-  width:calc(100% - 24px);
-  max-width:390px;
-  z-index:40;
-}
-
-.bottom-nav{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:4px;
-  padding:5px;
-  background:rgba(255,255,255,0.97);
-  border:1.8px solid var(--line);
-  border-radius:28px;
-  box-shadow:0 8px 24px var(--shadow);
-  backdrop-filter:blur(14px);
-}
-
-.quick-btn{
-  border:0;
-  background:none;
-  color:var(--muted);
-  border-radius:22px;
-  padding:8px 4px 7px;
-  font:700 11.5px 'Comfortaa','Nunito',sans-serif;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:3px;
-  transition:all .2s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor:pointer;
-}
-
-.quick-btn:active{
-  transform:scale(0.94);
-  background:var(--pale);
-  color:var(--darkpink);
-}
-
-.quick-btn svg{
-  width:18px;
-  height:18px;
-}
-
-/* ═════════════════════════════════
    MODALS & ADMIN PANEL
 ═════════════════════════════════ */
 .overlay{
@@ -1060,37 +1009,6 @@ textarea.input{min-height:85px;resize:vertical}
 
 </div><!-- /app -->
 
-<!-- ════════ BOTTOM QUICK JUMP BAR (OPTION A) ════════ -->
-<div class="bottom-nav-container">
-  <nav class="bottom-nav">
-    <!-- Quick Top -->
-    <button type="button" class="quick-btn" onclick="scrollToTop()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="18 15 12 9 6 15"></polyline>
-      </svg>
-      <span>บนสุด</span>
-    </button>
-
-    <!-- Quick Donate -->
-    <button type="button" class="quick-btn" onclick="scrollToDonate()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#ea5e89" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-      <span style="color:var(--darkpink);">โดเนท</span>
-    </button>
-
-    <!-- Quick Music -->
-    <button type="button" class="quick-btn" onclick="toggleMusic(event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 18V5l12-2v13"></path>
-        <circle cx="6" cy="18" r="3" fill="currentColor"></circle>
-        <circle cx="18" cy="16" r="3" fill="currentColor"></circle>
-      </svg>
-      <span>เพลง</span>
-    </button>
-  </nav>
-</div>
-
 <!-- ════════ ADMIN LOGIN MODAL ════════ -->
 <div class="overlay" id="loginModal">
   <div class="modal">
@@ -1302,25 +1220,6 @@ function renderHub(){
   $("linkInstagram").href = safeUrl(settings.instagramUrl)||defaults.instagramUrl;
 
   $("mainExtraBox").textContent = settings.extraText||defaults.extraText;
-}
-
-/* ═════════════════════════════════
-   QUICK JUMP BUTTONS (OPTION A)
-═════════════════════════════════ */
-function scrollToTop(){
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function scrollToDonate(){
-  const el = $("donateSection");
-  if(el){
-    el.scrollIntoView({behavior:'smooth',block:'center'});
-    const card = $("donateBannerLink");
-    card.classList.remove("highlight-pulse");
-    void card.offsetWidth;
-    card.classList.add("highlight-pulse");
-    burstHearts({currentTarget:card});
-  }
 }
 
 /* ═════════════════════════════════
