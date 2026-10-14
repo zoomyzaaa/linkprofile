@@ -1025,81 +1025,6 @@ textarea.input{min-height:90px;resize:vertical}
   font-weight:600;
 }
 
-/* ENTRANCE SPLASH OVERLAY */
-.entrance-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(253, 246, 249, 0.94);
-  backdrop-filter: blur(14px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  cursor: pointer;
-  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.45s ease;
-}
-
-.entrance-overlay.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.entrance-card {
-  width: 100%;
-  max-width: 310px;
-  text-align: center;
-  padding: 30px 22px;
-  background: #ffffff;
-  border: 2px solid var(--line);
-  border-radius: 28px;
-  box-shadow: 0 14px 40px rgba(235, 140, 175, 0.28);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  animation: entranceCardPulse 2.2s ease-in-out infinite alternate;
-}
-
-@keyframes entranceCardPulse {
-  0% { transform: scale(0.97); box-shadow: 0 8px 24px rgba(235, 140, 175, 0.2); }
-  100% { transform: scale(1.02); box-shadow: 0 16px 44px rgba(235, 140, 175, 0.35); }
-}
-
-.entrance-deco {
-  font-size: 13px;
-  color: var(--soft);
-  letter-spacing: 3px;
-}
-
-.entrance-icon {
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  background: var(--pale);
-  border: 1.8px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 14px var(--shadow);
-  color: var(--pink);
-}
-
-.entrance-text {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--darkpink);
-  font-family: 'Comfortaa', 'Nunito', sans-serif;
-  letter-spacing: 0.5px;
-}
-
-.entrance-sub {
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
 .round-btn.music-playing {
   animation: musicPlayingPulse 1.8s ease-in-out infinite alternate;
   border-color: var(--pink);
@@ -1113,22 +1038,6 @@ textarea.input{min-height:90px;resize:vertical}
 </style>
 </head>
 <body>
-
-<!-- ENTRANCE SPLASH OVERLAY (TAP ANYWHERE TO ENTER & PLAY MUSIC) -->
-<div id="entranceOverlay" class="entrance-overlay" onclick="enterWebAndPlayMusic()">
-  <div class="entrance-card">
-    <div class="entrance-deco">✦ · ♡ · ✦</div>
-    <div class="entrance-icon">
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 18V5l12-2v13"></path>
-        <circle cx="6" cy="18" r="3" fill="currentColor"></circle>
-        <circle cx="18" cy="16" r="3" fill="currentColor"></circle>
-      </svg>
-    </div>
-    <div class="entrance-text">tap anywhere to enter ♡</div>
-    <div class="entrance-sub">แตะที่ไหนก็ได้เพื่อเข้าสู่เว็บไซต์ ♫</div>
-  </div>
-</div>
 
 <div class="app">
 
@@ -2000,17 +1909,10 @@ function startMusicPlayback(){
     musicStarted = true;
     $("musicButton").hidden = false;
     $("musicButton").classList.add("music-playing");
-    const overlay = $("entranceOverlay");
-    if(overlay) overlay.classList.add("hidden");
   }).catch(err=>{
-    console.log("Audio autoplay waiting for user interaction:", err);
+    // Browser autoplay policy holds playback until first user interaction
+    console.log("Audio waiting for first interaction:", err);
   });
-}
-
-function enterWebAndPlayMusic(){
-  const overlay = $("entranceOverlay");
-  if(overlay) overlay.classList.add("hidden");
-  startMusicPlayback();
 }
 
 function syncMusic(){
@@ -2057,20 +1959,19 @@ function toggleMusic(){
   }
 }
 
-// Global user interaction triggers autoplay
-document.addEventListener("pointerdown", ()=>{
-  if(!musicStarted && !musicManuallyPaused){
-    startMusicPlayback();
-  }
-}, {passive:true});
+// Global user interaction triggers autoplay seamlessly without any overlay
+["pointerdown", "touchstart", "click", "scroll"].forEach(evt => {
+  window.addEventListener(evt, () => {
+    if(!musicStarted && !musicManuallyPaused){
+      startMusicPlayback();
+    }
+  }, {passive:true, once:false});
+});
 
 // Attempt autoplay immediately on load
-window.addEventListener("DOMContentLoaded", ()=>{
-  startMusicPlayback();
-});
-window.addEventListener("load", ()=>{
-  startMusicPlayback();
-});
+window.addEventListener("DOMContentLoaded", startMusicPlayback);
+window.addEventListener("load", startMusicPlayback);
+setTimeout(startMusicPlayback, 500);
 
 let audioCtx=null;
 function playWebAudioChime(){
