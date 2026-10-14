@@ -616,13 +616,14 @@ a{text-decoration:none;color:inherit}
 .modal{
   width:100%;
   max-width:440px;
-  max-height:90vh;
+  max-height:88vh;
   overflow-y:auto;
+  position:relative;
   scrollbar-width:thin;
   background:#fffafd;
   border:2px solid var(--line);
   border-radius:26px;
-  padding:20px;
+  padding:0 20px 20px;
   box-shadow:0 20px 60px rgba(109,60,92,0.35);
 }
 .modal-header{
@@ -630,22 +631,72 @@ a{text-decoration:none;color:inherit}
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:16px;
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(255,250,253,0.97);
+  padding:18px 0 14px;
+  margin-bottom:14px;
+  border-bottom:1.5px dashed var(--line);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
 }
 .modal-heading{
   font:800 20px 'Comfortaa','Nunito',sans-serif;
   color:var(--darkpink);
 }
 .close-btn{
-  width:34px;
-  height:34px;
+  width:36px;
+  height:36px;
   border-radius:50%;
   border:1.5px solid var(--line);
   background:white;
-  color:var(--pink);
+  color:var(--darkpink);
   font-size:18px;
   display:grid;
   place-items:center;
+  cursor:pointer;
+  transition:all .2s;
+  box-shadow:0 2px 8px var(--shadow);
+}
+.close-btn:hover{
+  background:var(--pale);
+  transform:scale(1.08);
+}
+.close-btn:active{
+  transform:scale(0.92);
+}
+
+/* Avatar uploader component */
+.avatar-upload-box{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:12px 14px;
+  background:#ffffff;
+  border:1.5px solid var(--line);
+  border-radius:20px;
+  box-shadow:0 2px 8px var(--shadow);
+}
+.avatar-preview-wrap{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  border:1.8px solid var(--line);
+  background:var(--pale);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 3px 10px var(--shadow);
+  position:relative;
+}
+.avatar-preview-placeholder{
+  color:var(--soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .field{margin-bottom:12px}
@@ -1167,9 +1218,37 @@ textarea.input{min-height:85px;resize:vertical}
       <label>Bio (ข้อความแนะนำตัว)</label>
       <textarea class="input" id="editBioText" placeholder="hi hi welc to my platform chanel ⊹ . ⁺ ૮૩"></textarea>
     </div>
+    <!-- Avatar Upload & URL -->
     <div class="field">
-      <label>รูปโปรไฟล์ URL</label>
-      <input class="input" id="editAvatarUrl" placeholder="https://...">
+      <label>🎀 รูปโปรไฟล์ (Profile Picture)</label>
+      <div class="avatar-upload-box">
+        <div class="avatar-preview-wrap">
+          <img id="avatarPreviewImg" src="" alt="preview" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:50%;">
+          <div id="avatarPreviewPlaceholder" class="avatar-preview-placeholder">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+        </div>
+        <div style="flex:1; min-width:0;">
+          <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="handleAvatarFileSelect(event)">
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="secondary" style="padding:8px 14px; font-size:11px;" onclick="$('avatarFileInput').click()">
+              📁 เลือกรูปจากเครื่อง
+            </button>
+            <button type="button" class="danger" id="removeAvatarBtn" style="padding:8px 12px; font-size:11px; display:none;" onclick="clearAvatar()">
+              ลบรูป
+            </button>
+          </div>
+          <div id="avatarUploadStatus" class="hint" style="margin:6px 0 0; color:var(--darkpink);">แตะเพื่อเลือกรูปจากมือถือหรือคอมได้ทันทีค่ะ ♡</div>
+        </div>
+      </div>
+      <!-- Direct URL fallback -->
+      <details style="margin-top:8px; font-size:11px; color:var(--muted);">
+        <summary style="cursor:pointer; color:var(--darkpink); font-weight:600;">หรือใส่ลิงก์รูปภาพ URL (Advanced)</summary>
+        <input class="input" id="editAvatarUrl" placeholder="https://..." style="margin-top:6px;" oninput="syncAvatarUrlPreview(this.value)">
+      </details>
     </div>
 
     <hr class="divider" style="margin:14px 0;">
@@ -1297,6 +1376,12 @@ function safeUrl(value){
   }catch(e){return "";}
 }
 
+function safeAvatarUrl(value){
+  const str = String(value||"").trim();
+  if(str.startsWith("data:image/")) return str;
+  return safeUrl(str);
+}
+
 function toast(message){
   const node=$("toast");
   node.textContent=message;
@@ -1320,9 +1405,7 @@ function closeModal(id){
   }
 }
 
-document.querySelectorAll(".overlay").forEach(node=>{
-  node.addEventListener("click",event=>{if(event.target===node)closeModal(node.id);});
-});
+// NOTE: Outside tap on .overlay does NOT close modal, ensuring user won't lose unsaved edits.
 
 /* ═════════════════════════════════
    RENDER HUB VIEW
@@ -1339,8 +1422,9 @@ function renderHub(){
 
   // Avatar
   const avatarBox=$("avatarBox");
-  if(settings.avatarUrl && safeUrl(settings.avatarUrl)){
-    avatarBox.innerHTML = `<img src="${safeUrl(settings.avatarUrl)}" alt="${name}">`;
+  const avatarSrc = safeAvatarUrl(settings.avatarUrl);
+  if(avatarSrc){
+    avatarBox.innerHTML = `<img src="${avatarSrc}" alt="${name}">`;
   }else{
     avatarBox.innerHTML = `
       <div class="avatar-default-placeholder">
@@ -1548,10 +1632,98 @@ async function logoutAdmin(){
   }
 }
 
+/* ═════════════════════════════════
+   AVATAR UPLOAD FROM DEVICE
+═════════════════════════════════ */
+function handleAvatarFileSelect(e){
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+
+  if(!file.type.startsWith("image/")){
+    toast("กรุณาเลือกไฟล์รูปภาพค่ะ (JPG, PNG, WebP) 📷");
+    return;
+  }
+
+  if(file.size > 10 * 1024 * 1024){
+    toast("ไฟล์รูปมีขนาดใหญ่เกิน 10MB ค่ะ");
+    return;
+  }
+
+  const status = $("avatarUploadStatus");
+  if(status) status.textContent = "กำลังประมวลผลรูปภาพ... ⏳";
+
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    const img = new Image();
+    img.onload = function(){
+      // Crop square & compress to 360x360 px for optimal speed & quality
+      const canvas = document.createElement("canvas");
+      const MAX_SIZE = 360;
+      let width = img.width;
+      let height = img.height;
+      const minSide = Math.min(width, height);
+      const startX = (width - minSide) / 2;
+      const startY = (height - minSide) / 2;
+
+      canvas.width = MAX_SIZE;
+      canvas.height = MAX_SIZE;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, startX, startY, minSide, minSide, 0, 0, MAX_SIZE, MAX_SIZE);
+
+      const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.88);
+      $("editAvatarUrl").value = compressedDataUrl;
+      updateAvatarPreviewUI(compressedDataUrl);
+
+      if(status) status.textContent = "✓ เลือกรูปภาพสำเร็จแล้วค่ะ (อย่าลืมกด save changes ด้านล่างน้า ♡)";
+      toast("เลือกรูปโปรไฟล์สำเร็จ ♡");
+    };
+    img.onerror = function(){
+      toast("ไม่สามารถโหลดรูปภาพนี้ได้ กรุณาลองรูปอื่นค่ะ");
+      if(status) status.textContent = "เกิดข้อผิดพลาดในการโหลดรูป";
+    };
+    img.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function updateAvatarPreviewUI(url){
+  const img = $("avatarPreviewImg");
+  const placeholder = $("avatarPreviewPlaceholder");
+  const removeBtn = $("removeAvatarBtn");
+  const valid = safeAvatarUrl(url);
+
+  if(valid){
+    img.src = valid;
+    img.style.display = "block";
+    if(placeholder) placeholder.style.display = "none";
+    if(removeBtn) removeBtn.style.display = "inline-block";
+  }else{
+    img.removeAttribute("src");
+    img.style.display = "none";
+    if(placeholder) placeholder.style.display = "flex";
+    if(removeBtn) removeBtn.style.display = "none";
+  }
+}
+
+function clearAvatar(){
+  $("editAvatarUrl").value = "";
+  const fileInput = $("avatarFileInput");
+  if(fileInput) fileInput.value = "";
+  updateAvatarPreviewUI("");
+  const status = $("avatarUploadStatus");
+  if(status) status.textContent = "นำรูปภาพออกแล้วค่ะ (กลับไปใช้รูปเริ่มต้น)";
+  toast("นำรูปภาพออกแล้วค่ะ");
+}
+
+function syncAvatarUrlPreview(val){
+  updateAvatarPreviewUI(val);
+}
+
 function fillAdminForm(){
   setVal("editDisplayName", settings.displayName||defaults.displayName);
   setVal("editBioText", settings.bioText||defaults.bioText);
   setVal("editAvatarUrl", settings.avatarUrl||"");
+  updateAvatarPreviewUI(settings.avatarUrl||"");
   setVal("editDonateUrl", settings.donateUrl||defaults.donateUrl);
   setVal("editTikTokUrl", settings.tiktokUrl||defaults.tiktokUrl);
   setVal("editSoundCloudUrl", settings.soundcloudUrl||defaults.soundcloudUrl);
